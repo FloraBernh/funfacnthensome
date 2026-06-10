@@ -32,5 +32,11 @@
     "credibility": "high",
     "title": "Världens första bannerannons hade en klickfrekvens på 44 procent",
     "sourceUrl": "https://www.thedrum.com/news/1994-first-banner-ad-appears-hotwiredcom"
+  },
+  {
+    "text": "Den skapades av Tim Berners-Lee 1991 för att förklara hur World Wide Web fungerar, och den ligger fortfarande kvar på sin ursprungliga adress hos det europeiska forskningscentret CERN.",
+    "credibility": "high",
+    "title": "Världens första webbplats är fortfarande live",
+    "sourceUrl": "https://info.cern.ch/"
   }
 ]
