@@ -179,22 +179,59 @@
             flex-shrink: 0;
         }
 
-        .fact-item-delete {
+        .fact-item-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+            flex-shrink: 0;
+        }
+
+        .fact-item-delete,
+        .fact-item-edit {
             background: transparent;
             border: none;
             cursor: pointer;
             color: var(--text-secondary);
-            font-size: 1rem;
+            font-size: 0.95rem;
             padding: 0.2rem 0.4rem;
             border-radius: 6px;
             transition: all 0.15s;
-            flex-shrink: 0;
             line-height: 1;
         }
         .fact-item-delete:hover {
             color: var(--red);
             background: #fff0f0;
         }
+        .fact-item-edit:hover {
+            color: var(--text);
+            background: #f0f0f0;
+        }
+
+        .editing-banner {
+            background: #FFF8EC;
+            border: 1px solid #FFDB77;
+            color: var(--text);
+            border-radius: 8px;
+            padding: 0.5rem 0.8rem;
+            font-size: 0.78rem;
+            font-weight: 500;
+            margin-bottom: 0.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.5rem;
+        }
+        .editing-banner button {
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 0.78rem;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            text-decoration: underline;
+            padding: 0;
+        }
+        .editing-banner button:hover { color: var(--text); }
 
         .loading {
             padding: 2rem 1rem;
@@ -347,7 +384,11 @@
 
     <div class="main">
         <div class="card">
-            <h2>Lägg till ny fakta</h2>
+            <h2 id="formHeading">Lägg till ny fakta</h2>
+            <div id="editingBanner" class="editing-banner" style="display:none;">
+                <span>✏️ Redigerar fakta — ändra och tryck Spara, eller avbryt.</span>
+                <button type="button" id="cancelEditBtn">Avbryt</button>
+            </div>
             <input
                 type="text"
                 id="titleInput"
@@ -500,7 +541,15 @@
             status: document.getElementById("status"),
             list: document.getElementById("factList"),
             count: document.getElementById("count"),
+            formHeading: document.getElementById("formHeading"),
+            editingBanner: document.getElementById("editingBanner"),
+            cancelEditBtn: document.getElementById("cancelEditBtn"),
         };
+
+        // Redigeringsläge: null = skapa ny, number = redigera den index
+        let editingIndex = null;
+        // 'unchanged' (behåll befintlig imageUrl), 'cleared' (ta bort), 'new' (ladda upp ny)
+        let imageState = "unchanged";
 
         const MAX_IMAGE_BYTES = 3 * 1024 * 1024; // 3 MB
 
@@ -584,6 +633,14 @@
             els.imageFile.value = "";
             els.imagePreviewImg.src = "";
             els.imagePreview.style.display = "none";
+            imageState = "cleared";
+        }
+
+        function showExistingImage(url) {
+            els.imageFile.value = "";
+            els.imagePreviewImg.src = url;
+            els.imagePreview.style.display = "";
+            imageState = "unchanged";
         }
 
         els.imageClearBtn.addEventListener("click", clearImage);
@@ -600,6 +657,7 @@
             reader.onload = (e) => {
                 els.imagePreviewImg.src = e.target.result;
                 els.imagePreview.style.display = "";
+                imageState = "new";
             };
             reader.readAsDataURL(file);
         });
@@ -729,7 +787,10 @@
                                 <div class="fact-item-text">${escapeHtml(f.text)}</div>
                                 <div class="fact-item-meta">${metaParts.join("&nbsp;·&nbsp;")}</div>
                             </div>
-                            <button class="fact-item-delete" data-index="${i}" title="Ta bort">✕</button>
+                            <div class="fact-item-actions">
+                                <button class="fact-item-edit" data-edit="${i}" title="Redigera">✎</button>
+                                <button class="fact-item-delete" data-index="${i}" title="Ta bort">✕</button>
+                            </div>
                         </div>`;
                 })
                 .join("");
@@ -747,6 +808,53 @@
                 document.getElementById("retryBtn")?.addEventListener("click", loadFacts);
             }
         }
+
+        // ========== REDIGERINGSLÄGE ==========
+        function resetForm() {
+            editingIndex = null;
+            imageState = "unchanged";
+            els.title.value = "";
+            els.input.value = "";
+            els.sourceName.value = "";
+            els.sourceUrl.value = "";
+            els.credibility.value = "high";
+            els.imageFile.value = "";
+            els.imagePreviewImg.src = "";
+            els.imagePreview.style.display = "none";
+            els.formHeading.textContent = "Lägg till ny fakta";
+            els.editingBanner.style.display = "none";
+            els.publishBtn.textContent = "Publicera";
+        }
+
+        function startEdit(index) {
+            const f = facts[index];
+            if (!f) return;
+            editingIndex = index;
+            els.title.value = f.title || "";
+            els.input.value = f.text || "";
+            els.sourceName.value = f.sourceName || "";
+            els.sourceUrl.value = f.sourceUrl || "";
+            els.credibility.value = f.credibility || "high";
+            if (f.imageUrl) {
+                showExistingImage(f.imageUrl);
+            } else {
+                els.imageFile.value = "";
+                els.imagePreviewImg.src = "";
+                els.imagePreview.style.display = "none";
+                imageState = "unchanged";
+            }
+            els.formHeading.textContent = "Redigera fakta";
+            els.editingBanner.style.display = "";
+            els.publishBtn.textContent = "Spara ändringar";
+            setStatus("");
+            window.scrollTo({ top: 0, behavior: "smooth" });
+            els.title.focus();
+        }
+
+        els.cancelEditBtn.addEventListener("click", () => {
+            resetForm();
+            setStatus("");
+        });
 
         async function publishFact() {
             if (!loaded) {
@@ -772,8 +880,11 @@
                 return;
             }
 
+            const isEdit = editingIndex !== null;
+            const willUpload = imageState === "new" && imageFile;
+
             els.publishBtn.disabled = true;
-            setStatus(imageFile ? "Laddar upp bild..." : "Publicerar...");
+            setStatus(willUpload ? "Laddar upp bild..." : (isEdit ? "Sparar..." : "Publicerar..."));
 
             const newFact = { text, credibility };
             if (title) newFact.title = title;
@@ -781,28 +892,37 @@
             if (sourceUrl) newFact.sourceUrl = sourceUrl;
 
             try {
-                if (imageFile) {
+                // Bildhantering
+                if (willUpload) {
                     const token = await getToken();
                     if (!token) throw new Error("Ingen GitHub-token angiven.");
                     const imagePath = await uploadImageToRepo(imageFile, token);
                     newFact.imageUrl = imagePath;
-                    setStatus("Publicerar...");
+                    setStatus(isEdit ? "Sparar..." : "Publicerar...");
+                } else if (imageState === "unchanged" && isEdit) {
+                    // Behåll befintlig bild
+                    const existing = facts[editingIndex];
+                    if (existing?.imageUrl) newFact.imageUrl = existing.imageUrl;
+                }
+                // imageState === "cleared" → ingen imageUrl sätts → tas bort
+
+                let updated;
+                if (isEdit) {
+                    updated = facts.map((f, i) => i === editingIndex ? newFact : f);
+                } else {
+                    updated = [...facts, newFact];
                 }
 
-                const updated = [...facts, newFact];
                 await ghPut(updated);
                 facts = updated;
-                els.title.value = "";
-                els.input.value = "";
-                els.sourceName.value = "";
-                els.sourceUrl.value = "";
-                els.credibility.value = "high";
-                clearImage();
+                resetForm();
                 renderList();
-                setStatus("✓ Publicerad!", "success");
-                setTimeout(() => { if (els.status.textContent === "✓ Publicerad!") setStatus(""); }, 3000);
+                setStatus(isEdit ? "✓ Sparat!" : "✓ Publicerad!", "success");
+                setTimeout(() => {
+                    if (els.status.textContent.startsWith("✓")) setStatus("");
+                }, 3000);
             } catch (e) {
-                setStatus("Kunde inte publicera: " + e.message, "error");
+                setStatus("Kunde inte spara: " + e.message, "error");
             } finally {
                 els.publishBtn.disabled = false;
             }
@@ -820,6 +940,11 @@
             try {
                 await ghPut(updated);
                 facts = updated;
+                // Justera/avbryt redigeringsläget om indexet pekar fel efter radering
+                if (editingIndex !== null) {
+                    if (editingIndex === index) resetForm();
+                    else if (editingIndex > index) editingIndex--;
+                }
                 renderList();
                 setStatus("✓ Raderad!", "success");
                 setTimeout(() => { if (els.status.textContent === "✓ Raderad!") setStatus(""); }, 3000);
@@ -838,10 +963,17 @@
         });
 
         els.list.addEventListener("click", (e) => {
-            const btn = e.target.closest(".fact-item-delete");
-            if (!btn) return;
-            const i = Number(btn.dataset.index);
-            if (Number.isInteger(i)) deleteFact(i);
+            const editBtn = e.target.closest(".fact-item-edit");
+            if (editBtn) {
+                const i = Number(editBtn.dataset.edit);
+                if (Number.isInteger(i)) startEdit(i);
+                return;
+            }
+            const delBtn = e.target.closest(".fact-item-delete");
+            if (delBtn) {
+                const i = Number(delBtn.dataset.index);
+                if (Number.isInteger(i)) deleteFact(i);
+            }
         });
 
         loadFacts();
