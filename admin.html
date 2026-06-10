@@ -162,6 +162,15 @@
             word-break: break-word;
         }
 
+        .fact-item-thumb {
+            width: 56px;
+            height: 56px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            flex-shrink: 0;
+        }
+
         .fact-item-delete {
             background: transparent;
             border: none;
@@ -233,11 +242,92 @@
             justify-content: flex-end;
         }
 
+        .field {
+            margin-top: 0.8rem;
+        }
+
+        .field-label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 0.35rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .field-input,
+        .field-select {
+            width: 100%;
+            padding: 0.65rem 0.85rem;
+            border: 1.5px solid var(--border);
+            border-radius: 8px;
+            font-size: 0.88rem;
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            outline: none;
+            transition: border-color 0.15s;
+            background: white;
+        }
+
+        .field-input:focus,
+        .field-select:focus { border-color: var(--text); }
+        .field-input::placeholder { color: #bbb; }
+
+        .field-grid {
+            display: grid;
+            grid-template-columns: 1fr 160px;
+            gap: 0.7rem;
+        }
+
+        .fact-item-meta {
+            margin-top: 0.4rem;
+            font-size: 0.74rem;
+            color: var(--text-secondary);
+            display: flex;
+            gap: 0.7rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .fact-item-meta a { color: #5588cc; text-decoration: none; }
+        .fact-item-meta a:hover { text-decoration: underline; }
+
+        .cred-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        .cred-pill::before {
+            content: "";
+            display: inline-block;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #ddd;
+        }
+        .cred-pill.high::before { background: var(--green); }
+        .cred-pill.medium::before { background: #FFDB77; }
+        .cred-pill.low::before { background: var(--red); }
+
+        .stat-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            padding: 0.15rem 0.5rem;
+            border-radius: 12px;
+            background: #f5f5f5;
+            font-size: 0.72rem;
+            font-weight: 500;
+            color: var(--text);
+        }
+        .stat-chip strong { font-weight: 700; }
+
         @media (max-width: 500px) {
             .main { padding: 1rem; }
             .card { padding: 1.1rem; }
             .actions { flex-direction: column-reverse; align-items: stretch; }
             .actions .btn { width: 100%; }
+            .field-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -256,6 +346,53 @@
                 placeholder="Skriv din fakta här..."
                 maxlength="600"
             ></textarea>
+
+            <div class="field-grid">
+                <div class="field">
+                    <label class="field-label" for="sourceNameInput">Källa (namn)</label>
+                    <input
+                        type="text"
+                        id="sourceNameInput"
+                        class="field-input"
+                        placeholder="t.ex. NASA, Wikipedia, SVT..."
+                        maxlength="120"
+                    >
+                </div>
+                <div class="field">
+                    <label class="field-label" for="credibilityInput">Trovärdighet</label>
+                    <select id="credibilityInput" class="field-select">
+                        <option value="high">Hög</option>
+                        <option value="medium">Medel</option>
+                        <option value="low">Låg</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="field-label" for="sourceUrlInput">Käll-URL (frivilligt)</label>
+                <input
+                    type="url"
+                    id="sourceUrlInput"
+                    class="field-input"
+                    placeholder="https://..."
+                    maxlength="500"
+                >
+            </div>
+
+            <div class="field">
+                <label class="field-label" for="imageInput">Bild (frivilligt, max 3 MB)</label>
+                <input
+                    type="file"
+                    id="imageInput"
+                    class="field-input"
+                    accept="image/jpeg,image/png,image/webp,image/gif"
+                >
+                <div id="imagePreview" style="margin-top:0.6rem; display:none;">
+                    <img id="imagePreviewImg" style="max-width:180px; max-height:180px; border-radius:8px; border:1px solid var(--border);">
+                    <button type="button" id="imageClearBtn" class="btn btn-ghost" style="margin-left:0.5rem; padding:0.4rem 0.8rem; font-size:0.75rem;">Ta bort</button>
+                </div>
+            </div>
+
             <div class="actions">
                 <div class="status" id="status"></div>
                 <button class="btn btn-primary" id="publishBtn">Publicera</button>
@@ -270,6 +407,9 @@
             </div>
         </div>
     </div>
+
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
 
     <div class="token-modal" id="tokenModal">
         <div class="token-box">
@@ -288,17 +428,66 @@
         const FILE = "published-data.json";
         const TOKEN_KEY = "smartass_gh_token";
 
+        // ========== FIREBASE ==========
+        const firebaseConfig = {
+            apiKey: "AIzaSyBb564Dfem8IPMrKxV54AOsqLB6x8wqpu4",
+            authDomain: "smartass-54b33.firebaseapp.com",
+            projectId: "smartass-54b33",
+            storageBucket: "smartass-54b33.firebasestorage.app",
+            messagingSenderId: "802864537973",
+            appId: "1:802864537973:web:bfea158ded445ff04fb33c"
+        };
+        let db = null;
+        try {
+            firebase.initializeApp(firebaseConfig);
+            db = firebase.firestore();
+        } catch (e) { console.warn("Firebase init failed:", e); }
+
+        function factHash(text) {
+            const s = (text || "").trim();
+            let h = 5381;
+            for (let i = 0; i < s.length; i++) {
+                h = ((h << 5) + h + s.charCodeAt(i)) >>> 0;
+            }
+            return "f" + h.toString(36);
+        }
+
+        let factStats = {}; // factHash → { knewCount, learnedCount }
+
+        async function loadStats() {
+            if (!db) return;
+            try {
+                const snap = await db.collection("factStats").get();
+                const m = {};
+                snap.forEach(doc => { m[doc.id] = doc.data(); });
+                factStats = m;
+            } catch (e) {
+                console.warn("loadStats failed:", e);
+            }
+        }
+
         let facts = [];
         let fileSha = "";
         let loaded = false;
 
         const els = {
             input: document.getElementById("factInput"),
+            sourceName: document.getElementById("sourceNameInput"),
+            sourceUrl: document.getElementById("sourceUrlInput"),
+            credibility: document.getElementById("credibilityInput"),
+            imageFile: document.getElementById("imageInput"),
+            imagePreview: document.getElementById("imagePreview"),
+            imagePreviewImg: document.getElementById("imagePreviewImg"),
+            imageClearBtn: document.getElementById("imageClearBtn"),
             publishBtn: document.getElementById("publishBtn"),
             status: document.getElementById("status"),
             list: document.getElementById("factList"),
             count: document.getElementById("count"),
         };
+
+        const MAX_IMAGE_BYTES = 3 * 1024 * 1024; // 3 MB
+
+        const CRED_LABEL = { high: "Hög", medium: "Medel", low: "Låg" };
 
         function setStatus(msg, kind = "") {
             els.status.textContent = msg;
@@ -373,6 +562,80 @@
             return JSON.parse(decoded || "[]");
         }
 
+        // ========== BILD ==========
+        function clearImage() {
+            els.imageFile.value = "";
+            els.imagePreviewImg.src = "";
+            els.imagePreview.style.display = "none";
+        }
+
+        els.imageClearBtn.addEventListener("click", clearImage);
+
+        els.imageFile.addEventListener("change", () => {
+            const file = els.imageFile.files?.[0];
+            if (!file) { clearImage(); return; }
+            if (file.size > MAX_IMAGE_BYTES) {
+                setStatus(`Bilden är för stor (${(file.size / 1024 / 1024).toFixed(1)} MB). Max 3 MB.`, "error");
+                clearImage();
+                return;
+            }
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                els.imagePreviewImg.src = e.target.result;
+                els.imagePreview.style.display = "";
+            };
+            reader.readAsDataURL(file);
+        });
+
+        function fileExtFromName(name) {
+            const m = (name || "").match(/\.([a-zA-Z0-9]{1,5})$/);
+            return m ? m[1].toLowerCase() : "jpg";
+        }
+
+        function fileToBase64Content(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = () => {
+                    const result = reader.result;
+                    // Strip "data:image/...;base64," prefix
+                    const idx = result.indexOf(",");
+                    resolve(idx >= 0 ? result.slice(idx + 1) : result);
+                };
+                reader.onerror = () => reject(new Error("Kunde inte läsa bilden."));
+                reader.readAsDataURL(file);
+            });
+        }
+
+        async function uploadImageToRepo(file, token) {
+            const ext = fileExtFromName(file.name) || "jpg";
+            const path = `images/${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
+            const content = await fileToBase64Content(file);
+            const res = await fetch(
+                `https://api.github.com/repos/${GITHUB_REPO}/contents/${path}`,
+                {
+                    method: "PUT",
+                    headers: {
+                        "Authorization": `token ${token}`,
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        message: `Lägg till bild ${path}`,
+                        content,
+                        branch: "main",
+                    }),
+                }
+            );
+            if (res.status === 401) {
+                localStorage.removeItem(TOKEN_KEY);
+                throw new Error("Ogiltig GitHub-token.");
+            }
+            if (!res.ok) {
+                const err = await res.json().catch(() => ({}));
+                throw new Error(err.message || `GitHub API: ${res.status}`);
+            }
+            return path;
+        }
+
         async function ghPut(newFacts) {
             const token = await getToken();
             if (!token) throw new Error("Ingen GitHub-token angiven.");
@@ -418,17 +681,43 @@
             }
 
             els.list.innerHTML = facts
-                .map((f, i) => `
-                    <div class="fact-item">
-                        <div class="fact-item-text">${escapeHtml(f.text)}</div>
-                        <button class="fact-item-delete" data-index="${i}" title="Ta bort">✕</button>
-                    </div>`)
+                .map((f, i) => {
+                    const cred = f.credibility || "high";
+                    const credLabel = CRED_LABEL[cred] || CRED_LABEL.high;
+                    const sourceHtml = f.sourceName
+                        ? (f.sourceUrl
+                            ? `<a href="${escapeHtml(f.sourceUrl)}" target="_blank" rel="noopener">${escapeHtml(f.sourceName)}</a>`
+                            : `<span>${escapeHtml(f.sourceName)}</span>`)
+                        : "";
+                    const stats = factStats[factHash(f.text)] || {};
+                    const knew = stats.knewCount || 0;
+                    const learned = stats.learnedCount || 0;
+                    const metaParts = [
+                        `<span class="cred-pill ${cred}">${credLabel}</span>`,
+                        sourceHtml ? `Källa: ${sourceHtml}` : "",
+                        `<span class="stat-chip" title="Visste redan">🧠 <strong>${knew}</strong></span>`,
+                        `<span class="stat-chip" title="Lärde sig nytt">💡 <strong>${learned}</strong></span>`,
+                    ].filter(Boolean);
+                    const thumbHtml = f.imageUrl
+                        ? `<img src="${escapeHtml(f.imageUrl)}" alt="" class="fact-item-thumb" loading="lazy" onerror="this.style.display='none'">`
+                        : "";
+                    return `
+                        <div class="fact-item">
+                            ${thumbHtml}
+                            <div style="flex:1; min-width:0;">
+                                <div class="fact-item-text">${escapeHtml(f.text)}</div>
+                                <div class="fact-item-meta">${metaParts.join("&nbsp;·&nbsp;")}</div>
+                            </div>
+                            <button class="fact-item-delete" data-index="${i}" title="Ta bort">✕</button>
+                        </div>`;
+                })
                 .join("");
         }
 
         async function loadFacts() {
             try {
-                facts = await ghFetch();
+                const [factsResult] = await Promise.all([ghFetch(), loadStats()]);
+                facts = factsResult;
                 if (!Array.isArray(facts)) facts = [];
                 loaded = true;
                 renderList();
@@ -450,16 +739,41 @@
                 return;
             }
 
-            els.publishBtn.disabled = true;
-            setStatus("Publicerar...");
+            const sourceName = els.sourceName.value.trim();
+            const sourceUrl = els.sourceUrl.value.trim();
+            const credibility = els.credibility.value || "high";
+            const imageFile = els.imageFile.files?.[0] || null;
 
-            const newFact = { text };
-            const updated = [...facts, newFact];
+            if (sourceUrl && !/^https?:\/\//i.test(sourceUrl)) {
+                setStatus("Käll-URL måste börja med http:// eller https://", "error");
+                els.sourceUrl.focus();
+                return;
+            }
+
+            els.publishBtn.disabled = true;
+            setStatus(imageFile ? "Laddar upp bild..." : "Publicerar...");
+
+            const newFact = { text, credibility };
+            if (sourceName) newFact.sourceName = sourceName;
+            if (sourceUrl) newFact.sourceUrl = sourceUrl;
 
             try {
+                if (imageFile) {
+                    const token = await getToken();
+                    if (!token) throw new Error("Ingen GitHub-token angiven.");
+                    const imagePath = await uploadImageToRepo(imageFile, token);
+                    newFact.imageUrl = imagePath;
+                    setStatus("Publicerar...");
+                }
+
+                const updated = [...facts, newFact];
                 await ghPut(updated);
                 facts = updated;
                 els.input.value = "";
+                els.sourceName.value = "";
+                els.sourceUrl.value = "";
+                els.credibility.value = "high";
+                clearImage();
                 renderList();
                 setStatus("✓ Publicerad!", "success");
                 setTimeout(() => { if (els.status.textContent === "✓ Publicerad!") setStatus(""); }, 3000);

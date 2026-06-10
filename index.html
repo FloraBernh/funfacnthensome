@@ -109,6 +109,17 @@
             will-change: transform, opacity;
         }
 
+        .fact-image {
+            display: block;
+            width: calc(100% + 2.6rem);
+            margin: -1.4rem -1.3rem 1.2rem;
+            border-top-left-radius: calc(var(--radius) - 1.5px);
+            border-top-right-radius: calc(var(--radius) - 1.5px);
+            max-height: 280px;
+            object-fit: cover;
+            background: #f5f5f5;
+        }
+
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(8px); }
             to { opacity: 1; transform: translateY(0); }
@@ -138,7 +149,52 @@
         .fact-text {
             font-size: 0.92rem;
             line-height: 1.65;
+            margin-bottom: 1.1rem;
             color: var(--text);
+        }
+
+        .fact-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .credibility {
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .cred-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            background: #ddd;
+        }
+
+        .cred-high .cred-dot { background: var(--green); }
+        .cred-medium .cred-dot { background: #FFDB77; }
+        .cred-low .cred-dot { background: #FF8383; }
+        .cred-label { font-weight: 600; }
+
+        .source-link {
+            color: #5588cc;
+            text-decoration: none;
+            font-size: 0.75rem;
+            font-weight: 500;
+            transition: opacity 0.15s;
+        }
+        .source-link:hover { opacity: 0.7; text-decoration: underline; }
+
+        .source-text {
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+            font-weight: 500;
         }
 
         .fact-actions {
@@ -173,6 +229,7 @@
         }
 
         @media (max-width: 500px) {
+            .fact-footer { flex-direction: column; align-items: flex-start; }
             .fact-nav-row {
                 flex-wrap: wrap;
                 gap: 0.75rem 0;
@@ -212,6 +269,8 @@
         </div>
     </div>
 
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
     <script>
         // ========== SEEN FACTS TRACKER (localStorage) ==========
         const SEEN_KEY = "smartass_seen";
@@ -275,6 +334,46 @@
             return div.innerHTML;
         }
 
+        const CRED_LABEL = { high: "Hög", medium: "Medel", low: "Låg" };
+
+        // ========== FIREBASE (Firestore för klick-statistik) ==========
+        const firebaseConfig = {
+            apiKey: "AIzaSyBb564Dfem8IPMrKxV54AOsqLB6x8wqpu4",
+            authDomain: "smartass-54b33.firebaseapp.com",
+            projectId: "smartass-54b33",
+            storageBucket: "smartass-54b33.firebasestorage.app",
+            messagingSenderId: "802864537973",
+            appId: "1:802864537973:web:bfea158ded445ff04fb33c"
+        };
+
+        let db = null;
+        try {
+            firebase.initializeApp(firebaseConfig);
+            db = firebase.firestore();
+        } catch (e) {
+            console.warn("Firebase init failed:", e);
+        }
+
+        // Stabil hash för faktatext → Firestore-doc-ID (a-z0-9, max ~12 tecken)
+        function factHash(text) {
+            const s = (text || "").trim();
+            let h = 5381;
+            for (let i = 0; i < s.length; i++) {
+                h = ((h << 5) + h + s.charCodeAt(i)) >>> 0;
+            }
+            return "f" + h.toString(36);
+        }
+
+        function trackClick(fact, field) {
+            if (!db) return;
+            const key = factHash(fact.text);
+            db.collection("factStats").doc(key).set({
+                text: fact.text,
+                [field]: firebase.firestore.FieldValue.increment(1),
+                lastClicked: firebase.firestore.FieldValue.serverTimestamp(),
+            }, { merge: true }).catch(e => console.warn("trackClick failed:", e));
+        }
+
         // ========== PUBLISHED FACTS ==========
         let _publishedFacts = [];
         async function loadPublishedFacts() {
@@ -320,17 +419,47 @@
                             : "anim-in-fade";
             _slideDir = null;
 
+            const cred = fact.credibility || "high";
+            const credLabel = CRED_LABEL[cred] || CRED_LABEL.high;
+
+            let sourceHtml = "";
+            if (fact.sourceName) {
+                sourceHtml = fact.sourceUrl
+                    ? `<a href="${escapeHtml(fact.sourceUrl)}" target="_blank" rel="noopener" class="source-link">Källa: ${escapeHtml(fact.sourceName)}</a>`
+                    : `<span class="source-text">Källa: ${escapeHtml(fact.sourceName)}</span>`;
+            }
+
+            const imageHtml = fact.imageUrl
+                ? `<img src="${escapeHtml(fact.imageUrl)}" alt="" class="fact-image" loading="lazy" onerror="this.remove()">`
+                : "";
+
             factArea.innerHTML = `
                 <div class="fact-card ${animClass}">
+                    ${imageHtml}
                     <div class="fact-text">${escapeHtml(fact.text)}</div>
+                    <div class="fact-footer">
+                        <div class="credibility cred-${cred}">
+                            <span class="cred-dot"></span>
+                            <span>Trovärdighet:</span>
+                            <span class="cred-label">${credLabel}</span>
+                        </div>
+                        ${sourceHtml}
+                    </div>
                     <div class="fact-actions">
-                        <button class="fact-action-btn" id="knownBtn">🧠 Visste redan</button>
+                        <button class="fact-action-btn" id="knewBtn">🧠 Detta visste jag om</button>
+                        <button class="fact-action-btn" id="learnedBtn">💡 Jaha, där lärde jag mig något nytt</button>
                     </div>
                 </div>`;
 
-            document.getElementById("knownBtn")?.addEventListener("click", () => {
+            document.getElementById("knewBtn")?.addEventListener("click", () => {
+                trackClick(fact, "knewCount");
                 markFactKnown(fact);
-                showNextFact();
+                returnToStart();
+            });
+
+            document.getElementById("learnedBtn")?.addEventListener("click", () => {
+                trackClick(fact, "learnedCount");
+                returnToStart();
             });
         }
 
@@ -339,6 +468,15 @@
             document.getElementById("randomSection").style.display = "none";
             document.getElementById("prevArrow").classList.add("visible");
             document.getElementById("nextArrow").classList.add("visible");
+        }
+
+        function returnToStart() {
+            factHistory = [];
+            historyIndex = -1;
+            document.getElementById("factArea").innerHTML = "";
+            document.getElementById("prevArrow").classList.remove("visible");
+            document.getElementById("nextArrow").classList.remove("visible");
+            document.getElementById("randomSection").style.display = "";
         }
 
         function updateArrows() {
