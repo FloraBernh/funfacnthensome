@@ -17,8 +17,6 @@
             --text: #222222;
             --text-secondary: #999999;
             --green: #C2FF66;
-            --yellow: #FFDB77;
-            --red: #FF8383;
             --border: #e8e8e8;
             --radius: 12px;
         }
@@ -48,52 +46,6 @@
             align-items: center;
             text-align: center;
         }
-
-        .search-section {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .search-bar {
-            display: flex;
-            gap: 0;
-            width: 100%;
-            border: 1.5px solid var(--border);
-            border-radius: var(--radius);
-            overflow: hidden;
-            transition: border-color 0.2s;
-        }
-
-        .search-bar:focus-within { border-color: #bbb; }
-
-        .search-bar input {
-            flex: 1;
-            padding: 0.75rem 1rem;
-            border: none;
-            font-size: 0.88rem;
-            font-family: 'Inter', sans-serif;
-            outline: none;
-            background: var(--bg);
-            color: var(--text);
-        }
-
-        .search-bar input::placeholder { color: #bbb; }
-
-        .search-btn {
-            padding: 0.75rem 1.3rem;
-            background: var(--text);
-            color: var(--bg);
-            border: none;
-            font-size: 0.82rem;
-            font-weight: 600;
-            font-family: 'Inter', sans-serif;
-            cursor: pointer;
-            transition: background 0.15s;
-        }
-
-        .search-btn:hover { background: #444; }
 
         .random-btn {
             width: 100%;
@@ -125,12 +77,7 @@
             min-width: 0;
             overflow: hidden;
         }
-
         .fact-area:empty { margin-bottom: 0; }
-
-        .related-area {
-            margin-bottom: 2rem;
-        }
 
         .nav-arrow {
             display: none;
@@ -191,289 +138,41 @@
         .fact-text {
             font-size: 0.92rem;
             line-height: 1.65;
-            margin-bottom: 1.1rem;
             color: var(--text);
         }
 
-        .fact-footer {
+        .fact-actions {
+            display: flex;
+            gap: 0.4rem;
+            margin-top: 1.4rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
+        .fact-action-btn {
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .credibility {
-            display: flex;
-            align-items: center;
-            gap: 0.35rem;
-            font-size: 0.75rem;
-            color: var(--text-secondary);
-        }
-
-        .cred-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            flex-shrink: 0;
-        }
-
-        .cred-high .cred-dot { background: var(--green); }
-        .cred-medium .cred-dot { background: var(--yellow); }
-        .cred-low .cred-dot { background: var(--red); }
-        .cred-high .cred-label { font-weight: 600; }
-        .cred-medium .cred-label { font-weight: 600; }
-        .cred-low .cred-label { font-weight: 600; }
-
-        .source-link {
-            color: #5588cc;
-            text-decoration: none;
-            font-size: 0.75rem;
-            font-weight: 500;
-            transition: opacity 0.15s;
-        }
-
-        .source-link:hover { opacity: 0.7; text-decoration: underline; }
-
-        .related-section {
-            margin-top: 1.2rem;
-            text-align: center;
-        }
-
-        .related-label {
-            font-size: 0.68rem;
-            color: var(--text-secondary);
-            margin-bottom: 0.4rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-        }
-
-        .related-topics {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
             gap: 0.3rem;
-        }
-
-        .topic-pill {
-            background: var(--bg);
-            border: 1.5px solid var(--border);
-            padding: 0.25rem 0.7rem;
+            padding: 0.3rem 0.7rem;
             border-radius: 20px;
-            font-size: 0.73rem;
-            font-family: 'Inter', sans-serif;
+            border: 1.5px solid var(--border);
+            background: white;
+            font-size: 0.72rem;
             font-weight: 500;
-            color: var(--text);
+            font-family: 'Inter', sans-serif;
             cursor: pointer;
             transition: all 0.15s;
-        }
-
-        .topic-pill:hover { background: var(--text); color: var(--bg); border-color: var(--text); }
-
-        .loading-text {
             color: var(--text-secondary);
-            font-size: 0.85rem;
-            padding: 2rem 0;
         }
-
-        .spinner {
-            width: 22px;
-            height: 22px;
-            border: 2.5px solid var(--border);
-            border-top-color: var(--text);
-            border-radius: 50%;
-            animation: spin 0.7s linear infinite;
-            margin: 0 auto 0.8rem;
-        }
-
-        @keyframes spin { to { transform: rotate(360deg); } }
+        .fact-action-btn:hover { border-color: var(--text); color: var(--text); }
 
         .error-msg {
             color: var(--text-secondary);
             font-size: 0.88rem;
             padding: 1.5rem 0;
+            text-align: center;
         }
-
-        .wiki-note {
-            font-size: 0.7rem;
-            color: var(--text-secondary);
-            background: #FFF8EC;
-            border: 1px solid var(--yellow);
-            border-radius: var(--radius);
-            padding: 0.5rem 0.8rem;
-            margin-bottom: 0.8rem;
-            line-height: 1.4;
-            text-align: left;
-        }
-
-        /* AUTH BAR */
-        .auth-bar {
-            position: fixed; top: 0; right: 0; left: 0;
-            padding: 0.6rem 1rem;
-            display: flex; justify-content: flex-end; align-items: center; gap: 0.5rem;
-            z-index: 100;
-        }
-        .auth-btn {
-            display: flex; align-items: center; gap: 0.4rem;
-            padding: 0.4rem 0.9rem; border-radius: 20px;
-            border: 1.5px solid var(--border); background: white;
-            font-size: 0.75rem; font-weight: 600; font-family: 'Inter', sans-serif;
-            cursor: pointer; transition: all 0.15s; color: var(--text);
-        }
-        .auth-btn:hover { border-color: var(--text); }
-        .auth-avatar {
-            width: 26px; height: 26px; border-radius: 50%;
-            cursor: pointer; border: 2px solid var(--border);
-            transition: border-color 0.15s;
-        }
-        .auth-avatar:hover { border-color: var(--text); }
-
-        /* FACT ACTION BUTTONS */
-        .fact-actions {
-            display: flex; gap: 0.4rem; margin-top: 1.4rem; padding-top: 1rem;
-            border-top: 1px solid var(--border);
-        }
-        .fact-action-btn {
-            display: flex; align-items: center; gap: 0.3rem;
-            padding: 0.3rem 0.7rem; border-radius: 20px;
-            border: 1.5px solid var(--border); background: white;
-            font-size: 0.72rem; font-weight: 500; font-family: 'Inter', sans-serif;
-            cursor: pointer; transition: all 0.15s; color: var(--text-secondary);
-        }
-        .fact-action-btn:hover { border-color: var(--text); color: var(--text); }
-        .fact-action-btn.saved { background: var(--green); border-color: var(--green); color: var(--text); }
-
-        /* "Visste redan" — extends fact-action-btn */
-        .fact-known-btn.known {
-            opacity: 0.5;
-            cursor: default;
-        }
-
-        /* PROFILE PANEL */
-        .profile-overlay {
-            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0,0,0,0.3); z-index: 200;
-            display: none; align-items: center; justify-content: center;
-            padding: 1rem;
-        }
-        .profile-overlay.open { display: flex; }
-        .profile-panel {
-            background: white; border-radius: 16px; width: 100%; max-width: 440px;
-            max-height: 85vh; overflow-y: auto; padding: 1.5rem;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
-            animation: fadeIn 0.2s ease;
-        }
-        .profile-header {
-            display: flex; align-items: center; gap: 0.8rem;
-            margin-bottom: 1.5rem; padding-bottom: 1rem;
-            border-bottom: 1px solid var(--border);
-        }
-        .profile-photo {
-            width: 48px; height: 48px; border-radius: 50%;
-        }
-        .profile-name { font-size: 1rem; font-weight: 700; }
-        .profile-email { font-size: 0.75rem; color: var(--text-secondary); }
-        .profile-tab-bar {
-            display: flex; gap: 0; background: #f5f5f5; border-radius: 8px;
-            margin-bottom: 1rem; overflow: hidden;
-        }
-        .profile-tab {
-            flex: 1; padding: 0.5rem; font-size: 0.75rem; font-weight: 600;
-            text-align: center; border: none; background: transparent;
-            cursor: pointer; font-family: 'Inter', sans-serif;
-            color: var(--text-secondary); transition: all 0.15s;
-        }
-        .profile-tab.active { background: var(--text); color: white; border-radius: 8px; }
-        .profile-section { display: none; }
-        .profile-section.active { display: block; }
-        .saved-fact-item {
-            padding: 0.7rem; margin-bottom: 0.4rem;
-            border: 1px solid var(--border); border-radius: 8px;
-            font-size: 0.82rem; line-height: 1.5;
-            display: flex; gap: 0.5rem; align-items: flex-start;
-        }
-        .saved-fact-text { flex: 1; }
-        .saved-fact-remove {
-            background: none; border: none; cursor: pointer;
-            font-size: 0.8rem; color: var(--text-secondary); padding: 0.2rem;
-        }
-        .saved-fact-remove:hover { color: var(--red); }
-        .saved-detail-back {
-            display: flex; align-items: center; gap: 0.4rem;
-            background: none; border: none; cursor: pointer; padding: 0;
-            font-size: 0.8rem; font-family: inherit; color: var(--text-secondary);
-            margin-bottom: 0.9rem;
-        }
-        .saved-detail-back:hover { color: var(--text); }
-        .saved-detail-card {
-            background: var(--card-bg);
-            border-radius: var(--radius);
-            padding: 1.2rem 1rem;
-            border: 1.5px solid var(--border);
-            animation: fadeIn 0.2s ease;
-        }
-        .saved-detail-text {
-            font-size: 0.88rem;
-            line-height: 1.65;
-            margin-bottom: 1rem;
-            color: var(--text);
-        }
-        .saved-detail-footer {
-            display: flex; align-items: center;
-            justify-content: space-between; flex-wrap: wrap; gap: 0.4rem;
-            padding-top: 0.7rem;
-            border-top: 1px solid var(--border);
-        }
-        .inbox-item {
-            padding: 0.8rem; margin-bottom: 0.5rem;
-            border: 1px solid var(--border); border-radius: 8px;
-            animation: fadeIn 0.2s ease;
-        }
-        .inbox-item.unread { border-left: 3px solid var(--green); background: #f9fff0; }
-        .inbox-from { font-size: 0.7rem; color: var(--text-secondary); margin-bottom: 0.3rem; font-weight: 600; }
-        .inbox-text { font-size: 0.82rem; line-height: 1.5; margin-bottom: 0.4rem; }
-        .inbox-actions { display: flex; gap: 0.3rem; }
-        .profile-close {
-            position: absolute; top: 1rem; right: 1rem;
-            background: none; border: none; font-size: 1.2rem;
-            cursor: pointer; color: var(--text-secondary); padding: 0.3rem;
-        }
-        .profile-close:hover { color: var(--text); }
-        .inbox-badge {
-            background: var(--red); color: white; border-radius: 10px;
-            font-size: 0.6rem; font-weight: 700; padding: 0.1rem 0.35rem;
-            min-width: 16px; text-align: center; line-height: 1.2;
-        }
-
-        /* SHARE MODAL */
-        .share-modal {
-            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0,0,0,0.3); z-index: 300;
-            display: none; align-items: center; justify-content: center;
-            padding: 1rem;
-        }
-        .share-modal.open { display: flex; }
-        .share-box {
-            background: white; border-radius: 12px; padding: 1.5rem;
-            width: 100%; max-width: 360px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
-        }
-        .share-box h3 { font-size: 0.95rem; margin-bottom: 0.8rem; }
-        .share-input {
-            width: 100%; padding: 0.6rem 0.8rem; border: 1.5px solid var(--border);
-            border-radius: 8px; font-size: 0.82rem; font-family: 'Inter', sans-serif;
-            outline: none; margin-bottom: 0.6rem;
-        }
-        .share-input:focus { border-color: var(--text); }
-        .share-actions { display: flex; gap: 0.4rem; justify-content: flex-end; }
-        .share-status { font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 0.5rem; min-height: 1.2em; }
 
         @media (max-width: 500px) {
-            .fact-footer { flex-direction: column; align-items: flex-start; }
-            .profile-panel { max-height: 90vh; border-radius: 12px; }
-
-            /* Stack card full-width on top, arrows side-by-side below */
             .fact-nav-row {
                 flex-wrap: wrap;
                 gap: 0.75rem 0;
@@ -498,583 +197,21 @@
     </style>
 </head>
 <body>
-    <!-- AUTH BAR -->
-    <div class="auth-bar">
-        <div id="authArea">
-            <button class="auth-btn" id="loginBtn" onclick="googleLogin()">
-                <svg width="14" height="14" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
-                Logga in
-            </button>
-        </div>
-    </div>
-
-    <!-- PROFILE PANEL -->
-    <div class="profile-overlay" id="profileOverlay" onclick="if(event.target===this)closeProfile()">
-        <div class="profile-panel" style="position:relative;">
-            <button class="profile-close" onclick="closeProfile()">✕</button>
-            <div class="profile-header">
-                <div style="width:52px;height:52px;border-radius:50%;background:var(--text);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="12" cy="8" r="4"/>
-                        <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
-                    </svg>
-                </div>
-                <div>
-                    <div class="profile-name" id="profileName"></div>
-                    <div class="profile-email" id="profileEmail"></div>
-                    <button onclick="showUsernameModal()" style="margin-top:0.3rem;background:none;border:none;font-size:0.72rem;color:var(--text-secondary);cursor:pointer;padding:0;font-family:inherit;text-decoration:underline;">Byt användarnamn</button>
-                </div>
-            </div>
-            <div class="profile-tab-bar">
-                <button class="profile-tab active" data-ptab="saved" onclick="switchProfileTab('saved')">❤️ Sparade</button>
-                <button class="profile-tab" data-ptab="inbox" onclick="switchProfileTab('inbox')">📩 Inbox <span id="inboxBadge" class="inbox-badge" style="display:none;">0</span></button>
-            </div>
-            <div class="profile-section active" id="psec-saved">
-                <div id="savedList"></div>
-                <div id="savedDetail" style="display:none;">
-                    <button class="saved-detail-back" onclick="closeSavedDetail()">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-                        Tillbaka
-                    </button>
-                    <div class="saved-detail-card" id="savedDetailCard"></div>
-                </div>
-            </div>
-            <div class="profile-section" id="psec-inbox">
-                <div id="inboxList"></div>
-            </div>
-            <div style="margin-top:1.5rem; padding-top:1rem; border-top:1px solid var(--border); text-align:center;">
-                <button class="auth-btn" onclick="logOut()" style="color:var(--red); border-color:var(--red);">Logga ut</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- USERNAME MODAL -->
-    <div class="share-modal" id="usernameModal">
-        <div class="share-box">
-            <h3>👤 Välj användarnamn</h3>
-            <p style="font-size:0.78rem;color:var(--text-secondary);margin-bottom:0.8rem;">Välj ett unikt användarnamn. Vänner hittar dig med detta namn.</p>
-            <input class="share-input" id="usernameInput" type="text" placeholder="t.ex. coolkatt99" maxlength="20" oninput="this.value=this.value.toLowerCase().replace(/[^a-z0-9_.]/g,'')">
-            <div class="share-status" id="usernameStatus"></div>
-            <div class="share-actions">
-                <button class="auth-btn" id="usernameCancelBtn" onclick="closeUsernameModal()">Avbryt</button>
-                <button class="auth-btn" onclick="saveUsername()" style="background:var(--text);color:white;border-color:var(--text);">Spara</button>
-            </div>
-            <p style="font-size:0.68rem;color:var(--text-secondary);margin-top:0.6rem;">Endast a-z, 0-9, punkt och underscore. Max 20 tecken.</p>
-        </div>
-    </div>
-
-    <!-- SHARE MODAL -->
-    <div class="share-modal" id="shareModal" onclick="if(event.target===this)closeShare()">
-        <div class="share-box">
-            <h3>📩 Skicka till en vän</h3>
-            <p style="font-size:0.78rem; color:var(--text-secondary); margin-bottom:0.8rem;" id="sharePreview"></p>
-            <input class="share-input" id="shareEmail" type="email" placeholder="Vännens e-postadress...">
-            <div class="share-status" id="shareStatus"></div>
-            <div class="share-actions">
-                <button class="auth-btn" onclick="closeShare()">Avbryt</button>
-                <button class="auth-btn" onclick="sendFact()" style="background:var(--text); color:white; border-color:var(--text);">Skicka</button>
-            </div>
-        </div>
-    </div>
-
     <div class="container">
         <div class="fact-nav-row">
-            <button class="nav-arrow" id="prevArrow" onclick="showPrevFact()" disabled title="Föregående">
+            <button class="nav-arrow" id="prevArrow" disabled title="Föregående">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
             </button>
             <div class="fact-area" id="factArea"></div>
-            <button class="nav-arrow" id="nextArrow" onclick="showNextFact()" title="Nästa">
+            <button class="nav-arrow" id="nextArrow" title="Nästa">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
             </button>
         </div>
-        <div class="search-section" id="randomSection">
+        <div id="randomSection" style="width:100%;">
             <button type="button" class="random-btn" id="randomBtn">Berätta något jag inte vet</button>
         </div>
     </div>
 
-    <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
-    <script>
-        // ===== FIREBASE CONFIG — Fill in your project details =====
-        const firebaseConfig = {
-            apiKey: "AIzaSyBb564Dfem8IPMrKxV54AOsqLB6x8wqpu4",
-            authDomain: "smartass-54b33.firebaseapp.com",
-            projectId: "smartass-54b33",
-            storageBucket: "smartass-54b33.firebasestorage.app",
-            messagingSenderId: "802864537973",
-            appId: "1:802864537973:web:bfea158ded445ff04fb33c"
-        };
-
-        firebase.initializeApp(firebaseConfig);
-        const auth = firebase.auth();
-        const db = firebase.firestore();
-        let currentUser = null;
-
-        // ===== AUTH =====
-        function googleLogin() {
-            const provider = new firebase.auth.GoogleAuthProvider();
-            auth.signInWithPopup(provider).catch(e => {
-                console.error("Login error:", e);
-                alert("Fel: " + e.code + "\n" + e.message);
-            });
-        }
-
-        function logOut() {
-            if (_inboxUnsub) { _inboxUnsub(); _inboxUnsub = null; }
-            auth.signOut();
-            closeProfile();
-        }
-
-        auth.onAuthStateChanged(async (user) => {
-            currentUser = user;
-            const area = document.getElementById("authArea");
-
-            if (user) {
-                // Save/update user doc
-                await db.collection("users").doc(user.uid).set({
-                    name: user.displayName || "",
-                    email: user.email || "",
-                    photo: user.photoURL || "",
-                    lastLogin: firebase.firestore.FieldValue.serverTimestamp()
-                }, { merge: true });
-
-                area.innerHTML = `
-                    <span id="inboxDot" style="display:none;width:8px;height:8px;border-radius:50%;background:var(--red);position:absolute;top:6px;right:6px;border:2px solid white;"></span>
-                    <div onclick="openProfile()" style="position:relative;width:30px;height:30px;border-radius:50%;background:var(--text);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;" title="${user.displayName || 'Profil'}">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="8" r="4"/>
-                            <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
-                        </svg>
-                    </div>
-                `;
-                subscribeToInbox();
-                requestNotifPermission();
-                // Ask for username if not set yet
-                const username = await loadUsername();
-                if (!username) showUsernameModal(true);
-            } else {
-                area.innerHTML = `
-                    <button class="auth-btn" id="loginBtn" onclick="googleLogin()">
-                        <svg width="14" height="14" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
-                        Logga in
-                    </button>
-                `;
-            }
-            // Re-render current fact if showing (to add/remove action buttons)
-            if (currentFacts.length > 0) renderSingleFact();
-        });
-
-        // ===== USERNAME =====
-        async function loadUsername() {
-            if (!currentUser) return null;
-            const doc = await db.collection("users").doc(currentUser.uid).get();
-            return doc.exists ? doc.data().username || null : null;
-        }
-
-        function showUsernameModal(required = false) {
-            const cancelBtn = document.getElementById("usernameCancelBtn");
-            cancelBtn.style.display = required ? "none" : "";
-            document.getElementById("usernameInput").value = "";
-            document.getElementById("usernameStatus").textContent = "";
-            document.getElementById("usernameModal").classList.add("open");
-            document.getElementById("usernameInput").focus();
-        }
-
-        function closeUsernameModal() {
-            document.getElementById("usernameModal").classList.remove("open");
-        }
-
-        async function saveUsername() {
-            const input = document.getElementById("usernameInput").value.trim().toLowerCase();
-            const status = document.getElementById("usernameStatus");
-
-            if (input.length < 3) {
-                status.textContent = "Minst 3 tecken krävs.";
-                status.style.color = "var(--red)"; return;
-            }
-
-            // Check uniqueness
-            status.textContent = "Kontrollerar...";
-            status.style.color = "var(--text-secondary)";
-
-            const existing = await db.collection("usernames").doc(input).get();
-            if (existing.exists && existing.data().uid !== currentUser.uid) {
-                status.textContent = "❌ Det användarnamnet är redan taget.";
-                status.style.color = "var(--red)"; return;
-            }
-
-            // Free old username
-            const userDoc = await db.collection("users").doc(currentUser.uid).get();
-            const oldUsername = userDoc.exists ? userDoc.data().username : null;
-            if (oldUsername && oldUsername !== input) {
-                await db.collection("usernames").doc(oldUsername).delete();
-            }
-
-            // Save new username
-            await db.collection("usernames").doc(input).set({ uid: currentUser.uid });
-            await db.collection("users").doc(currentUser.uid).update({ username: input });
-
-            status.textContent = "✅ Sparat!";
-            status.style.color = "var(--green)";
-            setTimeout(() => {
-                closeUsernameModal();
-                openProfile();
-            }, 800);
-        }
-
-        // ===== PROFILE =====
-        async function openProfile() {
-            if (!currentUser) return;
-            const username = await loadUsername();
-            document.getElementById("profileName").textContent = username ? `@${username}` : (currentUser.displayName || "Användare");
-            document.getElementById("profileEmail").textContent = currentUser.email || "";
-            document.getElementById("profileOverlay").classList.add("open");
-            loadSavedFacts();
-            loadInbox();
-        }
-
-        function closeProfile() {
-            document.getElementById("profileOverlay").classList.remove("open");
-            // Reset saved detail view for next open
-            const detail = document.getElementById("savedDetail");
-            const list = document.getElementById("savedList");
-            if (detail) detail.style.display = "none";
-            if (list) list.style.display = "block";
-        }
-
-        function switchProfileTab(tab) {
-            document.querySelectorAll(".profile-tab").forEach(t => t.classList.remove("active"));
-            document.querySelector(`[data-ptab="${tab}"]`).classList.add("active");
-            document.querySelectorAll(".profile-section").forEach(s => s.classList.remove("active"));
-            document.getElementById(`psec-${tab}`).classList.add("active");
-            if (tab === "inbox") loadInbox();
-            if (tab === "saved") loadSavedFacts();
-        }
-
-        // ===== SAVED FACTS =====
-        async function toggleSaveFact(fact) {
-            if (!currentUser) { googleLogin(); return; }
-            const ref = db.collection("users").doc(currentUser.uid).collection("saved");
-            const key = (fact.text || "").slice(0, 80);
-
-            const existing = await ref.where("key", "==", key).get();
-            if (!existing.empty) {
-                existing.forEach(doc => doc.ref.delete());
-            } else {
-                await ref.add({
-                    key,
-                    text: fact.text,
-                    category: fact.category || "",
-                    sourceName: fact.sourceName || "",
-                    sourceUrl: fact.sourceUrl || "",
-                    savedAt: firebase.firestore.FieldValue.serverTimestamp()
-                });
-            }
-            renderSingleFact();
-        }
-
-        async function isFactSavedByUser(fact) {
-            if (!currentUser) return false;
-            const key = (fact.text || "").slice(0, 80);
-            const snap = await db.collection("users").doc(currentUser.uid)
-                .collection("saved").where("key", "==", key).get();
-            return !snap.empty;
-        }
-
-        // ===== "JAG VET REDAN" =====
-        async function isFactKnownByUser(fact) {
-            if (!currentUser) return false;
-            const key = (fact.text || "").slice(0, 80);
-            const doc = await db.collection("users").doc(currentUser.uid)
-                .collection("known").doc(key).get();
-            return doc.exists;
-        }
-
-        async function markAsKnown(fact) {
-            // Always navigate to next fact immediately
-            showNextFact();
-
-            // Track in Firestore silently in background (only if logged in)
-            if (currentUser) {
-                try {
-                    const key = (fact.text || "").slice(0, 80);
-                    const userRef = db.collection("users").doc(currentUser.uid).collection("known").doc(key);
-                    const already = await userRef.get();
-                    if (already.exists) return;
-                    await userRef.set({ markedAt: firebase.firestore.FieldValue.serverTimestamp() });
-                    await db.collection("factStats").doc(key).set({
-                        text: fact.text,
-                        category: fact.category || "",
-                        knownCount: firebase.firestore.FieldValue.increment(1),
-                        lastKnownAt: firebase.firestore.FieldValue.serverTimestamp()
-                    }, { merge: true });
-                } catch (e) { console.warn("markAsKnown error:", e); }
-            }
-        }
-
-        // Cache for saved facts so we can reference by index in onclick
-        let _savedFactsCache = [];
-
-        async function loadSavedFacts() {
-            if (!currentUser) return;
-            const snap = await db.collection("users").doc(currentUser.uid)
-                .collection("saved").orderBy("savedAt", "desc").get();
-
-            const list = document.getElementById("savedList");
-            if (snap.empty) {
-                _savedFactsCache = [];
-                list.innerHTML = `<p style="color:var(--text-secondary);text-align:center;padding:1.5rem;font-size:0.82rem;">Inga sparade fakta ännu. Tryck ❤️ på en fakta för att spara den!</p>`;
-                return;
-            }
-
-            _savedFactsCache = snap.docs.map(doc => ({
-                id: doc.id,
-                fact: { text: doc.data().text, category: doc.data().category, sourceName: doc.data().sourceName, sourceUrl: doc.data().sourceUrl, credibility: "high", keywords: [], related: [] }
-            }));
-
-            list.innerHTML = _savedFactsCache.map((item, i) => `
-                <div class="saved-fact-item" style="cursor:pointer;" onclick="openSavedFact(${i})">
-                    <div class="saved-fact-text">${escapeHtml(item.fact.text)}</div>
-                    <button class="saved-fact-remove" onclick="event.stopPropagation(); removeSaved('${item.id}')" title="Ta bort">✕</button>
-                </div>`).join("");
-        }
-
-        function openSavedFact(index) {
-            const item = _savedFactsCache[index];
-            if (!item) return;
-            const fact = item.fact;
-
-            const sourceHtml = fact.sourceName
-                ? `<a href="${escapeHtml(fact.sourceUrl || '#')}" target="_blank" rel="noopener" class="source-link" style="font-size:0.75rem;">Källa: ${escapeHtml(fact.sourceName)}</a>`
-                : "";
-
-            const credClass = `cred-${fact.credibility || 'high'}`;
-            const label = credibilityLabel(fact.credibility || 'high');
-
-            document.getElementById("savedDetailCard").innerHTML = `
-                <div class="saved-detail-text">${escapeHtml(fact.text)}</div>
-                <div class="saved-detail-footer">
-                    <div class="credibility ${credClass}" style="font-size:0.75rem;">
-                        <span class="cred-dot"></span>
-                        <span>Trovärdighet: </span>
-                        <span class="cred-label">${label}</span>
-                    </div>
-                    ${sourceHtml}
-                </div>
-                <div style="margin-top:0.9rem; padding-top:0.9rem; border-top:1px solid var(--border);">
-                    <button class="fact-action-btn" onclick="openShare(_savedFactsCache[${index}].fact)" style="font-size:0.8rem;">📩 Skicka till vän</button>
-                </div>`;
-
-            document.getElementById("savedList").style.display = "none";
-            document.getElementById("savedDetail").style.display = "block";
-        }
-
-        function closeSavedDetail() {
-            document.getElementById("savedDetail").style.display = "none";
-            document.getElementById("savedList").style.display = "block";
-        }
-
-        async function removeSaved(docId) {
-            if (!currentUser) return;
-            await db.collection("users").doc(currentUser.uid).collection("saved").doc(docId).delete();
-            loadSavedFacts();
-            if (currentFacts.length > 0) renderSingleFact();
-        }
-
-        // ===== SHARE / INBOX =====
-        let factToShare = null;
-
-        function openShare(fact) {
-            if (!currentUser) { googleLogin(); return; }
-            factToShare = fact;
-            document.getElementById("sharePreview").textContent = `"${(fact.text || "").slice(0, 120)}${fact.text.length > 120 ? '...' : ''}"`;
-            document.getElementById("shareEmail").value = "";
-            document.getElementById("shareStatus").textContent = "";
-            document.getElementById("shareModal").classList.add("open");
-            document.getElementById("shareEmail").focus();
-        }
-
-        function closeShare() {
-            document.getElementById("shareModal").classList.remove("open");
-            factToShare = null;
-        }
-
-        async function sendFact() {
-            if (!currentUser || !factToShare) return;
-            const email = document.getElementById("shareEmail").value.trim().toLowerCase();
-            const status = document.getElementById("shareStatus");
-
-            if (!email || !email.includes("@")) {
-                status.textContent = "Ange en giltig e-postadress.";
-                status.style.color = "var(--red)";
-                return;
-            }
-
-            // Find recipient by email
-            const userSnap = await db.collection("users").where("email", "==", email).get();
-            if (userSnap.empty) {
-                status.textContent = "Ingen användare med den adressen hittades. De måste logga in på SmartAss först!";
-                status.style.color = "var(--red)";
-                return;
-            }
-
-            const recipientId = userSnap.docs[0].id;
-            if (recipientId === currentUser.uid) {
-                status.textContent = "Du kan inte skicka till dig själv!";
-                status.style.color = "var(--red)";
-                return;
-            }
-
-            try {
-                await db.collection("users").doc(recipientId).collection("inbox").add({
-                    fromUid: currentUser.uid,
-                    fromName: currentUser.displayName || "Anonym",
-                    fromPhoto: currentUser.photoURL || "",
-                    text: factToShare.text,
-                    category: factToShare.category || "",
-                    sourceName: factToShare.sourceName || "",
-                    sourceUrl: factToShare.sourceUrl || "",
-                    read: false,
-                    sentAt: firebase.firestore.FieldValue.serverTimestamp()
-                });
-
-                status.textContent = "✅ Skickat!";
-                status.style.color = "var(--green)";
-                setTimeout(closeShare, 1500);
-            } catch (e) {
-                status.textContent = "Något gick fel. Försök igen!";
-                status.style.color = "var(--red)";
-            }
-        }
-
-        async function loadInbox() {
-            if (!currentUser) return;
-            const snap = await db.collection("users").doc(currentUser.uid)
-                .collection("inbox").orderBy("sentAt", "desc").get();
-
-            const list = document.getElementById("inboxList");
-            if (snap.empty) {
-                list.innerHTML = `<p style="color:var(--text-secondary);text-align:center;padding:1.5rem;font-size:0.82rem;">Ingen post ännu. Be en vän skicka en kul fakta!</p>`;
-                return;
-            }
-
-            list.innerHTML = snap.docs.map(doc => {
-                const d = doc.data();
-                const unread = !d.read;
-                return `<div class="inbox-item ${unread ? 'unread' : ''}">
-                    <div class="inbox-from">
-                        ${d.fromPhoto ? `<img src="${d.fromPhoto}" style="width:16px;height:16px;border-radius:50%;vertical-align:middle;margin-right:4px;" referrerpolicy="no-referrer">` : ''}
-                        ${escapeHtml(d.fromName)} skickade:
-                    </div>
-                    <div class="inbox-text">${escapeHtml(d.text)}</div>
-                    <div class="inbox-actions">
-                        <button class="fact-action-btn" onclick="saveFromInbox('${doc.id}')">❤️ Spara</button>
-                        <button class="fact-action-btn" onclick="deleteInbox('${doc.id}')">🗑 Ta bort</button>
-                    </div>
-                </div>`;
-            }).join("");
-
-            // Mark all as read
-            snap.docs.filter(d => !d.data().read).forEach(doc => {
-                doc.ref.update({ read: true });
-            });
-            updateInboxBadge(0);
-        }
-
-        // ===== REAL-TIME INBOX + NOTIFICATIONS =====
-        let _inboxUnsub = null;
-        let _lastUnreadCount = -1; // -1 = first snapshot, don't notify yet
-
-        function requestNotifPermission() {
-            if (!("Notification" in window)) return;
-            if (Notification.permission === "default") {
-                Notification.requestPermission();
-            }
-        }
-
-        function subscribeToInbox() {
-            if (!currentUser) return;
-            if (_inboxUnsub) _inboxUnsub(); // clean up old listener
-
-            _lastUnreadCount = -1;
-
-            _inboxUnsub = db.collection("users").doc(currentUser.uid)
-                .collection("inbox")
-                .where("read", "==", false)
-                .onSnapshot(snap => {
-                    const count = snap.size;
-                    updateInboxBadge(count);
-
-                    // First snapshot just sets baseline — don't notify
-                    if (_lastUnreadCount === -1) {
-                        _lastUnreadCount = count;
-                        return;
-                    }
-
-                    // New messages arrived since last snapshot
-                    if (count > _lastUnreadCount) {
-                        const newDocs = snap.docChanges()
-                            .filter(c => c.type === "added")
-                            .map(c => c.doc.data());
-
-                        newDocs.forEach(d => sendDesktopNotif(d));
-                    }
-
-                    _lastUnreadCount = count;
-                });
-        }
-
-        function sendDesktopNotif(msg) {
-            if (!("Notification" in window) || Notification.permission !== "granted") return;
-            const from = msg.fromName || "Någon";
-            const n = new Notification("📩 Ny fakta från " + from, {
-                body: msg.text ? msg.text.slice(0, 120) + (msg.text.length > 120 ? "…" : "") : "Öppna SmartAss för att läsa",
-                icon: "https://florabernh.github.io/smartass/favicon.png",
-                badge: "https://florabernh.github.io/smartass/favicon.png",
-                tag: "smartass-inbox",
-                renotify: true
-            });
-            n.onclick = () => { window.focus(); openProfile(); n.close(); };
-        }
-
-        function updateInboxBadge(count) {
-            const badge = document.getElementById("inboxBadge");
-            const dot = document.getElementById("inboxDot");
-            if (badge) {
-                badge.textContent = count;
-                badge.style.display = count > 0 ? "inline" : "none";
-            }
-            if (dot) dot.style.display = count > 0 ? "inline-block" : "none";
-        }
-
-        async function saveFromInbox(docId) {
-            if (!currentUser) return;
-            const doc = await db.collection("users").doc(currentUser.uid).collection("inbox").doc(docId).get();
-            if (!doc.exists) return;
-            const d = doc.data();
-            await db.collection("users").doc(currentUser.uid).collection("saved").add({
-                key: (d.text || "").slice(0, 80),
-                text: d.text,
-                category: d.category || "",
-                sourceName: d.sourceName || "",
-                sourceUrl: d.sourceUrl || "",
-                savedAt: firebase.firestore.FieldValue.serverTimestamp()
-            });
-            await doc.ref.delete();
-            loadInbox();
-            loadSavedFacts();
-        }
-
-        async function deleteInbox(docId) {
-            if (!currentUser) return;
-            await db.collection("users").doc(currentUser.uid).collection("inbox").doc(docId).delete();
-            loadInbox();
-        }
-    </script>
-
-    <script src="facts.js"></script>
     <script>
         // ========== SEEN FACTS TRACKER (localStorage) ==========
         const SEEN_KEY = "smartass_seen";
@@ -1083,8 +220,7 @@
         function getSeenFacts() {
             try {
                 const data = JSON.parse(localStorage.getItem(SEEN_KEY) || "{}");
-                const now = Date.now();
-                const cutoff = now - SEEN_EXPIRY_DAYS * 24 * 60 * 60 * 1000;
+                const cutoff = Date.now() - SEEN_EXPIRY_DAYS * 24 * 60 * 60 * 1000;
                 const cleaned = {};
                 for (const [key, ts] of Object.entries(data)) {
                     if (ts > cutoff) cleaned[key] = ts;
@@ -1096,6 +232,10 @@
             } catch { return {}; }
         }
 
+        function factId(fact) {
+            return (fact.text || "").slice(0, 80);
+        }
+
         function markFactSeen(fact) {
             try {
                 const data = getSeenFacts();
@@ -1104,595 +244,76 @@
             } catch {}
         }
 
-        function factId(fact) {
-            return (fact.text || "").slice(0, 80);
-        }
-
         function isFactSeen(fact) {
             return !!getSeenFacts()[factId(fact)];
         }
 
-        // ========== INSTITUTIONAL API SOURCES ==========
-        const API_SOURCES = {
-            async nasaApod() {
-                const res = await fetchWithTimeout(`https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&count=5`);
-                if (!res.ok) throw new Error(`NASA APOD: ${res.status}`);
-                const data = await res.json();
-                return data.filter(d => d.explanation).map(d => ({
-                    text: d.explanation.split('. ').find(s => s.length > 40 && s.length < 200) || d.explanation.split('. ').slice(0, 1).join('. ') + ".",
-                    sourceName: "NASA (APOD)",
-                    sourceUrl: d.url || "https://apod.nasa.gov/",
-                    credibility: "high",
-                    keywords: ["rymden", "astronomi", "nasa", "foto"],
-                    related: ["rymden", "stjärnor", "galaxer", "solsystemet"]
-                }));
-            },
+        // ========== KNOWN FACTS TRACKER (localStorage) ==========
+        const KNOWN_KEY = "smartass_known";
 
-            async nasaAsteroids() {
-                const today = new Date().toISOString().slice(0, 10);
-                const res = await fetchWithTimeout(`https://api.nasa.gov/neo/rest/v1/feed?start_date=${today}&end_date=${today}&api_key=DEMO_KEY`);
-                if (!res.ok) throw new Error(`NASA NEO: ${res.status}`);
-                const data = await res.json();
-                const neos = Object.values(data.near_earth_objects || {}).flat();
-                return neos.slice(0, 5).map(neo => {
-                    const diam = neo.estimated_diameter?.meters;
-                    const minD = Math.round(diam?.estimated_diameter_min || 0);
-                    const maxD = Math.round(diam?.estimated_diameter_max || 0);
-                    const speed = Math.round(parseFloat(neo.close_approach_data?.[0]?.relative_velocity?.kilometers_per_hour || 0));
-                    const missLunar = parseFloat(neo.close_approach_data?.[0]?.miss_distance?.lunar || 0).toFixed(1);
-                    const danger = neo.is_potentially_hazardous_asteroid ? "Klassad som potentiellt farlig!" : "Helt ofarlig för oss.";
-                    return {
-                        text: `Asteroiden ${neo.name.replace(/[()]/g, '')} passerar jorden idag! Den är ${minD}–${maxD} meter i diameter, färdas i ${speed.toLocaleString('sv')} km/h och passerar ${missLunar} månavstånd bort. ${danger}`,
-                        sourceName: "NASA Center for Near Earth Object Studies",
-                        sourceUrl: neo.nasa_jpl_url || "https://cneos.jpl.nasa.gov/",
-                        credibility: "high",
-                        keywords: ["asteroid", "rymden", "nasa", "jorden"],
-                        related: ["asteroider", "rymden", "dinosaurier", "solsystemet"]
-                    };
-                });
-            },
-
-            async nobelPrize() {
-                const catSv = {physics:"fysik",chemistry:"kemi","economic sciences":"ekonomi","physiology or medicine":"medicin",literature:"litteratur",peace:"fred"};
-                const res = await fetchWithTimeout("https://api.nobelprize.org/2.1/laureates?limit=25&offset=" + Math.floor(Math.random() * 900));
-                if (!res.ok) throw new Error(`Nobel: ${res.status}`);
-                const data = await res.json();
-                return (data.laureates || []).filter(l => l.nobelPrizes?.length && (l.fullName?.en || l.orgName?.en)).slice(0, 5).map(l => {
-                    const prize = l.nobelPrizes[0];
-                    const fullName = l.fullName?.en || l.orgName?.en;
-                    const nameParts = fullName.split(" ");
-                    const name = nameParts.length > 2 ? `${nameParts[0]} ${nameParts[nameParts.length-1]}` : fullName;
-                    const year = prize.awardYear;
-                    const cat = catSv[(prize.category?.en || "").toLowerCase()] || prize.category?.en || "";
-                    const age = l.birth?.date ? (year - parseInt(l.birth.date)) : null;
-                    const country = l.birth?.place?.country?.en || "";
-                    let text = `${name}${country ? ` från ${country}` : ""} fick Nobelpriset i ${cat} ${year}.`;
-                    if (age && age < 35) text += ` Bara ${age} år gammal — genialitet har ingen åldersgräns!`;
-                    else if (age && age > 85) text += ` Vid ${age} års ålder — bevis på att det aldrig är för sent!`;
-                    return {
-                        text,
-                        sourceName: "Nobelprize.org",
-                        sourceUrl: `https://www.nobelprize.org/prizes/${cat.toLowerCase().replace(/\s/g, '-')}/${year}/`,
-                        credibility: "high",
-                        keywords: ["nobelpris", "nobel", cat.toLowerCase(), "vetenskap", "historia"],
-                        related: ["Nobelpriset", "vetenskap", "Stockholm", "historia"]
-                    };
-                });
-            },
-
-            async usgsEarthquakes() {
-                const res = await fetchWithTimeout("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_week.geojson");
-                if (!res.ok) throw new Error(`USGS: ${res.status}`);
-                const data = await res.json();
-                const q = (data.features || [])[0];
-                if (!q) return [];
-                const total = data.features.length;
-                return [{
-                    text: `Bara den senaste veckan har det skett ${total} jordbävningar över 4.5 på Richterskalan runt om i världen. Den senaste var på ${q.properties.mag} ${q.properties.place}. Jorden skakar bokstavligen hela tiden!`,
-                    sourceName: "U.S. Geological Survey (USGS)",
-                    sourceUrl: q.properties.url || "https://earthquake.usgs.gov/",
-                    credibility: "high",
-                    keywords: ["jordbävning", "geologi", "tektonik", "natur"],
-                    related: ["vulkaner", "tektonik", "geologi", "tsunamier"]
-                }];
-            },
-
-            async restCountries() {
-                const res = await fetchWithTimeout("https://restcountries.com/v3.1/all?fields=name,capital,population,area,region,subregion,languages,currencies,maps,landlocked,car");
-                if (!res.ok) throw new Error(`REST Countries: ${res.status}`);
-                const countries = await res.json();
-                return countries.sort(() => Math.random() - 0.5).slice(0, 5).map(c => {
-                    const name = c.name?.common || "Okänt land";
-                    const langs = Object.values(c.languages || {});
-                    const pop = c.population || 0;
-                    const area = c.area || 0;
-                    const capital = c.capital?.[0] || "";
-                    const region = c.subregion || c.region || "";
-                    const angles = [];
-                    if (langs.length >= 8) angles.push(`I ${name} talas hela ${langs.length} officiella språk. Det mest talade är ${langs[0]}. Att beställa kaffe måste vara en upplevelse!`);
-                    else if (langs.length >= 4) angles.push(`${name} har ${langs.length} officiella språk — bland annat ${langs.slice(0, 3).join(", ")}. Flerspråkig flex!`);
-                    if (pop > 0 && area > 0) {
-                        const density = Math.round(pop / area);
-                        if (density > 1000) angles.push(`${name} har ${density.toLocaleString('sv')} invånare per km² — ett av världens mest tätbefolkade ställen. Personligt utrymme? Aldrig hört talas om.`);
-                        else if (density < 5 && area > 10000) angles.push(`${name} har bara ${density} invånare per km². Perfekt för dig som gillar att vara ifred.`);
-                    }
-                    if (area < 2 && area > 0) angles.push(`${name} är bara ${area} km² stort — du kan bokstavligen promenera genom hela landet på en eftermiddag.`);
-                    if (c.landlocked) angles.push(`${name} har ingen kust alls — det är helt omgivet av andra länder. Strandsemester kräver lite planering.`);
-                    if (c.car?.side === "left") angles.push(`I ${name} kör man på vänster sida av vägen. Ungefär 35% av världens länder gör det — ett arv från den brittiska tiden.`);
-                    if (angles.length === 0) angles.push(`${name} ligger i ${region}${capital ? ` med huvudstad ${capital}` : ""}. Ett land värt att lära sig mer om!`);
-                    return {
-                        text: angles[Math.floor(Math.random() * angles.length)],
-                        sourceName: "REST Countries (open data)",
-                        sourceUrl: c.maps?.googleMaps || "https://restcountries.com/",
-                        credibility: "high",
-                        keywords: ["geografi", "länder", name.toLowerCase(), region.toLowerCase()],
-                        related: ["geografi", "länder", region, capital]
-                    };
-                });
-            },
-
-            async metMuseum() {
-                const searches = ["painting", "sculpture", "photograph", "drawing", "ceramic", "gold"];
-                const term = searches[Math.floor(Math.random() * searches.length)];
-                const searchRes = await fetchWithTimeout(`https://collectionapi.metmuseum.org/public/collection/v1/search?hasImages=true&q=${term}`);
-                if (!searchRes.ok) throw new Error(`Met Museum: ${searchRes.status}`);
-                const searchData = await searchRes.json();
-                const ids = (searchData.objectIDs || []).sort(() => Math.random() - 0.5).slice(0, 3);
-                const facts = [];
-                for (const id of ids) {
-                    try {
-                        const res = await fetchWithTimeout(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${id}`);
-                        const obj = await res.json();
-                        if (!obj.title || !obj.artistDisplayName) continue;
-                        const funFacts = [
-                            `"${obj.title}" av ${obj.artistDisplayName} skapades ${obj.objectDate || "för länge sedan"} och finns idag på Met i New York.`,
-                            `Visste du att ${obj.artistDisplayName} skapade "${obj.title}"? Det finns på Met Museum i New York — gratis att besöka!`,
-                            `${obj.artistDisplayName}s "${obj.title}" (${obj.objectDate || "?"}) är ett av över 1,5 miljoner konstverk på Metropolitan Museum.`
-                        ];
-                        facts.push({
-                            text: funFacts[Math.floor(Math.random() * funFacts.length)],
-                            sourceName: "The Metropolitan Museum of Art",
-                            sourceUrl: obj.objectURL || "https://www.metmuseum.org/",
-                            credibility: "high",
-                            keywords: ["konst", "museum", "met", "målning", "skulptur"],
-                            related: ["konst", "museum", "New York", obj.artistDisplayName?.split(" ").pop() || "konst"]
-                        });
-                    } catch {}
-                }
-                return facts;
-            },
-
-            async peopleInSpace() {
-                const res = await fetchWithTimeout("http://api.open-notify.org/astros.json");
-                if (!res.ok) throw new Error(`Open Notify: ${res.status}`);
-                const data = await res.json();
-                if (!data.number) return [];
-                const names = data.people.map(p => p.name).join(", ");
-                const crafts = [...new Set(data.people.map(p => p.craft))].join(" och ");
-                return [{
-                    text: `Just nu befinner sig ${data.number} personer i rymden ombord på ${crafts}: ${names}. De kretsar runt jorden var 90:e minut i ungefär 408 km höjd.`,
-                    sourceName: "Open Notify / NASA",
-                    sourceUrl: "https://www.nasa.gov/international-space-station/",
-                    credibility: "high",
-                    keywords: ["rymden", "iss", "astronaut", "rymdstation"],
-                    related: ["ISS", "rymden", "NASA", "astronauter"]
-                }];
-            },
-
-            async europeana() {
-                const queries = ["viking", "renaissance", "medieval", "ancient", "baroque", "impressionism", "sculpture", "mosaic", "fresco", "portrait"];
-                const q = queries[Math.floor(Math.random() * queries.length)];
-                const res = await fetchWithTimeout(`https://api.europeana.eu/record/v2/search.json?query=${q}&rows=10&wskey=apidemo`);
-                if (!res.ok) throw new Error(`Europeana: ${res.status}`);
-                const data = await res.json();
-                return (data.items || []).filter(i => i.title?.[0]?.length > 3 && i.dcCreator?.[0]).slice(0, 5).map(item => {
-                    const title = item.title[0].length > 60 ? item.title[0].slice(0, 57) + "..." : item.title[0];
-                    const creator = item.dcCreator[0];
-                    const year = item.year?.[0] || "";
-                    return {
-                        text: `"${title}" av ${creator}${year ? ` (${year})` : ""} är bevarat som en del av Europas gemensamma kulturarv via Europeana.`,
-                        sourceName: "Europeana",
-                        sourceUrl: item.guid || "https://www.europeana.eu/",
-                        credibility: "high",
-                        keywords: ["konst", "kulturarv", "europa", "museum", "historia"],
-                        related: ["kulturarv", "Europa", "museum", "historia"]
-                    };
-                });
-            },
-
-            async gbif() {
-                const animals = ["Panthera", "Ursus", "Aquila", "Delphinus", "Corvus", "Canis", "Vulpes", "Balaenoptera", "Gorilla", "Elephas", "Puma", "Lynx", "Cervus", "Lutra", "Falco"];
-                const genus = animals[Math.floor(Math.random() * animals.length)];
-                const res = await fetchWithTimeout(`https://api.gbif.org/v1/species/search?q=${genus}&limit=10&rank=SPECIES`);
-                if (!res.ok) throw new Error(`GBIF: ${res.status}`);
-                const data = await res.json();
-                return (data.results || []).filter(s => s.vernacularName && s.canonicalName).slice(0, 5).map(species => ({
-                    text: `${species.vernacularName} (${species.canonicalName}) tillhör familjen ${species.family || "okänd"}. Det finns ${(species.numDescendants || "tusentals").toLocaleString('sv')} registrerade observationer i GBIF:s globala databas — biodiversitet på riktigt!`,
-                    sourceName: "GBIF (Global Biodiversity Information Facility)",
-                    sourceUrl: `https://www.gbif.org/species/${species.key}`,
-                    credibility: "high",
-                    keywords: ["djur", "biologi", "arter", "natur", "biodiversitet"],
-                    related: ["djur", "natur", "evolution", "arter"]
-                }));
-            },
-
-            async openLibrary() {
-                const authors = ["Shakespeare", "Tolkien", "Austen", "Hemingway", "Kafka", "Dostoevsky", "Orwell", "Woolf", "Márquez", "Lagerlöf", "Strindberg", "Lindgren", "Dickens", "Twain", "Poe"];
-                const author = authors[Math.floor(Math.random() * authors.length)];
-                const res = await fetchWithTimeout(`https://openlibrary.org/search.json?author=${encodeURIComponent(author)}&limit=10&sort=editions`);
-                if (!res.ok) throw new Error(`Open Library: ${res.status}`);
-                const data = await res.json();
-                return (data.docs || []).filter(d => d.title && d.first_publish_year).slice(0, 5).map(book => {
-                    const editions = book.edition_count || 0;
-                    const langs = book.language?.length || 0;
-                    let extra = "";
-                    if (editions > 100) extra = ` Den har getts ut i hela ${editions} upplagor — en riktig klassiker!`;
-                    else if (langs > 10) extra = ` Översatt till ${langs} språk — hela världen har läst den.`;
-                    return {
-                        text: `"${book.title}" av ${book.author_name?.[0] || author} publicerades första gången ${book.first_publish_year}.${extra}`,
-                        sourceName: "Open Library (Internet Archive)",
-                        sourceUrl: `https://openlibrary.org${book.key}`,
-                        credibility: "high",
-                        keywords: ["böcker", "litteratur", "författare", author.toLowerCase()],
-                        related: ["böcker", "litteratur", "författare", "bibliotek"]
-                    };
-                });
-            },
-
-            async pokeApi() {
-                const id = Math.floor(Math.random() * 898) + 1;
-                const res = await fetchWithTimeout(`https://pokeapi.co/api/v2/pokemon/${id}`);
-                if (!res.ok) throw new Error(`PokéAPI: ${res.status}`);
-                const pokemon = await res.json();
-                const specRes = await fetchWithTimeout(`https://pokeapi.co/api/v2/pokemon-species/${id}`);
-                const species = specRes.ok ? await specRes.json() : {};
-                const flavor = (species.flavor_text_entries || []).find(f => f.language?.name === "en")?.flavor_text?.replace(/\n|\f/g, ' ') || "";
-                const types = pokemon.types.map(t => t.type.name).join("/");
-                return [{
-                    text: `${pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)} (#${pokemon.id}) är en ${types}-typ Pokémon. Den är ${pokemon.height / 10} m hög och väger ${pokemon.weight / 10} kg.${flavor ? ` "${flavor}"` : ""}`,
-                    sourceName: "PokéAPI (officiell Pokémon-data)",
-                    sourceUrl: `https://pokemondb.net/pokedex/${pokemon.name}`,
-                    credibility: "high",
-                    keywords: ["pokémon", "pokemon", "spel", "gaming", "popkultur"],
-                    related: ["Pokémon", "Nintendo", "spel", "anime"]
-                }];
-            },
-
-            async frankfurter() {
-                const res = await fetchWithTimeout("https://api.frankfurter.app/latest?from=SEK");
-                if (!res.ok) throw new Error(`Frankfurter: ${res.status}`);
-                const data = await res.json();
-                const currencies = Object.entries(data.rates || {});
-                const pick = currencies[Math.floor(Math.random() * currencies.length)];
-                if (!pick) return [];
-                const currencyNames = {USD:"amerikanska dollar",EUR:"euro",GBP:"brittiska pund",JPY:"japanska yen",CHF:"schweiziska franc",AUD:"australiensiska dollar",CAD:"kanadensiska dollar",NOK:"norska kronor",DKK:"danska kronor",CNY:"kinesiska yuan",INR:"indiska rupier",BRL:"brasilianska real",KRW:"sydkoreanska won",MXN:"mexikanska pesos",TRY:"turkiska lira",ZAR:"sydafrikanska rand"};
-                const name = currencyNames[pick[0]] || pick[0];
-                return [{
-                    text: `Just nu är 1 svensk krona värd ${pick[1].toFixed(4)} ${name} (${pick[0]}). Växelkurser ändras varje dag baserat på global handel, räntor och ekonomisk politik. Datum: ${data.date}.`,
-                    sourceName: "Europeiska Centralbanken (via Frankfurter)",
-                    sourceUrl: "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/",
-                    credibility: "high",
-                    keywords: ["valuta", "ekonomi", "växelkurs", "pengar", "kronor"],
-                    related: ["ekonomi", "valuta", "handel", "Riksbanken"]
-                }];
-            },
-
-            async worldBank() {
-                const indicators = [
-                    { id: "SP.POP.TOTL", label: "befolkning", unit: "" },
-                    { id: "NY.GDP.PCAP.CD", label: "BNP per capita", unit: " USD" },
-                    { id: "SP.DYN.LE00.IN", label: "medellivslängd", unit: " år" },
-                    { id: "SE.ADT.LITR.ZS", label: "läskunnighet", unit: "%" }
-                ];
-                const ind = indicators[Math.floor(Math.random() * indicators.length)];
-                const countries = ["SWE","USA","JPN","BRA","IND","CHN","DEU","FRA","NGA","AUS","KEN","MEX","EGY","ARG","THA","CAN","KOR","ZAF","GBR","NOR"];
-                const cc = countries[Math.floor(Math.random() * countries.length)];
-                const res = await fetchWithTimeout(`https://api.worldbank.org/v2/country/${cc}/indicator/${ind.id}?format=json&per_page=1&date=2020:2023`);
-                if (!res.ok) throw new Error(`World Bank: ${res.status}`);
-                const data = await res.json();
-                const entry = data?.[1]?.[0];
-                if (!entry?.value) return [];
-                const val = ind.unit === "%" ? Math.round(entry.value) + "%" : Number(entry.value).toLocaleString('sv-SE') + ind.unit;
-                return [{
-                    text: `${entry.country.value} hade en ${ind.label} på ${val} (${entry.date}). Världsbankens data täcker 217 länder och används av forskare, journalister och beslutsfattare världen över.`,
-                    sourceName: "Världsbanken (World Bank Open Data)",
-                    sourceUrl: `https://data.worldbank.org/indicator/${ind.id}?locations=${cc}`,
-                    credibility: "high",
-                    keywords: ["ekonomi", "statistik", "världen", "data", "befolkning"],
-                    related: ["ekonomi", "statistik", "geografi", "utveckling"]
-                }];
-            },
-
-            async kSamsok() {
-                const queries = ["viking", "runsten", "medeltid", "slott", "kyrka", "järnålder", "bronsålder", "skeppssättning", "hällristning"];
-                const q = queries[Math.floor(Math.random() * queries.length)];
-                const res = await fetchWithTimeout(`https://kulturarvsdata.se/ksamsok/api?method=search&query=text%3D${encodeURIComponent(q)}&recordSchema=presentation&startRecord=${Math.floor(Math.random()*50)+1}&maximumRecords=5`);
-                if (!res.ok) throw new Error(`K-Samsök: ${res.status}`);
-                const text = await res.text();
-                const parser = new DOMParser();
-                const xml = parser.parseFromString(text, "text/xml");
-                const records = xml.querySelectorAll("record");
-                const facts = [];
-                records.forEach(rec => {
-                    const pres = rec.querySelector("pres\\:item, item");
-                    if (!pres) return;
-                    const label = pres.querySelector("pres\\:itemLabel, itemLabel")?.textContent || "";
-                    const desc = pres.querySelector("pres\\:description, description")?.textContent || "";
-                    const type = pres.querySelector("pres\\:type, type")?.textContent || "";
-                    if (!label && !desc) return;
-                    facts.push({
-                        text: `${label || "Kulturarvsföremål"}${type ? ` (${type})` : ""}: ${desc || "Ett svenskt kulturarvsföremål registrerat i Riksantikvarieämbetets databas K-Samsök."}`.slice(0, 300),
-                        sourceName: "Riksantikvarieämbetet (K-Samsök)",
-                        sourceUrl: "https://www.raa.se/hitta-information/k-samsok/",
-                        credibility: "high",
-                        keywords: ["kulturarv", "sverige", "historia", "arkeologi", q],
-                        related: ["kulturarv", "Sverige", "historia", "vikingarna"]
-                    });
-                });
-                return facts;
-            }
-        };
-
-        // ========== HELPER FUNCTIONS ==========
-        function credibilityLabel(level) {
-            return level === "high" ? "Hög" : level === "medium" ? "Medel" : "Låg";
+        function getKnownFacts() {
+            try { return JSON.parse(localStorage.getItem(KNOWN_KEY) || "{}"); }
+            catch { return {}; }
         }
 
+        function markFactKnown(fact) {
+            try {
+                const data = getKnownFacts();
+                data[factId(fact)] = Date.now();
+                localStorage.setItem(KNOWN_KEY, JSON.stringify(data));
+            } catch {}
+        }
+
+        function isFactKnown(fact) {
+            return !!getKnownFacts()[factId(fact)];
+        }
+
+        // ========== HELPERS ==========
         function escapeHtml(str) {
             const div = document.createElement("div");
-            div.textContent = str;
+            div.textContent = str ?? "";
             return div.innerHTML;
         }
 
-        // Published facts — loaded from published-data.json (synced via admin)
+        // ========== PUBLISHED FACTS ==========
         let _publishedFacts = [];
         async function loadPublishedFacts() {
             try {
                 const res = await fetch("published-data.json?" + Date.now());
-                if (res.ok) _publishedFacts = await res.json();
+                if (res.ok) {
+                    const data = await res.json();
+                    if (Array.isArray(data)) _publishedFacts = data;
+                }
             } catch {}
         }
-        function getAllFacts() {
-            return _publishedFacts;
-        }
 
-        function searchCuratedFacts(topic) {
-            const query = topic.toLowerCase().trim();
-            const queryWords = query.split(/\s+/);
-            const allFacts = getAllFacts();
-
-            const scored = allFacts.map(fact => {
-                let score = 0;
-                for (const word of queryWords) {
-                    for (const kw of fact.keywords) {
-                        if (kw === query) score += 10;
-                        else if (kw.includes(word) || word.includes(kw)) score += 5;
-                        else if (kw.startsWith(word.slice(0, 3)) && word.length >= 3) score += 2;
-                    }
-                    if (fact.text.toLowerCase().includes(word)) score += 1;
-                }
-                return { fact, score };
-            });
-
-            return scored
-                .filter(s => s.score >= 3)
-                .sort((a, b) => b.score - a.score)
-                .map(s => s.fact);
-        }
-
-        let currentFacts = [];
-        let currentIndex = 0;
-        let currentRelated = [];
-        let currentTopic = "";
+        // ========== STATE ==========
         let factHistory = [];
         let historyIndex = -1;
-        let currentIsApi = false;
+        let _slideDir = null;
 
-        // ========== API HELPERS ==========
-        function fetchWithTimeout(url, timeoutMs = 5000) {
-            return Promise.race([
-                fetch(url),
-                new Promise((_, reject) => setTimeout(() => reject(new Error("Timeout")), timeoutMs))
-            ]);
+        function currentFact() {
+            return factHistory[historyIndex]?.fact || null;
         }
 
-        async function fetchRandomApiFact() {
-            const sourceNames = Object.keys(API_SOURCES).sort(() => Math.random() - 0.5).slice(0, 3);
-            const results = await Promise.allSettled(
-                sourceNames.map(name => API_SOURCES[name]())
-            );
-            for (const r of results) {
-                if (r.status === "fulfilled" && r.value.length > 0) {
-                    const unseen = r.value.filter(f => !isFactSeen(f));
-                    if (unseen.length > 0) return unseen;
-                    return r.value;
-                }
-            }
-            return [];
+        function pickRandomFact() {
+            if (_publishedFacts.length === 0) return null;
+            const knownIds = getKnownFacts();
+            const candidates = _publishedFacts.filter(f => !knownIds[factId(f)]);
+            if (candidates.length === 0) return null;
+            const unseen = candidates.filter(f => !isFactSeen(f));
+            const pool = unseen.length > 0 ? unseen : candidates;
+            return pool[Math.floor(Math.random() * pool.length)];
         }
 
-        // ========== SEARCH TRACKING ==========
-        function trackSearch(topic, foundResult) {
-            try {
-                const searches = JSON.parse(localStorage.getItem("smartass_searches") || "[]");
-                const existing = searches.find(s => s.query.toLowerCase() === topic.toLowerCase());
-                if (existing) {
-                    existing.count++;
-                    existing.lastSearched = new Date().toISOString();
-                    existing.hadResult = foundResult;
-                } else {
-                    searches.push({
-                        query: topic,
-                        count: 1,
-                        firstSearched: new Date().toISOString(),
-                        lastSearched: new Date().toISOString(),
-                        hadResult: foundResult
-                    });
-                }
-                localStorage.setItem("smartass_searches", JSON.stringify(searches));
-            } catch {}
-        }
-
-        // ========== SEARCH & DISPLAY ==========
-        async function searchFacts(topic) {
+        // ========== RENDER ==========
+        function renderSingleFact() {
+            const fact = currentFact();
             const factArea = document.getElementById("factArea");
-            document.getElementById("searchInput").value = topic;
-            currentTopic = topic;
-
-            const curated = searchCuratedFacts(topic);
-
-            if (curated.length > 0) {
-                const unseen = curated.filter(f => !isFactSeen(f));
-                const pick = unseen.length > 0 ? unseen[0] : curated[0];
-
-                currentFacts = [{ ...pick, credibility: "high" }];
-                currentRelated = (pick.related || []).filter(r => r.toLowerCase() !== topic.toLowerCase()).slice(0, 6);
-                currentIndex = 0;
-                currentIsApi = false;
-                markFactSeen(currentFacts[0]);
-                trackSearch(topic, true);
-                renderSingleFact();
+            if (!fact) {
+                factArea.innerHTML = "";
                 return;
             }
-
-            trackSearch(topic, false);
-            factArea.innerHTML = `
-                <div class="fact-card" style="text-align:center; padding: 2rem 1.5rem;">
-                    <p style="font-size:1rem; margin-bottom:0.5rem;">😕</p>
-                    <p style="font-size:0.95rem; font-weight:500; margin-bottom:0.75rem;">Tyvärr har vi ingen info om "${escapeHtml(topic)}" ännu</p>
-                    <p style="font-size:0.82rem; color:var(--text-secondary); line-height:1.5;">Vi bygger ut vår faktabank varje dag! Testa att söka på något annat eller tryck på knappen nedan för en slumpmässig fakta.</p>
-                </div>`;
-        }
-
-        async function fetchWikipediaFacts(topic) {
-            try {
-                const searchUrl = `https://sv.wikipedia.org/w/api.php?action=opensearch&search=${encodeURIComponent(topic)}&limit=1&format=json&origin=*`;
-                const searchRes = await fetch(searchUrl);
-                const searchData = await searchRes.json();
-
-                let title, lang;
-                if (searchData[1]?.length > 0) {
-                    title = searchData[1][0];
-                    lang = "sv";
-                } else {
-                    const enRes = await fetch(`https://en.wikipedia.org/w/api.php?action=opensearch&search=${encodeURIComponent(topic)}&limit=1&format=json&origin=*`);
-                    const enData = await enRes.json();
-                    if (!enData[1]?.length) return { facts: [], related: [] };
-                    title = enData[1][0];
-                    lang = "en";
-                }
-
-                const base = `https://${lang}.wikipedia.org`;
-                const [summaryRes, linksRes] = await Promise.all([
-                    fetch(`${base}/api/rest_v1/page/summary/${encodeURIComponent(title)}`),
-                    fetch(`${base}/w/api.php?action=query&titles=${encodeURIComponent(title)}&prop=links&pllimit=20&format=json&origin=*`)
-                ]);
-
-                const summary = await summaryRes.json();
-                const linksData = await linksRes.json();
-
-                const facts = [];
-                if (summary.extract) {
-                    summary.extract.split(/(?<=[.!?])\s+/).filter(s => s.length > 30).forEach(text => {
-                        facts.push({
-                            text,
-                            sourceName: "Wikipedia",
-                            sourceUrl: summary.content_urls?.desktop?.page || `${base}/wiki/${encodeURIComponent(title)}`,
-                            credibility: "medium"
-                        });
-                    });
-                }
-
-                const related = [];
-                const pages = linksData.query?.pages;
-                if (pages) {
-                    const page = Object.values(pages)[0];
-                    page?.links?.filter(l => l.ns === 0 && !l.title.includes(":")).slice(0, 10).forEach(l => related.push(l.title));
-                }
-
-                return { facts, related };
-            } catch (e) {
-                console.error("Wikipedia error:", e);
-                return { facts: [], related: [] };
-            }
-        }
-
-        const TOPIC_API_MAP = [
-            { keywords: ["rymd", "nasa", "astro", "planet", "stjärn", "galax", "sol", "mars", "jupiter", "saturn", "asteroid", "meteor", "teleskop", "komet", "iss", "rymdstation", "astronaut"], apis: ["nasaApod", "nasaAsteroids", "peopleInSpace"] },
-            { keywords: ["nobel", "pris", "vetenskap", "fysik", "kemi", "medicin", "fred"], apis: ["nobelPrize"] },
-            { keywords: ["jordbävning", "geologi", "tektonik", "vulkan", "seism", "richter", "tsunami"], apis: ["usgsEarthquakes"] },
-            { keywords: ["geografi", "land", "länder", "kontinent", "huvudstad", "befolkning", "europa", "afrika", "asien", "amerika", "oceanien"], apis: ["restCountries", "worldBank"] },
-            { keywords: ["konst", "museum", "målning", "skulptur", "tavla", "konstnär", "met", "renässans", "mode", "design"], apis: ["metMuseum", "europeana"] },
-            { keywords: ["bok", "böcker", "litteratur", "författare", "roman", "poesi", "bibliotek"], apis: ["openLibrary"] },
-            { keywords: ["pokémon", "pokemon", "pikachu", "nintendo"], apis: ["pokeApi"] },
-            { keywords: ["valuta", "kronor", "dollar", "euro", "växelkurs", "pengar"], apis: ["frankfurter"] },
-            { keywords: ["ekonomi", "bnp", "statistik", "befolkning", "utveckling", "fattigdom"], apis: ["worldBank"] },
-            { keywords: ["djur", "arter", "biologi", "natur", "biodiversitet", "fågel", "däggdjur", "fisk", "insekt"], apis: ["gbif"] },
-            { keywords: ["kulturarv", "viking", "runsten", "arkeologi", "fornfynd", "medeltid", "järnålder", "bronsålder", "hällristning"], apis: ["kSamsok", "europeana"] },
-            { keywords: ["europa", "kultur", "historia", "antik", "barock", "gotik"], apis: ["europeana"] }
-        ];
-
-        async function fetchTopicApiFacts(topic) {
-            const q = topic.toLowerCase();
-            const apiSet = new Set();
-
-            for (const mapping of TOPIC_API_MAP) {
-                if (mapping.keywords.some(k => q.includes(k))) {
-                    mapping.apis.forEach(a => apiSet.add(a));
-                }
-            }
-
-            if (apiSet.size === 0) {
-                ["nobelPrize", "restCountries", "europeana", "gbif", "openLibrary"].forEach(a => apiSet.add(a));
-            }
-
-            const facts = [];
-            try {
-                const results = await Promise.allSettled(
-                    [...apiSet].map(name => API_SOURCES[name]?.() || Promise.resolve([]))
-                );
-                results.forEach(r => {
-                    if (r.status === "fulfilled") facts.push(...r.value);
-                });
-            } catch (e) {
-                console.warn("API topic search error:", e);
-            }
-
-            const unseen = facts.filter(f => !isFactSeen(f));
-            return unseen.length > 0 ? unseen : facts;
-        }
-
-        let _slideDir = null; // "next" | "prev" | null (set before calling renderSingleFact)
-
-        async function renderSingleFact() {
-            const factArea = document.getElementById("factArea");
-            const fact = currentFacts[currentIndex];
-            const credClass = `cred-${fact.credibility}`;
-            const label = credibilityLabel(fact.credibility);
-
-            const sourceHtml = fact.sourceName
-                ? `<a href="${escapeHtml(fact.sourceUrl || '#')}" target="_blank" rel="noopener" class="source-link">Källa: ${escapeHtml(fact.sourceName)}</a>`
-                : "";
-
-            // Check if saved / known (async)
-            let isSaved = false, isKnown = false;
-            if (currentUser) {
-                try { isSaved = await isFactSavedByUser(fact); } catch {}
-                try { isKnown = await isFactKnownByUser(fact); } catch {}
-            }
-
-            const actionsHtml = `
-                <div class="fact-actions">
-                    <button class="fact-action-btn ${isSaved ? 'saved' : ''}" onclick="toggleSaveFact(currentFacts[currentIndex])">
-                        ${isSaved ? '❤️ Sparad' : '🤍 Spara'}
-                    </button>
-                    <button class="fact-action-btn" onclick="openShare(currentFacts[currentIndex])">
-                        📩 Skicka till vän
-                    </button>
-                    <button class="fact-action-btn fact-known-btn ${isKnown ? 'known' : ''}" onclick="markAsKnown(currentFacts[currentIndex])" style="margin-left:auto;" ${isKnown ? 'disabled' : ''}>
-                        ${isKnown ? '✓ Visste' : '🧠 Visste redan'}
-                    </button>
-                </div>`;
 
             const animClass = _slideDir === "next" ? "anim-in-right"
                             : _slideDir === "prev" ? "anim-in-left"
@@ -1702,22 +323,18 @@
             factArea.innerHTML = `
                 <div class="fact-card ${animClass}">
                     <div class="fact-text">${escapeHtml(fact.text)}</div>
-                    <div class="fact-footer">
-                        <div class="credibility ${credClass}">
-                            <span class="cred-dot"></span>
-                            <span>Trovärdighet: </span>
-                            <span class="cred-label">${label}</span>
-                        </div>
-                        ${sourceHtml}
+                    <div class="fact-actions">
+                        <button class="fact-action-btn" id="knownBtn">🧠 Visste redan</button>
                     </div>
-                    ${actionsHtml}
                 </div>`;
+
+            document.getElementById("knownBtn")?.addEventListener("click", () => {
+                markFactKnown(fact);
+                showNextFact();
+            });
         }
 
-        // ========== INIT ==========
-        loadPublishedFacts();
-
-        // ========== NAV HELPERS ==========
+        // ========== NAV ==========
         function enterCardMode() {
             document.getElementById("randomSection").style.display = "none";
             document.getElementById("prevArrow").classList.add("visible");
@@ -1725,21 +342,10 @@
         }
 
         function updateArrows() {
-            const prev = document.getElementById("prevArrow");
-            const next = document.getElementById("nextArrow");
-            prev.disabled = historyIndex <= 0;
-            next.disabled = false; // next always picks a new fact if at end
+            document.getElementById("prevArrow").disabled = historyIndex <= 0;
+            document.getElementById("nextArrow").disabled = false;
         }
 
-        function pickRandomFact() {
-            const allFacts = getAllFacts();
-            if (allFacts.length === 0) return null;
-            const unseen = allFacts.filter(f => !isFactSeen(f));
-            const pool = unseen.length > 0 ? unseen : allFacts;
-            return pool[Math.floor(Math.random() * pool.length)];
-        }
-
-        // Animate out current card, then run changeFn (which calls renderSingleFact)
         async function animateNav(direction, changeFn) {
             const card = document.querySelector("#factArea .fact-card");
             if (card) {
@@ -1750,47 +356,43 @@
             changeFn();
         }
 
-        function showFactFromHistory(index, direction) {
-            const entry = factHistory[index];
-            if (!entry) return;
-            historyIndex = index;
-            currentFacts = [entry.fact];
-            currentRelated = entry.related;
-            currentIndex = 0;
-            currentTopic = entry.topic;
-            updateArrows();
-            renderSingleFact();
-        }
-
         function showPrevFact() {
             if (historyIndex <= 0) return;
-            animateNav("prev", () => showFactFromHistory(historyIndex - 1, "prev"));
-        }
-
-        function showNextFact() {
-            if (historyIndex < factHistory.length - 1) {
-                animateNav("next", () => showFactFromHistory(historyIndex + 1, "next"));
-                return;
-            }
-            const randomFact = pickRandomFact();
-            if (!randomFact) return;
-            animateNav("next", () => {
-                const fact = { ...randomFact, credibility: "high" };
-                const related = fact.related || [];
-                const topic = fact.keywords?.[0] || "";
-                markFactSeen(fact);
-                factHistory.push({ fact, related, topic });
-                historyIndex = factHistory.length - 1;
-                currentFacts = [fact];
-                currentRelated = related;
-                currentIndex = 0;
-                currentTopic = topic;
+            animateNav("prev", () => {
+                historyIndex--;
                 updateArrows();
                 renderSingleFact();
             });
         }
 
-        // ========== SWIPE SUPPORT ==========
+        function showNextFact() {
+            // If history has a forward entry, go to it
+            if (historyIndex < factHistory.length - 1) {
+                animateNav("next", () => {
+                    historyIndex++;
+                    updateArrows();
+                    renderSingleFact();
+                });
+                return;
+            }
+            const fact = pickRandomFact();
+            if (!fact) {
+                animateNav("next", () => {
+                    document.getElementById("factArea").innerHTML =
+                        `<div class="fact-card anim-in-fade"><div class="error-msg">Inga fler nya fakta just nu.</div></div>`;
+                });
+                return;
+            }
+            animateNav("next", () => {
+                markFactSeen(fact);
+                factHistory.push({ fact });
+                historyIndex = factHistory.length - 1;
+                updateArrows();
+                renderSingleFact();
+            });
+        }
+
+        // ========== TOUCH SWIPE ==========
         (function() {
             let touchStartX = 0;
             let touchStartY = 0;
@@ -1810,29 +412,31 @@
         })();
 
         // ========== EVENT LISTENERS ==========
+        document.getElementById("prevArrow").addEventListener("click", showPrevFact);
+        document.getElementById("nextArrow").addEventListener("click", showNextFact);
+
         document.getElementById("randomBtn").addEventListener("click", async () => {
-            const randomFact = pickRandomFact();
-            if (!randomFact) {
-                document.getElementById("factArea").innerHTML = `
-                    <div class="error-msg">Inga publicerade fakta ännu!</div>`;
+            if (_publishedFacts.length === 0) {
+                document.getElementById("factArea").innerHTML =
+                    `<div class="fact-card anim-in-fade"><div class="error-msg">Inga publicerade fakta ännu!</div></div>`;
                 return;
             }
-            const fact = { ...randomFact, credibility: "high" };
-            const related = fact.related || [];
-            const topic = fact.keywords?.[0] || "";
+            const fact = pickRandomFact();
+            if (!fact) {
+                document.getElementById("factArea").innerHTML =
+                    `<div class="fact-card anim-in-fade"><div class="error-msg">Inga fler nya fakta just nu.</div></div>`;
+                return;
+            }
             markFactSeen(fact);
-
-            factHistory = [{ fact, related, topic }];
+            factHistory = [{ fact }];
             historyIndex = 0;
-            currentFacts = [fact];
-            currentRelated = related;
-            currentIndex = 0;
-            currentTopic = topic;
-
             enterCardMode();
             updateArrows();
             renderSingleFact();
         });
+
+        // ========== INIT ==========
+        loadPublishedFacts();
     </script>
 </body>
 </html>

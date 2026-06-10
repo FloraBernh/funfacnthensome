@@ -14,7 +14,6 @@
             --text: #222222;
             --text-secondary: #888888;
             --green: #C2FF66;
-            --yellow: #FFDB77;
             --red: #FF8383;
             --border: #e0e0e0;
             --radius: 12px;
@@ -43,2440 +42,471 @@
         }
 
         .topbar h1 { font-size: 1.1rem; font-weight: 700; font-style: italic; }
-        .topbar-links a {
-            font-size: 0.78rem; color: var(--text-secondary); text-decoration: none;
-            font-weight: 500; transition: color 0.15s;
-        }
-        .topbar-links a:hover { color: var(--text); }
 
-        .main { max-width: 1100px; margin: 0 auto; padding: 1.5rem; }
+        .topbar-link {
+            font-size: 0.78rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.15s;
+        }
+        .topbar-link:hover { color: var(--text); }
 
-        /* TABS */
-        .tabs {
-            display: flex; gap: 0; background: var(--card-bg);
-            border-radius: var(--radius); border: 1px solid var(--border);
-            overflow: hidden; margin-bottom: 1.5rem;
+        .main {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 1.5rem;
         }
-        .tab {
-            flex: 1; padding: 0.7rem 0.5rem; font-size: 0.78rem; font-weight: 600;
-            font-family: 'Inter', sans-serif; border: none; background: transparent;
-            cursor: pointer; color: var(--text-secondary); transition: all 0.15s; text-align: center;
-        }
-        .tab:hover { color: var(--text); }
-        .tab.active { background: var(--text); color: white; }
-        .tab-panel { display: none; }
-        .tab-panel.active { display: block; }
 
-        /* STATS */
-        .stats-grid {
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-            gap: 0.6rem; margin-bottom: 1.5rem;
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.4rem;
+            margin-bottom: 1.5rem;
         }
-        .stat-card {
-            background: var(--card-bg); border: 1px solid var(--border);
-            border-radius: var(--radius); padding: 1rem; text-align: center;
-            cursor: pointer; transition: all 0.15s; position: relative;
-        }
-        .stat-card:hover { border-color: var(--text); transform: translateY(-1px); }
-        .stat-number { font-size: 1.6rem; font-weight: 700; line-height: 1; }
-        .stat-label { font-size: 0.7rem; color: var(--text-secondary); margin-top: 0.3rem; font-weight: 500; }
-        .stat-total { background: var(--text); color: white; border-color: var(--text); }
-        .stat-total .stat-label { color: rgba(255,255,255,0.6); }
-        .stat-draft { border-left: 3px solid var(--yellow); }
-        .stat-approved { border-left: 3px solid var(--green); }
-        .stat-card .arrow { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); font-size: 0.7rem; color: var(--text-secondary); opacity: 0; transition: opacity 0.15s; }
-        .stat-card:hover .arrow { opacity: 1; }
 
-        /* GENERATE SECTION */
-        .generate-section {
-            background: var(--card-bg); border: 1px solid var(--border);
-            border-radius: var(--radius); padding: 1.5rem; margin-bottom: 1.5rem; text-align: center;
-        }
-        .generate-section h2 { font-size: 1rem; font-weight: 700; margin-bottom: 0.3rem; }
-        .generate-section p { font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 1rem; }
-        .generate-controls { display: flex; gap: 0.5rem; align-items: center; justify-content: center; flex-wrap: wrap; }
-        .generate-input {
-            width: 70px; padding: 0.55rem 0.6rem; border: 1.5px solid var(--border);
-            border-radius: 8px; font-size: 0.85rem; font-family: 'Inter', sans-serif;
-            text-align: center; outline: none;
-        }
-        .generate-input:focus { border-color: var(--text); }
-
-        /* BUTTONS */
-        .btn {
-            padding: 0.55rem 1.2rem; border: none; border-radius: 8px;
-            font-size: 0.8rem; font-weight: 600; font-family: 'Inter', sans-serif;
-            cursor: pointer; transition: all 0.15s;
-        }
-        .btn:active { transform: scale(0.97); }
-        .btn-primary { background: var(--text); color: white; }
-        .btn-primary:hover { background: #444; }
-        .btn-outline { background: transparent; border: 1.5px solid var(--border); color: var(--text); }
-        .btn-outline:hover { border-color: var(--text); }
-        .btn-approve { background: var(--green); color: var(--text); }
-        .btn-approve:hover { opacity: 0.85; }
-        .btn-edit { background: var(--yellow); color: var(--text); }
-        .btn-edit:hover { opacity: 0.85; }
-        .btn-delete { background: var(--red); color: var(--text); }
-        .btn-delete:hover { opacity: 0.85; }
-        .btn-sm { padding: 0.35rem 0.7rem; font-size: 0.72rem; }
-        .btn-ghost { background: transparent; color: var(--text-secondary); padding: 0.35rem 0.5rem; }
-        .btn-ghost:hover { color: var(--text); }
-
-        /* REVIEW CARDS */
-        .review-list { display: flex; flex-direction: column; gap: 0.6rem; }
-        .review-card {
-            background: var(--card-bg); border: 1px solid var(--border);
-            border-radius: var(--radius); padding: 1rem 1.2rem;
-            animation: fadeIn 0.2s ease both;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(4px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .review-text { font-size: 0.88rem; line-height: 1.6; margin-bottom: 0.7rem; }
-        .review-text[contenteditable="true"] {
-            outline: 2px solid var(--yellow); border-radius: 4px;
-            padding: 0.3rem; background: #FFFDF5;
-        }
-        .review-meta {
-            display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;
-            margin-bottom: 0.6rem; font-size: 0.73rem; color: var(--text-secondary);
-        }
-        .review-meta .badge {
-            display: inline-flex; align-items: center; gap: 0.25rem;
-            padding: 0.15rem 0.5rem; border-radius: 20px; font-size: 0.68rem; font-weight: 600;
-        }
-        .badge-category { background: #F0F0F0; color: var(--text); }
-        .badge-source { background: #F0F0F0; color: var(--text); }
-        .badge-draft { background: var(--yellow); color: var(--text); }
-        .badge-approved { background: var(--green); color: var(--text); }
-        .badge-curated { background: #F0F0F0; color: var(--text); }
-        .badge-edited { background: var(--yellow); color: var(--text); }
-        .review-actions { display: flex; gap: 0.35rem; align-items: center; flex-wrap: wrap; }
-        .category-select {
-            padding: 0.3rem 0.5rem; border: 1.5px solid var(--border); border-radius: 6px;
-            font-size: 0.72rem; font-family: 'Inter', sans-serif; outline: none;
-            background: white; cursor: pointer;
-        }
-        .category-select:focus { border-color: var(--text); }
-
-        /* FILTER BAR */
-        .filter-bar { display: flex; gap: 0.4rem; margin-bottom: 1rem; flex-wrap: wrap; align-items: center; }
-        .filter-bar label { font-size: 0.72rem; font-weight: 600; color: var(--text-secondary); margin-right: 0.2rem; }
-        .filter-pill {
-            padding: 0.25rem 0.6rem; border-radius: 20px; border: 1.5px solid var(--border);
-            background: white; font-size: 0.7rem; font-family: 'Inter', sans-serif;
-            font-weight: 500; cursor: pointer; color: var(--text); transition: all 0.15s;
-        }
-        .filter-pill:hover { border-color: var(--text); }
-        .filter-pill.active { background: var(--text); color: white; border-color: var(--text); }
-        .filter-pill .pill-count { opacity: 0.6; margin-left: 2px; }
-
-        /* BULK BAR */
-        .bulk-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem; }
-        .bulk-bar .count { font-size: 0.78rem; color: var(--text-secondary); font-weight: 500; }
-        .bulk-actions { display: flex; gap: 0.3rem; }
-
-        /* SEARCH IN LIST */
-        .list-search {
-            width: 100%; padding: 0.6rem 0.9rem; border: 1.5px solid var(--border);
-            border-radius: var(--radius); font-size: 0.82rem; font-family: 'Inter', sans-serif;
-            outline: none; margin-bottom: 0.8rem; background: white;
-        }
-        .list-search:focus { border-color: #bbb; }
-        .list-search::placeholder { color: #ccc; }
-
-        /* EMPTY STATE */
-        .empty-state { text-align: center; padding: 3rem 1rem; color: var(--text-secondary); }
-        .empty-state p { font-size: 0.85rem; }
-
-        /* PROGRESS */
-        .progress-bar { width: 100%; height: 4px; background: var(--border); border-radius: 2px; margin-top: 1rem; overflow: hidden; display: none; }
-        .progress-bar.active { display: block; }
-        .progress-fill { height: 100%; background: var(--green); border-radius: 2px; transition: width 0.3s ease; width: 0%; }
-        .generate-status { font-size: 0.75rem; color: var(--text-secondary); margin-top: 0.5rem; min-height: 1.2em; }
-
-        /* PAGINATION */
-        .pagination { display: flex; justify-content: center; gap: 0.3rem; margin-top: 1rem; }
-        .page-btn {
-            padding: 0.3rem 0.6rem; border: 1px solid var(--border); border-radius: 6px;
-            background: white; font-size: 0.72rem; font-family: 'Inter', sans-serif;
-            cursor: pointer; transition: all 0.15s;
-        }
-        .page-btn:hover { border-color: var(--text); }
-        .page-btn.active { background: var(--text); color: white; border-color: var(--text); }
-        .page-btn:disabled { opacity: 0.3; cursor: default; }
-
-        /* SWIPE VIEW */
-        .swipe-container {
-            display: flex; flex-direction: column; align-items: center;
-            padding: 1rem 0;
-        }
-        .swipe-counter {
-            font-size: 0.75rem; color: var(--text-secondary); font-weight: 500;
+        .card h2 {
+            font-size: 0.95rem;
+            font-weight: 700;
             margin-bottom: 1rem;
         }
-        .swipe-card {
-            background: var(--card-bg); border: 1px solid var(--border);
-            border-radius: 16px; padding: 2rem 1.8rem; width: 100%; max-width: 500px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-            transition: transform 0.35s cubic-bezier(.4,0,.2,1), opacity 0.35s ease;
-            position: relative;
-        }
-        .swipe-card.swipe-left {
-            transform: translateX(-120%) rotate(-8deg); opacity: 0;
-        }
-        .swipe-card.swipe-right {
-            transform: translateX(120%) rotate(8deg); opacity: 0;
-        }
-        .swipe-card.swipe-up {
-            transform: translateY(-100%) scale(0.9); opacity: 0;
-        }
-        .swipe-card.dragging {
-            transition: none;
-            cursor: grabbing;
-        }
-        .swipe-overlay {
-            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-            border-radius: 16px; display: flex; align-items: center; justify-content: center;
-            font-size: 1.4rem; font-weight: 800; pointer-events: none;
-            opacity: 0; transition: opacity 0.1s;
-        }
-        .swipe-overlay-yes { background: rgba(194,255,102,0.3); color: #3a7a00; }
-        .swipe-overlay-no { background: rgba(255,131,131,0.3); color: #a00; }
-        .swipe-text {
-            font-size: 1.05rem; line-height: 1.7; margin-bottom: 1.2rem;
-            font-weight: 400;
-        }
-        .swipe-text[contenteditable="true"] {
-            outline: 2px solid var(--yellow); border-radius: 6px;
-            padding: 0.5rem; background: #FFFDF5;
-        }
-        .swipe-meta {
-            display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center;
-            margin-bottom: 1.2rem; font-size: 0.75rem;
-        }
-        .swipe-category-row {
-            display: flex; gap: 0.5rem; align-items: center; margin-bottom: 1.5rem;
-        }
-        .swipe-category-select {
-            flex: 1; padding: 0.5rem 0.7rem; border: 1.5px solid var(--border);
-            border-radius: 8px; font-size: 0.82rem; font-family: 'Inter', sans-serif;
-            outline: none; background: white; cursor: pointer;
-        }
-        .swipe-category-select:focus { border-color: var(--text); }
-        .swipe-actions {
-            display: flex; gap: 0.6rem; justify-content: center;
-        }
-        .swipe-btn {
-            flex: 1; padding: 0.9rem 1rem; border: none; border-radius: 12px;
-            font-size: 0.88rem; font-weight: 700; font-family: 'Inter', sans-serif;
-            cursor: pointer; transition: all 0.15s; max-width: 160px;
-        }
-        .swipe-btn:active { transform: scale(0.95); }
-        .swipe-btn-no { background: var(--red); color: var(--text); }
-        .swipe-btn-no:hover { opacity: 0.85; }
-        .swipe-btn-edit { background: var(--yellow); color: var(--text); }
-        .swipe-btn-edit:hover { opacity: 0.85; }
-        .swipe-btn-yes { background: var(--green); color: var(--text); }
-        .swipe-btn-yes:hover { opacity: 0.85; }
-        .swipe-btn-save { background: var(--text); color: white; }
-        .swipe-btn-save:hover { background: #444; }
-        .swipe-empty {
-            text-align: center; padding: 3rem; color: var(--text-secondary);
-        }
-        .swipe-empty p { font-size: 0.9rem; margin-bottom: 0.5rem; }
-        .view-toggle {
-            display: flex; gap: 0; background: var(--card-bg); border: 1.5px solid var(--border);
-            border-radius: 8px; overflow: hidden; margin-bottom: 1rem;
-        }
-        .view-toggle-btn {
-            padding: 0.4rem 0.9rem; font-size: 0.72rem; font-weight: 600;
-            font-family: 'Inter', sans-serif; border: none; background: transparent;
-            cursor: pointer; color: var(--text-secondary); transition: all 0.15s;
-        }
-        .view-toggle-btn.active { background: var(--text); color: white; }
-        .view-toggle-btn:hover:not(.active) { color: var(--text); }
 
-        /* NEW CATEGORY INPUT */
-        .new-cat-row {
-            display: flex; gap: 0.4rem; align-items: center; margin-top: 0.5rem;
-        }
-        .new-cat-input {
-            flex: 1; padding: 0.4rem 0.6rem; border: 1.5px solid var(--border);
-            border-radius: 6px; font-size: 0.75rem; font-family: 'Inter', sans-serif;
+        .fact-textarea {
+            width: 100%;
+            min-height: 110px;
+            padding: 0.8rem 1rem;
+            border: 1.5px solid var(--border);
+            border-radius: 8px;
+            font-size: 0.92rem;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.55;
+            color: var(--text);
             outline: none;
+            resize: vertical;
+            transition: border-color 0.15s;
         }
-        .new-cat-input:focus { border-color: var(--text); }
-        .new-cat-input::placeholder { color: #ccc; }
 
-        /* VERIFICATION */
-        .verify-status {
-            padding: 0.6rem 0.8rem; border-radius: 8px; margin-bottom: 0.7rem;
-            font-size: 0.78rem; line-height: 1.5;
+        .fact-textarea:focus { border-color: var(--text); }
+        .fact-textarea::placeholder { color: #bbb; }
+
+        .actions {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.8rem;
+            margin-top: 0.9rem;
+            flex-wrap: wrap;
         }
-        .verify-checking {
-            background: #F5F5F5; border: 1px solid var(--border);
+
+        .btn {
+            padding: 0.65rem 1.4rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .btn:active { transform: scale(0.97); }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        .btn-primary { background: var(--text); color: white; }
+        .btn-primary:hover:not(:disabled) { background: #444; }
+
+        .btn-ghost {
+            background: transparent;
             color: var(--text-secondary);
+            border: 1.5px solid var(--border);
         }
-        .verify-checking::before { content: "⏳ "; }
-        .verify-pass {
-            background: color-mix(in srgb, var(--green) 20%, white); border: 1px solid var(--green);
-            color: var(--text);
+        .btn-ghost:hover { color: var(--text); border-color: var(--text); }
+
+        .status {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            min-height: 1.2em;
         }
-        .verify-pass::before { content: "✅ "; }
-        .verify-warn {
-            background: color-mix(in srgb, var(--yellow) 20%, white); border: 1px solid var(--yellow);
-            color: var(--text);
-        }
-        .verify-warn::before { content: "⚠️ "; }
-        .verify-fail {
-            background: color-mix(in srgb, var(--red) 20%, white); border: 1px solid var(--red);
-            color: var(--text);
-        }
-        .verify-fail::before { content: "❌ "; }
-        .verify-sources {
-            margin-top: 0.4rem; font-size: 0.7rem;
-        }
-        .verify-sources a {
-            color: #5588cc; text-decoration: none; display: block;
-            padding: 0.15rem 0; word-break: break-all;
-        }
-        .verify-sources a:hover { text-decoration: underline; }
-        .swipe-verify {
-            margin-bottom: 1rem; min-height: 2rem;
+        .status.success { color: #38a169; font-weight: 500; }
+        .status.error { color: var(--red); font-weight: 500; }
+
+        .count {
+            font-size: 0.78rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.8rem;
+            font-weight: 500;
         }
 
-        /* DUPLICATE CARDS */
-        .dup-pair {
-            background: var(--card-bg); border: 1px solid var(--border);
-            border-radius: var(--radius); padding: 1rem 1.2rem; margin-bottom: 0.6rem;
-            border-left: 3px solid var(--red);
+        .list-empty {
+            padding: 2rem 1rem;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.88rem;
         }
-        .dup-pair-label {
-            font-size: 0.68rem; font-weight: 700; color: var(--red);
-            text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.6rem;
+
+        .fact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.7rem;
+            padding: 0.9rem 0;
+            border-bottom: 1px solid var(--border);
         }
-        .dup-item {
-            padding: 0.6rem 0; font-size: 0.85rem; line-height: 1.5;
+        .fact-item:last-child { border-bottom: none; }
+
+        .fact-item-text {
+            flex: 1;
+            font-size: 0.88rem;
+            line-height: 1.55;
+            color: var(--text);
+            word-break: break-word;
         }
-        .dup-item + .dup-item { border-top: 1px dashed var(--border); }
-        .dup-item-meta {
-            display: flex; gap: 0.4rem; align-items: center; margin-top: 0.3rem;
-            font-size: 0.7rem;
+
+        .fact-item-delete {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            color: var(--text-secondary);
+            font-size: 1rem;
+            padding: 0.2rem 0.4rem;
+            border-radius: 6px;
+            transition: all 0.15s;
+            flex-shrink: 0;
+            line-height: 1;
         }
-        .dup-similarity {
-            display: inline-flex; align-items: center; gap: 0.3rem;
-            font-size: 0.72rem; font-weight: 600; color: var(--red);
+        .fact-item-delete:hover {
+            color: var(--red);
+            background: #fff0f0;
+        }
+
+        .loading {
+            padding: 2rem 1rem;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.88rem;
+        }
+
+        .token-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.4);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+        .token-modal.open { display: flex; }
+        .token-box {
+            background: white;
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            width: 100%;
+            max-width: 420px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+        }
+        .token-box h3 {
+            font-size: 1rem;
+            font-weight: 700;
             margin-bottom: 0.5rem;
         }
-
-        /* TRASH CARD */
-        .trash-card {
-            background: var(--card-bg); border: 1px solid var(--border);
-            border-radius: var(--radius); padding: 0.8rem 1rem;
-            opacity: 0.7; transition: opacity 0.15s;
+        .token-box p {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            margin-bottom: 1rem;
         }
-        .trash-card:hover { opacity: 1; }
-        .trash-text { font-size: 0.85rem; line-height: 1.5; margin-bottom: 0.5rem; }
-        .trash-actions { display: flex; gap: 0.3rem; }
-
-        @media (max-width: 768px) {
-            .main { padding: 0.75rem; }
-
-            /* Topbar */
-            .topbar { padding: 0.6rem 0.75rem; gap: 0.5rem; }
-            .topbar h1 { font-size: 0.95rem; }
-            .topbar-links { display: flex; align-items: center; gap: 0.5rem; }
-            .topbar-links a { font-size: 0.7rem; }
-            #syncBtn { padding: 0.35rem 0.7rem; font-size: 0.7rem; white-space: nowrap; }
-
-            /* Tabs — scrollable horizontally */
-            .tabs {
-                overflow-x: auto; -webkit-overflow-scrolling: touch;
-                scrollbar-width: none; gap: 0;
-            }
-            .tabs::-webkit-scrollbar { display: none; }
-            .tab {
-                flex: 0 0 auto; padding: 0.6rem 0.75rem; font-size: 0.7rem;
-                white-space: nowrap;
-            }
-
-            /* Stats grid */
-            .stats-grid { grid-template-columns: repeat(2, 1fr); }
-
-            /* Review cards */
-            .review-card { padding: 0.8rem; }
-            .review-text { font-size: 0.82rem; line-height: 1.5; margin-bottom: 0.5rem; }
-            .review-meta { font-size: 0.68rem; margin-bottom: 0.5rem; }
-            .review-actions { gap: 0.25rem; }
-            .review-actions .btn-sm { padding: 0.3rem 0.5rem; font-size: 0.68rem; }
-            .category-select { font-size: 0.68rem; padding: 0.25rem 0.4rem; }
-
-            /* Swipe card */
-            .swipe-card { padding: 1.2rem 1rem; border-radius: 12px; }
-            .swipe-text { font-size: 0.95rem; line-height: 1.6; margin-bottom: 1rem; }
-            .swipe-actions { gap: 0.4rem; }
-            .swipe-btn { padding: 0.75rem 0.6rem; font-size: 0.8rem; border-radius: 10px; }
-
-            /* Bulk bar */
-            .bulk-bar { flex-wrap: wrap; gap: 0.4rem; }
-            .bulk-actions { flex-wrap: wrap; gap: 0.25rem; }
-
-            /* Filter pills */
-            .filter-bar { gap: 0.3rem; }
-            .filter-pill { padding: 0.2rem 0.5rem; font-size: 0.65rem; }
-
-            /* Buttons */
-            .btn { padding: 0.45rem 0.9rem; font-size: 0.75rem; }
-            .btn-sm { padding: 0.3rem 0.55rem; font-size: 0.68rem; }
-
-            /* Generate section */
-            .generate-section { padding: 1rem; }
-            .generate-section h2 { font-size: 0.9rem; }
-            .generate-controls { gap: 0.4rem; }
-
-            /* Pagination */
-            .page-btn { padding: 0.25rem 0.5rem; font-size: 0.68rem; }
-
-            /* Duplicate cards */
-            .dup-pair { padding: 0.8rem; }
-            .dup-item { font-size: 0.8rem; }
-
-            /* Trash */
-            .trash-card { padding: 0.7rem 0.8rem; }
-            .trash-text { font-size: 0.8rem; }
-
-            /* Search list table */
-            #searchesList table { font-size: 0.75rem; }
-            #searchesList th, #searchesList td { padding: 0.35rem 0.3rem; }
-
-            /* View toggle */
-            .view-toggle-btn { padding: 0.35rem 0.7rem; font-size: 0.68rem; }
-
-            /* List search */
-            .list-search { padding: 0.5rem 0.7rem; font-size: 0.78rem; }
-
-            /* Verification */
-            .verify-status { font-size: 0.72rem; padding: 0.5rem 0.6rem; }
+        .token-input {
+            width: 100%;
+            padding: 0.7rem 0.9rem;
+            border: 1.5px solid var(--border);
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-family: 'Inter', sans-serif;
+            outline: none;
+            margin-bottom: 0.9rem;
+        }
+        .token-input:focus { border-color: var(--text); }
+        .token-actions {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: flex-end;
         }
 
-        @media (max-width: 400px) {
-            .topbar { flex-wrap: wrap; justify-content: center; gap: 0.3rem; }
-            .topbar h1 { font-size: 0.85rem; width: 100%; text-align: center; }
-            .topbar-links { width: 100%; justify-content: center; }
-
-            .tab { padding: 0.5rem 0.6rem; font-size: 0.65rem; }
-
-            .swipe-btn { font-size: 0.75rem; padding: 0.65rem 0.4rem; }
-            .swipe-text { font-size: 0.88rem; }
-
-            .review-actions { flex-direction: column; align-items: stretch; }
-            .review-actions .btn-sm { text-align: center; }
+        @media (max-width: 500px) {
+            .main { padding: 1rem; }
+            .card { padding: 1.1rem; }
+            .actions { flex-direction: column-reverse; align-items: stretch; }
+            .actions .btn { width: 100%; }
         }
     </style>
 </head>
 <body>
     <div class="topbar">
-        <h1>SmartAss Admin</h1>
-        <div class="topbar-links">
-            <button id="syncBtn" onclick="syncToGitHub()" style="background:var(--green);color:#222;border:none;padding:0.4rem 0.8rem;border-radius:8px;font-weight:600;font-size:0.78rem;cursor:pointer;font-family:inherit;">🔄 Synka</button>
-            <a href="index.html">Publik sida</a>
-        </div>
+        <h1>SmartAss — Admin</h1>
+        <a href="index.html" class="topbar-link">← Tillbaka till sidan</a>
     </div>
 
     <div class="main">
-        <div class="tabs">
-            <button class="tab active" data-tab="dashboard">Dashboard</button>
-            <button class="tab" data-tab="published">Publicerade</button>
-            <button class="tab" data-tab="drafts">Utkast</button>
-            <button class="tab" data-tab="approved">Godkända</button>
-            <button class="tab" data-tab="duplicates">Dubletter <span id="dupBadge" style="background:#FF8383;color:white;border-radius:10px;padding:0 5px;font-size:0.6rem;margin-left:2px;display:none;">0</span></button>
-            <button class="tab" data-tab="trash">Papperskorg</button>
-            <button class="tab" data-tab="searches">Sökningar</button>
-            <button class="tab" data-tab="known">Kända fakta</button>
-            <button class="tab" data-tab="generate">Generera</button>
-        </div>
-
-        <!-- DASHBOARD -->
-        <div class="tab-panel active" id="panel-dashboard">
-            <div id="statsGrid"></div>
-
-            <div class="generate-section" id="importSection">
-                <h2>Importera befintliga fakta</h2>
-                <p>Lägg alla <span id="importableCount">0</span> befintliga fakta från facts.js som utkast, så du kan granska dem i swipe-vyn.</p>
-                <button class="btn btn-primary" id="importCuratedBtn" style="padding: 0.7rem 2rem; font-size: 0.88rem;">Importera till utkast</button>
-                <div id="importStatus" style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 0.5rem; min-height: 1.2em;"></div>
-            </div>
-
-        </div>
-
-        <!-- PUBLISHED (live on public site) -->
-        <div class="tab-panel" id="panel-published">
-            <input type="text" class="list-search" id="publishedSearch" placeholder="Sök bland publicerade fakta...">
-            <div class="filter-bar" id="publishedFilters"></div>
-            <div class="bulk-bar">
-                <span class="count" id="publishedCount">0 fakta</span>
-            </div>
-            <div class="review-list" id="publishedList"></div>
-            <div class="pagination" id="publishedPagination"></div>
-        </div>
-
-        <!-- DRAFTS -->
-        <div class="tab-panel" id="panel-drafts">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-                <div class="view-toggle">
-                    <button class="view-toggle-btn active" onclick="setDraftView('swipe')">Granska</button>
-                    <button class="view-toggle-btn" onclick="setDraftView('list')">Lista</button>
-                </div>
-                <div class="bulk-actions">
-                    <button class="btn btn-sm btn-approve" id="approveAllBtn">Godkänn alla</button>
-                    <button class="btn btn-sm btn-delete" id="deleteAllDraftsBtn">Radera alla</button>
-                </div>
-            </div>
-
-            <!-- SWIPE VIEW -->
-            <div id="draftSwipeView">
-                <div class="swipe-container" id="swipeContainer"></div>
-            </div>
-
-            <!-- LIST VIEW -->
-            <div id="draftListView" style="display: none;">
-                <div class="filter-bar" id="draftFilters"><label>Filtrera:</label><button class="filter-pill active" data-filter="all">Alla</button></div>
-                <div class="bulk-bar">
-                    <span class="count" id="draftCount">0 utkast</span>
-                </div>
-                <div class="review-list" id="draftList"></div>
+        <div class="card">
+            <h2>Lägg till ny fakta</h2>
+            <textarea
+                id="factInput"
+                class="fact-textarea"
+                placeholder="Skriv din fakta här..."
+                maxlength="600"
+            ></textarea>
+            <div class="actions">
+                <div class="status" id="status"></div>
+                <button class="btn btn-primary" id="publishBtn">Publicera</button>
             </div>
         </div>
 
-        <!-- APPROVED -->
-        <div class="tab-panel" id="panel-approved">
-            <div class="filter-bar" id="approvedFilters"><label>Filtrera:</label><button class="filter-pill active" data-filter="all">Alla</button></div>
-            <div class="bulk-bar">
-                <span class="count" id="approvedCount">0 godkända</span>
-                <div class="bulk-actions">
-                    <button class="btn btn-sm btn-edit" id="verifyAllBtn" style="font-size: 0.78rem; padding: 0.45rem 1rem;">🔍 Verifiera alla</button>
-                    <button class="btn btn-sm btn-approve" id="publishBtn" style="font-size: 0.78rem; padding: 0.45rem 1.2rem;">🚀 Publicera alla</button>
-                </div>
-            </div>
-            <div id="publishStatus" style="font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 0.6rem; min-height: 1.2em;"></div>
-            <div class="review-list" id="approvedList"></div>
-        </div>
-
-        <!-- GENERATE -->
-        <div class="tab-panel" id="panel-generate">
-            <div class="generate-section">
-                <h2>Fakta-generator</h2>
-                <p>Generera nya faktakort med Claude AI. Varje fakta kommer med föreslagen kategori och källa. Alla hamnar som utkast tills du godkänner dem.</p>
-                <div class="generate-controls" style="margin-bottom: 0.8rem;">
-                    <label style="font-size: 0.8rem; font-weight: 500;">Antal:</label>
-                    <input type="number" class="generate-input" id="genCount" value="20" min="1" max="100">
-                </div>
-                <div class="generate-controls" style="margin-bottom: 0.8rem;">
-                    <label style="font-size: 0.8rem; font-weight: 500;">Kategori:</label>
-                    <select class="category-select" id="genCategory" style="padding: 0.45rem 0.6rem; font-size: 0.8rem;">
-                        <option value="mix">Blandat</option>
-                    </select>
-                </div>
-                <button class="btn btn-primary" id="generateBtn" style="padding: 0.7rem 2rem; font-size: 0.88rem;">Generera fakta</button>
-                <div class="progress-bar" id="genProgress"><div class="progress-fill" id="genProgressFill"></div></div>
-                <div class="generate-status" id="genStatus"></div>
+        <div class="card">
+            <h2>Publicerade fakta</h2>
+            <div class="count" id="count"></div>
+            <div id="factList">
+                <div class="loading">Laddar...</div>
             </div>
         </div>
-
-        <!-- DUPLICATES -->
-        <div class="tab-panel" id="panel-duplicates">
-            <div class="bulk-bar">
-                <span class="count" id="dupCount">0 möjliga dubletter</span>
-            </div>
-            <p style="font-size: 0.78rem; color: var(--text-secondary); margin-bottom: 1rem;">Fakta som är väldigt lika varandra. Granska och ta bort den som inte behövs.</p>
-            <div class="review-list" id="dupList"></div>
-        </div>
-
-        <!-- SEARCHES -->
-        <div class="tab-panel" id="panel-searches">
-            <div class="bulk-bar">
-                <span class="count" id="searchCount">0 sökningar</span>
-                <div class="bulk-actions">
-                    <button class="btn btn-sm" id="clearSearchesBtn" style="background:var(--red);color:#fff;">Rensa alla</button>
-                </div>
-            </div>
-            <p style="font-size: 0.78rem; color: var(--text-secondary); margin-bottom: 1rem;">Alla sökningar som gjorts på den publika sidan. Röda = hittade inga fakta. Använd detta för att se vad folk vill veta mer om!</p>
-            <div id="searchesList"></div>
-        </div>
-
-        <!-- KNOWN FACTS -->
-        <div class="tab-panel" id="panel-known">
-            <div class="bulk-bar">
-                <span class="count" id="knownCount">Laddar...</span>
-                <div class="bulk-actions">
-                    <button class="btn btn-sm" onclick="loadKnownStats()" style="background:var(--text);color:#fff;">↻ Uppdatera</button>
-                </div>
-            </div>
-            <p style="font-size:0.78rem;color:var(--text-secondary);margin-bottom:1rem;">
-                Fakta som användare har markerat som "Jag vet redan det här". Sortera på antal för att hitta fakta som inte är tillräckligt unika och ta bort dem.
-            </p>
-            <div id="knownList"></div>
-        </div>
-
-        <!-- TRASH -->
-        <div class="tab-panel" id="panel-trash">
-            <div class="bulk-bar">
-                <span class="count" id="trashCount">0 slängda</span>
-                <div class="bulk-actions">
-                    <button class="btn btn-sm btn-delete" id="emptyTrashBtn">Töm papperskorgen</button>
-                </div>
-            </div>
-            <div class="review-list" id="trashList"></div>
-        </div>
-
     </div>
 
-    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
-    <script src="https://js.puter.com/v2/"></script>
-    <script src="facts.js"></script>
+    <div class="token-modal" id="tokenModal">
+        <div class="token-box">
+            <h3>GitHub-token krävs</h3>
+            <p>Klistra in din GitHub Personal Access Token. Den sparas lokalt på din enhet och används för att uppdatera <code>published-data.json</code>.</p>
+            <input type="password" id="tokenInput" class="token-input" placeholder="ghp_..." autocomplete="off">
+            <div class="token-actions">
+                <button class="btn btn-ghost" id="tokenCancelBtn">Avbryt</button>
+                <button class="btn btn-primary" id="tokenSaveBtn">Spara</button>
+            </div>
+        </div>
+    </div>
+
     <script>
-        // ===== FIREBASE (for factStats) =====
-        const _fb = firebase.initializeApp({
-            apiKey: "AIzaSyBb564Dfem8IPMrKxV54AOsqLB6x8wqpu4",
-            authDomain: "smartass-54b33.firebaseapp.com",
-            projectId: "smartass-54b33",
-            storageBucket: "smartass-54b33.firebasestorage.app",
-            messagingSenderId: "802864537973",
-            appId: "1:802864537973:web:bfea158ded445ff04fb33c"
-        }, "admin");
-        const _db = _fb.firestore();
-    </script>
-    <script>
-        // ========== CATEGORIES ==========
-        const DEFAULT_CATEGORIES = [
-            "Rymden", "Djur", "Mat", "Historia", "Vetenskap", "Natur",
-            "Kroppen", "Musik", "Sport", "Konst & Kultur", "Film",
-            "Mode", "Gaming", "Geografi", "Teknologi", "Litteratur",
-            "Matematik", "Språk", "Sverige", "Psykologi", "Popkultur", "Ekonomi"
-        ];
-        const CUSTOM_CATS_KEY = "smartass_custom_categories";
-        function getCustomCategories() { try { return JSON.parse(localStorage.getItem(CUSTOM_CATS_KEY) || "[]"); } catch { return []; } }
-        function saveCustomCategories(c) { localStorage.setItem(CUSTOM_CATS_KEY, JSON.stringify(c)); }
-        function addCustomCategory(name) {
-            name = name.trim();
-            if (!name) return false;
-            // Capitalize first letter
-            name = name.charAt(0).toUpperCase() + name.slice(1);
-            const custom = getCustomCategories();
-            if (DEFAULT_CATEGORIES.includes(name) || custom.includes(name)) return false;
-            custom.push(name);
-            saveCustomCategories(custom);
-            return name;
-        }
-        function getAllCategories() { return [...DEFAULT_CATEGORIES, ...getCustomCategories()].sort(); }
-        // Alias for backward compat
-        const CATEGORIES = DEFAULT_CATEGORIES; // initial, but use getAllCategories() in renders
-
-        // ========== LOCAL STORAGE ==========
-        const DRAFT_KEY = "smartass_drafts";
-        const APPROVED_KEY = "smartass_approved";
-        const CURATED_EDITS_KEY = "smartass_curated_edits";     // { index: { text, category, ... } }
-        const CURATED_DELETED_KEY = "smartass_curated_deleted";  // [index, index, ...]
-        const PUBLISHED_KEY = "smartass_published";             // published facts visible on public site
-        const IMPORTED_KEY = "smartass_imported_curated";       // flag: curated facts already imported
-        const TRASH_KEY = "smartass_trash";                     // rejected/deleted facts
-
-        function getDrafts() { try { return JSON.parse(localStorage.getItem(DRAFT_KEY) || "[]"); } catch { return []; } }
-        function saveDrafts(d) { localStorage.setItem(DRAFT_KEY, JSON.stringify(d)); }
-        function getApproved() { try { return JSON.parse(localStorage.getItem(APPROVED_KEY) || "[]"); } catch { return []; } }
-        function saveApproved(a) { localStorage.setItem(APPROVED_KEY, JSON.stringify(a)); }
-        function getCuratedEdits() { try { return JSON.parse(localStorage.getItem(CURATED_EDITS_KEY) || "{}"); } catch { return {}; } }
-        function saveCuratedEdits(e) { localStorage.setItem(CURATED_EDITS_KEY, JSON.stringify(e)); }
-        function getCuratedDeleted() { try { return JSON.parse(localStorage.getItem(CURATED_DELETED_KEY) || "[]"); } catch { return []; } }
-        function saveCuratedDeleted(d) { localStorage.setItem(CURATED_DELETED_KEY, JSON.stringify(d)); }
-        function getTrash() { try { return JSON.parse(localStorage.getItem(TRASH_KEY) || "[]"); } catch { return []; } }
-        function saveTrash(t) { localStorage.setItem(TRASH_KEY, JSON.stringify(t)); }
-        function moveToTrash(fact) { const t = getTrash(); t.unshift({ ...fact, _trashedAt: Date.now() }); saveTrash(t); }
-
-        // Get effective curated fact (with edits applied)
-        function getEffectiveFact(index) {
-            const edits = getCuratedEdits();
-            const original = FACTS_DB[index];
-            if (!original) return null;
-            if (edits[index]) return { ...original, ...edits[index], _edited: true };
-            return original;
-        }
-
-        // Get all active curated facts (excluding deleted)
-        function getActiveCurated() {
-            const deleted = new Set(getCuratedDeleted());
-            const edits = getCuratedEdits();
-            return FACTS_DB.map((f, i) => {
-                if (deleted.has(i)) return null;
-                const effective = edits[i] ? { ...f, ...edits[i], _edited: true } : f;
-                return { ...effective, _originalIndex: i };
-            }).filter(Boolean);
-        }
-
-        // ========== CATEGORY DETECTION ==========
-        function guessCategory(fact) {
-            if (fact.category) return fact.category;
-            const combined = ((fact.keywords || []).join(" ") + " " + (fact.text || "")).toLowerCase();
-            const map = [
-                [/rymd|planet|astro|nasa|stjärn|galax|sol[^d]|måne|jupiter|saturn|mars |merkurius|venus |neptun|pluto|hubble|voyager|iss |sputnik|laika/i, "Rymden"],
-                [/djur|bläckfisk|bin |kolibri|blåval|flamingo|delfin|katt |haj |fågel|insekt|hund |gorilla|panda|sköldpadd|mantis/i, "Djur"],
-                [/mat |bröd|choklad|banan|honung|kaffe|socker|äpple|frukt|krydda|te |ris /i, "Mat"],
-                [/histori|vikin|egypten|kleopatra|pyramid|oxford|världskrig|rosetta|birka|medeltid|revolution|antik|wojtek|dinosauri/i, "Historia"],
-                [/vetenska|dna|atom|fysik|kemi|bakterie|blixt|glas |vatten |experiment|forskar/i, "Vetenskap"],
-                [/natur|norrsken|regnbåge|vulkan|sjö|sahara|skog|klimat|växt/i, "Natur"],
-                [/kropp|hjärna|näsa|ben |skelett|öga|cell|organ|sinne|lukt|smak/i, "Kroppen"],
-                [/musik|thriller|abba|bob dylan|polarpris|queen|spotify|vinyl|rock |pop |disco|album|hendrix|chuck berry/i, "Musik"],
-                [/sport|tennis|wimbledon|fotboll|usain|os |olymp|zlatan|hockey|borg |bordtennis|fifa/i, "Sport"],
-                [/konst|museum|mona lisa|picasso|louvre|national|tavla|skulptur|design|guernica/i, "Konst & Kultur"],
-                [/film|oscar|bergman|citizen kane|garbo|regissör|hollywood|parasite/i, "Film"],
-                [/mode|chanel|met gala|klänning|v&a|kläder|lady gaga/i, "Mode"],
-                [/spel|gaming|minecraft|tetris|mario|pac-man|pokémon|pokemon|esport|dota/i, "Gaming"],
-                [/geografi|marian|island |kontinent|hav |berg |öken/i, "Geografi"],
-                [/teknologi|dator|internet|eniac|mobil|ai |bot /i, "Teknologi"],
-                [/litteratur|bok |böcker|bibliotek|författare|roman|poesi|agatha|nobel.*litter/i, "Litteratur"],
-                [/matematik|primtal|pi |fibonacci|euler|pythagoras/i, "Matematik"],
-                [/språk|mandarin|alfabet|ord |tecken|modersmål/i, "Språk"],
-                [/sverige|svensk|stockholm|göteborg|smhi|riksdag/i, "Sverige"],
-                [/psykolog|minne|sömn|stress|dröm/i, "Psykologi"],
-                [/valuta|ekonomi|bnp|riksbank|handel|pengar/i, "Ekonomi"],
-            ];
-            for (const [regex, cat] of map) { if (regex.test(combined)) return cat; }
-            return "Övrigt";
-        }
-
-        function escapeHtml(str) { const d = document.createElement("div"); d.textContent = str; return d.innerHTML; }
-
-        // ========== STATS ==========
-        function getCategoryCounts() {
-            const counts = {};
-            getAllCategories().forEach(c => counts[c] = 0);
-            getPublished().forEach(f => { const c = f.category || guessCategory(f); counts[c] = (counts[c] || 0) + 1; });
-            return counts;
-        }
-
-        function renderStats() {
-            const counts = getCategoryCounts();
-            const totalApproved = getApproved().length;
-            const totalDrafts = getDrafts().length;
-            const totalPublished = getPublished().length;
-            const trashCount = getTrash().length;
-            const searchStats = (() => { try { return JSON.parse(localStorage.getItem("smartass_searches") || "[]"); } catch { return []; } })();
-            const missedSearches = searchStats.filter(s => !s.hadResult).length;
-
-            // Soft pastel color palette
-            const catColors = [
-                "#F87171","#F0A0A0","#F5C88A","#E2F0A0","#82E67D","#A0F0E8","#67E8F9","#60A8F0","#A8A0F0","#A855F4",
-                "#EC4899","#F9A8D4","#FB923C","#86EFAC","#C084FC","#FBBF24","#34D399","#38BDF8","#E879F9","#F472B6","#818CF8","#FB7185"
-            ];
-
-            // === STATUS ROW (horizontal) ===
-            const statusCards = [
-                { n: totalPublished, label: "Publicerade", tab: "published", bg: "var(--text)", color: "white", labelColor: "rgba(255,255,255,0.6)" },
-                { n: totalDrafts, label: "Utkast", tab: "drafts", border: "var(--yellow)" },
-                { n: totalApproved, label: "Godkända", tab: "approved", border: "var(--green)" },
-            ];
-            if (trashCount > 0) statusCards.push({ n: trashCount, label: "Papperskorg", tab: "trash", border: "var(--red)" });
-            if (searchStats.length > 0) statusCards.push({ n: searchStats.length, label: `Sökningar${missedSearches > 0 ? ' (' + missedSearches + ' utan träff)' : ''}`, tab: "searches", border: "#60A8F0" });
-
-            let html = `<div class="status-grid" style="display:grid;grid-template-columns:repeat(auto-fit, minmax(120px, 1fr));gap:0.6rem;margin-bottom:2rem;">`;
-            for (const s of statusCards) {
-                const bgStyle = s.bg ? `background:${s.bg};color:${s.color};` : `background:var(--card-bg);border-left:3px solid ${s.border};`;
-                html += `<div onclick="openTab('${s.tab}')" style="${bgStyle}border:1px solid var(--border);border-radius:var(--radius);padding:1rem;cursor:pointer;transition:transform 0.15s;text-align:center;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">
-                    <div style="font-size:1.8rem;font-weight:800;line-height:1;">${s.n}</div>
-                    <div style="font-size:0.7rem;font-weight:500;margin-top:0.3rem;${s.labelColor ? 'color:' + s.labelColor : 'color:var(--text-secondary)'}">${s.label}</div>
-                </div>`;
-            }
-            html += `</div>`;
-
-            // === CATEGORY CHART ===
-            const allCatsSorted = getAllCategories().map(c => [c, counts[c] || 0]).sort((a,b) => b[1] - a[1]);
-            const activeCats = allCatsSorted.filter(([,v]) => v > 0);
-            const maxCount = activeCats.length > 0 ? activeCats[0][1] : 1;
-            const totalPub = totalPublished;
-
-            if (totalPub > 0) {
-                html += `<div style="background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);padding:1.2rem;margin-bottom:1rem;overflow-x:auto;-webkit-overflow-scrolling:touch;">
-                    <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:1rem;">
-                        <span style="font-size:0.9rem;font-weight:700;">Kategorier</span>
-                        <span style="font-size:0.72rem;color:var(--text-secondary);">${totalPub} publicerade</span>
-                    </div>
-                    <div style="display:flex;align-items:flex-end;gap:4px;height:110px;min-width:${activeCats.length * 36}px;">`;
-
-                for (let i = 0; i < activeCats.length; i++) {
-                    const [cat, count] = activeCats[i];
-                    const h = Math.max(12, Math.round((count / maxCount) * 108));
-                    const color = catColors[i % catColors.length];
-                    html += `<div onclick="openPublishedWithFilter('${escapeHtml(cat)}')" title="${cat}: ${count}" style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;" onmouseover="this.querySelector('.bar').style.opacity='0.7'" onmouseout="this.querySelector('.bar').style.opacity='1'">
-                        <span style="font-size:0.65rem;font-weight:700;color:var(--text);">${count}</span>
-                        <div class="bar" style="width:100%;height:${h}px;background:${color};border-radius:6px 6px 4px 4px;transition:opacity 0.15s;"></div>
-                    </div>`;
-                }
-
-                html += `</div>
-                    <div style="display:flex;gap:4px;margin-top:6px;min-width:${activeCats.length * 36}px;">`;
-                for (let i = 0; i < activeCats.length; i++) {
-                    const [cat] = activeCats[i];
-                    html += `<div style="flex:1;text-align:center;font-size:0.6rem;color:var(--text-secondary);font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="${escapeHtml(cat)}">${escapeHtml(cat)}</div>`;
-                }
-                html += `</div></div>`;
-
-                // === CATEGORY CARDS GRID ===
-                html += `<div style="display:grid;grid-template-columns:repeat(auto-fill, minmax(130px, 1fr));gap:0.5rem;">`;
-                for (let i = 0; i < activeCats.length; i++) {
-                    const [cat, count] = activeCats[i];
-                    const color = catColors[i % catColors.length];
-                    const pct = Math.round((count / totalPub) * 100);
-
-                    html += `<div onclick="openPublishedWithFilter('${escapeHtml(cat)}')" style="background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);padding:1rem;cursor:pointer;transition:border-color 0.15s,transform 0.15s;" onmouseover="this.style.borderColor='var(--text)';this.style.transform='translateY(-1px)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform=''">
-                        <div style="display:flex;align-items:center;gap:0.4rem;margin-bottom:0.6rem;">
-                            <span style="width:12px;height:12px;border-radius:4px;background:${color};display:inline-block;flex-shrink:0;"></span>
-                            <span style="font-size:0.78rem;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${escapeHtml(cat)}</span>
-                        </div>
-                        <div style="font-size:1.8rem;font-weight:800;line-height:1;">${count}</div>
-                        <div style="font-size:0.65rem;color:var(--text-secondary);margin-top:0.2rem;">${pct}% av totalt</div>
-                    </div>`;
-                }
-                html += `</div>`;
-            } else {
-                html += `<p style="font-size:0.8rem;color:var(--text-secondary);text-align:center;padding:2rem;">Inga publicerade fakta ännu.</p>`;
-            }
-
-            document.getElementById("statsGrid").innerHTML = html;
-        }
-
-        // ========== PUBLISHED FACTS (live on public site) ==========
-        let publishedFilter = "all";
-        let publishedSearchQuery = "";
-        let publishedPage = 0;
-        const ITEMS_PER_PAGE = 20;
-
-        function getFilteredPublished() {
-            let facts = getPublished().map((f, i) => ({ ...f, _pubIndex: i }));
-
-            if (publishedFilter !== "all") {
-                facts = facts.filter(f => (f.category || guessCategory(f)) === publishedFilter);
-            }
-
-            if (publishedSearchQuery) {
-                const q = publishedSearchQuery.toLowerCase();
-                facts = facts.filter(f =>
-                    f.text.toLowerCase().includes(q) ||
-                    (f.keywords || []).some(k => k.includes(q)) ||
-                    (f.sourceName || "").toLowerCase().includes(q)
-                );
-            }
-
-            return facts;
-        }
-
-        function renderPublished() {
-            const facts = getFilteredPublished();
-            const totalPages = Math.ceil(facts.length / ITEMS_PER_PAGE);
-            if (publishedPage >= totalPages) publishedPage = Math.max(0, totalPages - 1);
-
-            const start = publishedPage * ITEMS_PER_PAGE;
-            const pageFacts = facts.slice(start, start + ITEMS_PER_PAGE);
-
-            document.getElementById("publishedCount").textContent =
-                `${facts.length} fakta${publishedFilter !== "all" ? ` i ${publishedFilter}` : ""}`;
-
-            if (pageFacts.length === 0) {
-                document.getElementById("publishedList").innerHTML = `
-                    <div class="empty-state"><p>${getPublished().length === 0 ? 'Inga publicerade fakta ännu. Godkänn utkast och klicka "Publicera".' : 'Inga fakta matchar filtret.'}</p></div>`;
-                document.getElementById("publishedPagination").innerHTML = "";
-                return;
-            }
-
-            document.getElementById("publishedList").innerHTML = pageFacts.map(f => {
-                const idx = f._pubIndex;
-                const cat = f.category || guessCategory(f);
-                const isEditing = localEditingSet.has("pub_" + idx);
-
-                return `
-                    <div class="review-card" data-index="${idx}" data-type="published">
-                        <div class="review-text" id="pub-text-${idx}" ${isEditing ? 'contenteditable="true"' : ''}>${escapeHtml(f.text)}</div>
-                        <div class="review-meta">
-                            <span class="badge badge-approved">Live</span>
-                            <span class="badge badge-category">${escapeHtml(cat)}</span>
-                            ${f.sourceName ? `<span class="badge badge-source">${escapeHtml(f.sourceName)}</span>` : ""}
-                            ${f.sourceUrl ? `<a href="${escapeHtml(f.sourceUrl)}" target="_blank" style="font-size: 0.68rem; color: #5588cc;">Källa ↗</a>` : ""}
-                        </div>
-                        <div class="review-actions">
-                            <select class="category-select" onchange="editPublishedCategory(${idx}, this.value)">
-                                ${getAllCategories().map(c => `<option value="${c}" ${c === cat ? 'selected' : ''}>${c}</option>`).join("")}
-                            </select>
-                            ${isEditing
-                                ? `<button class="btn btn-sm btn-primary" onclick="savePublishedEdit(${idx})">Spara</button>
-                                   <button class="btn btn-sm btn-outline" onclick="cancelPublishedEdit(${idx})">Avbryt</button>`
-                                : `<button class="btn btn-sm btn-edit" onclick="startPublishedEdit(${idx})">Redigera</button>`
-                            }
-                            <button class="btn btn-sm btn-delete" onclick="unpublish(${idx})">Avpublicera</button>
-                        </div>
-                    </div>`;
-            }).join("");
-
-            // Pagination
-            if (totalPages > 1) {
-                let pagHtml = `<button class="page-btn" onclick="goPage(${publishedPage - 1})" ${publishedPage === 0 ? 'disabled' : ''}>←</button>`;
-                for (let i = 0; i < totalPages; i++) {
-                    if (totalPages > 10 && Math.abs(i - publishedPage) > 2 && i !== 0 && i !== totalPages - 1) {
-                        if (i === 1 || i === totalPages - 2) pagHtml += `<span style="padding: 0 0.3rem; color: var(--text-secondary);">…</span>`;
-                        continue;
-                    }
-                    pagHtml += `<button class="page-btn ${i === publishedPage ? 'active' : ''}" onclick="goPage(${i})">${i + 1}</button>`;
-                }
-                pagHtml += `<button class="page-btn" onclick="goPage(${publishedPage + 1})" ${publishedPage >= totalPages - 1 ? 'disabled' : ''}>→</button>`;
-                document.getElementById("publishedPagination").innerHTML = pagHtml;
-            } else {
-                document.getElementById("publishedPagination").innerHTML = "";
-            }
-        }
-
-        function renderPublishedFilters() {
-            const cats = {};
-            const pub = getPublished();
-            pub.forEach(f => {
-                const c = f.category || guessCategory(f);
-                cats[c] = (cats[c] || 0) + 1;
-            });
-
-            let html = `<label>Kategori:</label><button class="filter-pill ${publishedFilter === 'all' ? 'active' : ''}" onclick="setPublishedFilter('all', this)">Alla <span class="pill-count">(${pub.length})</span></button>`;
-            Object.entries(cats).sort((a,b) => b[1] - a[1]).forEach(([cat, count]) => {
-                html += `<button class="filter-pill ${publishedFilter === cat ? 'active' : ''}" onclick="setPublishedFilter('${escapeHtml(cat)}', this)">${cat} <span class="pill-count">(${count})</span></button>`;
-            });
-            document.getElementById("publishedFilters").innerHTML = html;
-        }
-
-        function setPublishedFilter(filter, btn) {
-            publishedFilter = filter;
-            publishedPage = 0;
-            document.querySelectorAll("#publishedFilters .filter-pill").forEach(p => p.classList.remove("active"));
-            if (btn) btn.classList.add("active");
-            renderPublished();
-        }
-
-        function goPage(p) {
-            const totalPages = Math.ceil(getFilteredPublished().length / ITEMS_PER_PAGE);
-            if (p < 0 || p >= totalPages) return;
-            publishedPage = p;
-            renderPublished();
-            document.getElementById("panel-published").scrollIntoView({ behavior: "smooth", block: "start" });
-        }
-
-        // Search
-        document.getElementById("publishedSearch").addEventListener("input", (e) => {
-            publishedSearchQuery = e.target.value.trim();
-            publishedPage = 0;
-            renderPublished();
-        });
-
-        // Published edit actions
-        let localEditingSet = new Set();
-
-        function startPublishedEdit(idx) {
-            localEditingSet.add("pub_" + idx);
-            renderPublished();
-            setTimeout(() => {
-                const el = document.getElementById(`pub-text-${idx}`);
-                if (el) { el.focus(); }
-            }, 50);
-        }
-
-        function cancelPublishedEdit(idx) {
-            localEditingSet.delete("pub_" + idx);
-            renderPublished();
-        }
-
-        function savePublishedEdit(idx) {
-            const el = document.getElementById(`pub-text-${idx}`);
-            if (!el) return;
-            const pub = getPublished();
-            if (pub[idx]) {
-                pub[idx].text = el.textContent.trim();
-                savePublished(pub);
-            }
-            localEditingSet.delete("pub_" + idx);
-            refreshAll();
-        }
-
-        function editPublishedCategory(idx, category) {
-            const pub = getPublished();
-            if (pub[idx]) {
-                pub[idx].category = category;
-                savePublished(pub);
-            }
-            renderStats();
-        }
-
-        function unpublish(idx) {
-            if (!confirm("Avpublicera detta fakta? Det flyttas tillbaka till utkast.")) return;
-            const pub = getPublished();
-            const removed = pub.splice(idx, 1)[0];
-            savePublished(pub);
-            if (removed) {
-                const d = getDrafts();
-                d.unshift(removed);
-                saveDrafts(d);
-            }
-            refreshAll();
-        }
-
-        // ========== FACT VERIFICATION ==========
-        async function searchWikipedia(query, lang = "sv") {
-            try {
-                const url = `https://${lang}.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(query)}&format=json&origin=*&srlimit=3`;
-                const resp = await fetch(url, { signal: AbortSignal.timeout(5000) });
-                const data = await resp.json();
-                const results = data?.query?.search || [];
-                return results.map(r => ({
-                    title: r.title,
-                    url: `https://${lang}.wikipedia.org/wiki/${encodeURIComponent(r.title)}`,
-                    source: `Wikipedia (${lang.toUpperCase()})`
-                }));
-            } catch { return []; }
-        }
-
-        async function searchWikidata(query) {
-            try {
-                const url = `https://www.wikidata.org/w/api.php?action=wbsearchentities&search=${encodeURIComponent(query)}&language=sv&format=json&origin=*&limit=3`;
-                const resp = await fetch(url, { signal: AbortSignal.timeout(5000) });
-                const data = await resp.json();
-                return (data?.search || []).map(r => ({
-                    title: r.label,
-                    url: `https://www.wikidata.org/wiki/${r.id}`,
-                    source: "Wikidata"
-                }));
-            } catch { return []; }
-        }
-
-        async function verifyWithAI(factText) {
-            try {
-                const prompt = `Faktagranska följande påstående. Svara ENBART i JSON-format.
-
-Påstående: "${factText}"
-
-Analysera om påståendet stämmer och lista VERKLIGA, existerande webbsidor där detta kan verifieras.
-
-Svara i detta format (BARA JSON, inget annat):
-{
-  "verdict": "true" eller "false" eller "partly_true",
-  "confidence": 1-10,
-  "sources": [
-    {"name": "Källans namn", "url": "https://verklig-url.com/..."},
-  ],
-  "explanation": "Kort förklaring på svenska"
-}`;
-
-                const response = await withTimeout(
-                    puter.ai.chat(prompt, { model: "gpt-4o-mini" }),
-                    20000,
-                    "fact-check"
-                );
-
-                let text = response?.message?.content || "";
-                if (typeof text !== "string") text = JSON.stringify(text);
-                const jsonMatch = text.match(/\{[\s\S]*\}/);
-                if (!jsonMatch) return null;
-                return JSON.parse(jsonMatch[0]);
-            } catch (err) {
-                console.warn("AI verification failed:", err);
-                return null;
-            }
-        }
-
-        async function verifyFact(fact) {
-            // Extract key terms for searching
-            const text = fact.text;
-            const keywords = fact.keywords || [];
-            const searchQuery = keywords.length > 0
-                ? keywords.slice(0, 3).join(" ")
-                : text.split(/[.!?]/)[0].substring(0, 80);
-
-            const sources = [];
-            const seenDomains = new Set();
-
-            function addSource(s) {
-                try {
-                    const domain = new URL(s.url).hostname.replace("www.", "");
-                    if (!seenDomains.has(domain)) {
-                        seenDomains.add(domain);
-                        sources.push(s);
-                    }
-                } catch {
-                    // Invalid URL, skip
-                }
-            }
-
-            // 1. Search Wikipedia Swedish
-            const wikiSv = await searchWikipedia(searchQuery, "sv");
-            wikiSv.forEach(addSource);
-
-            // 2. Search Wikipedia English
-            const wikiEn = await searchWikipedia(searchQuery, "en");
-            wikiEn.forEach(addSource);
-
-            // 3. Search Wikidata
-            const wikidata = await searchWikidata(searchQuery);
-            wikidata.forEach(addSource);
-
-            // 4. AI verification (finds additional sources)
-            const aiResult = await verifyWithAI(text);
-            if (aiResult?.sources) {
-                aiResult.sources.forEach(s => {
-                    if (s.url && s.url.startsWith("http")) {
-                        addSource({ ...s, source: s.name || "AI-källa" });
-                    }
-                });
-            }
-
-            return {
-                sourceCount: sources.length,
-                sources: sources.slice(0, 8),
-                aiVerdict: aiResult?.verdict || "unknown",
-                aiConfidence: aiResult?.confidence || 0,
-                aiExplanation: aiResult?.explanation || "",
-                verified: sources.length >= 3,
-                verifiedAt: Date.now()
-            };
-        }
-
-        async function approveWithVerification(draftIndex, fromSwipe = false) {
-            const d = getDrafts();
-            const f = d.splice(draftIndex, 1)[0];
-            if (!f) return;
-            f.category = f.category || guessCategory(f);
-            delete f._editing;
-
-            // Show checking status
-            if (fromSwipe) {
-                const card = document.getElementById("swipeCard");
-                if (card) card.classList.add("swipe-up");
-            }
-
-            saveDrafts(d);
-            if (fromSwipe) {
-                if (draftIndex >= d.length) swipeIndex = Math.max(0, d.length - 1);
-            }
-
-            // Add to approved immediately with "checking" status
-            f._verification = { status: "checking" };
-            const a = getApproved();
-            const approvedIdx = a.length;
-            a.push(f);
-            saveApproved(a);
-            refreshAll();
-
-            // Run verification in background
-            try {
-                const result = await verifyFact(f);
-                // Re-read approved in case it changed
-                const a2 = getApproved();
-                if (a2[approvedIdx] && a2[approvedIdx].text === f.text) {
-                    a2[approvedIdx]._verification = result;
-
-                    if (result.verified) {
-                        // 3+ sources — auto-publish!
-                        const published = getPublished();
-                        const toPublish = { ...a2[approvedIdx] };
-                        published.push(toPublish);
-                        savePublished(published);
-                        a2.splice(approvedIdx, 1);
-                        saveApproved(a2);
-                    } else {
-                        saveApproved(a2);
-                    }
-                }
-            } catch (err) {
-                console.error("Verification error:", err);
-                const a2 = getApproved();
-                if (a2[approvedIdx]) {
-                    a2[approvedIdx]._verification = {
-                        status: "error",
-                        sourceCount: 0,
-                        sources: [],
-                        verified: false,
-                        error: err.message
-                    };
-                    saveApproved(a2);
-                }
-            }
-
-            refreshAll();
-        }
-
-        // ========== SWIPE VIEW ==========
-        let draftViewMode = "swipe";
-        let swipeIndex = 0;
-        let swipeEditing = false;
-
-        function setDraftView(mode) {
-            draftViewMode = mode;
-            document.querySelectorAll(".view-toggle-btn").forEach(b => b.classList.remove("active"));
-            document.querySelector(`.view-toggle-btn[onclick="setDraftView('${mode}')"]`).classList.add("active");
-            document.getElementById("draftSwipeView").style.display = mode === "swipe" ? "block" : "none";
-            document.getElementById("draftListView").style.display = mode === "list" ? "block" : "none";
-            if (mode === "swipe") renderSwipeCard();
-            if (mode === "list") renderDrafts();
-        }
-
-        function renderSwipeCard() {
-            const drafts = getDrafts();
-            const container = document.getElementById("swipeContainer");
-
-            if (drafts.length === 0) {
-                container.innerHTML = `<div class="swipe-empty">
-                    <p>🎉 Inga utkast att granska!</p>
-                    <p style="font-size: 0.78rem;">Generera nya fakta för att komma igång.</p>
-                </div>`;
-                return;
-            }
-
-            if (swipeIndex >= drafts.length) swipeIndex = 0;
-            const f = drafts[swipeIndex];
-            const cat = f.category || guessCategory(f);
-            const allCats = getAllCategories();
-
-            // Check for duplicates against published + approved facts only
-            const published = getPublished();
-            const approved = getApproved();
-            const allExisting = [...published, ...approved];
-            let dupWarning = "";
-            for (const ex of allExisting) {
-                const sim = similarity(f.text, ex.text);
-                if (sim >= 0.5) {
-                    dupWarning = `<div style="background:#FFF0F0;border:1px solid var(--red);border-radius:8px;padding:0.6rem 0.8rem;margin-bottom:1rem;font-size:0.78rem;">
-                        <strong style="color:var(--red);">⚠️ Möjlig dublett (${Math.round(sim*100)}% likhet):</strong><br>
-                        <span style="color:#666;">"${escapeHtml(ex.text.substring(0, 120))}${ex.text.length > 120 ? '...' : ''}"</span>
-                    </div>`;
-                    break;
-                }
-            }
-
-            container.innerHTML = `
-                <div class="swipe-counter">${swipeIndex + 1} av ${drafts.length} utkast</div>
-                <div class="swipe-card" id="swipeCard">
-                    ${dupWarning}
-                    <div class="swipe-text" id="swipeText" ${swipeEditing ? 'contenteditable="true"' : ''}>${escapeHtml(f.text)}</div>
-                    <div class="swipe-meta">
-                        ${f.sourceName ? `<span class="badge badge-source">${escapeHtml(f.sourceName)}</span>` : ""}
-                        ${f.sourceUrl ? `<a href="${escapeHtml(f.sourceUrl)}" target="_blank" style="font-size: 0.72rem; color: #5588cc;">Källa ↗</a>` : ""}
-                    </div>
-                    <div class="swipe-category-row">
-                        <select class="swipe-category-select" id="swipeCatSelect" onchange="swipeChangeCategory(this.value)">
-                            ${allCats.map(c => `<option value="${c}" ${c === cat ? 'selected' : ''}>${c}</option>`).join("")}
-                            <option value="__new__" style="color: #888;">+ Ny kategori...</option>
-                        </select>
-                    </div>
-                    <div id="swipeNewCatRow" class="new-cat-row" style="display: none; margin-bottom: 1rem;">
-                        <input type="text" class="new-cat-input" id="swipeNewCatInput" placeholder="Skriv ny kategori...">
-                        <button class="btn btn-sm btn-primary" onclick="swipeAddNewCategory()">Lägg till</button>
-                        <button class="btn btn-sm btn-outline" onclick="swipeCancelNewCategory()">Avbryt</button>
-                    </div>
-                    ${swipeEditing
-                        ? `<div class="swipe-actions">
-                            <button class="swipe-btn swipe-btn-save" onclick="swipeSaveEdit()">Spara</button>
-                            <button class="swipe-btn" style="background: var(--border); color: var(--text);" onclick="swipeCancelEdit()">Avbryt</button>
-                        </div>`
-                        : `<div class="swipe-actions">
-                            <button class="swipe-btn swipe-btn-no" onclick="swipeReject()">Släng</button>
-                            <button class="swipe-btn swipe-btn-edit" onclick="swipeEdit()">Redigera</button>
-                            <button class="swipe-btn swipe-btn-yes" onclick="swipeApprove()">Godkänn</button>
-                        </div>`
-                    }
-                </div>`;
-
-            if (swipeEditing) {
-                setTimeout(() => { const el = document.getElementById("swipeText"); if (el) el.focus(); }, 50);
-            }
-        }
-
-        function swipeChangeCategory(val) {
-            if (val === "__new__") {
-                document.getElementById("swipeNewCatRow").style.display = "flex";
-                setTimeout(() => document.getElementById("swipeNewCatInput").focus(), 50);
-                return;
-            }
-            const d = getDrafts();
-            if (d[swipeIndex]) { d[swipeIndex].category = val; saveDrafts(d); }
-        }
-
-        function swipeAddNewCategory() {
-            const input = document.getElementById("swipeNewCatInput");
-            const name = addCustomCategory(input.value);
-            if (name) {
-                const d = getDrafts();
-                if (d[swipeIndex]) { d[swipeIndex].category = name; saveDrafts(d); }
-                renderSwipeCard();
-            } else {
-                input.style.borderColor = "var(--red)";
-                setTimeout(() => input.style.borderColor = "", 1000);
-            }
-        }
-
-        function swipeCancelNewCategory() {
-            document.getElementById("swipeNewCatRow").style.display = "none";
-            const d = getDrafts();
-            const cat = d[swipeIndex]?.category || guessCategory(d[swipeIndex]);
-            document.getElementById("swipeCatSelect").value = cat;
-        }
-
-        function swipeApprove() {
-            approveWithVerification(swipeIndex, true);
-            setTimeout(() => renderSwipeCard(), 400);
-        }
-
-        function swipeReject() {
-            const d = getDrafts();
-            const removed = d.splice(swipeIndex, 1)[0];
-            if (removed) moveToTrash(removed);
-            saveDrafts(d);
-            const card = document.getElementById("swipeCard");
-            if (card) card.classList.add("swipe-left");
-            if (swipeIndex >= d.length) swipeIndex = Math.max(0, d.length - 1);
-            setTimeout(() => { refreshAll(); renderSwipeCard(); }, 350);
-        }
-
-        function swipeEdit() {
-            swipeEditing = true;
-            renderSwipeCard();
-        }
-
-        function swipeSaveEdit() {
-            const el = document.getElementById("swipeText");
-            if (!el) return;
-            const d = getDrafts();
-            d[swipeIndex].text = el.textContent.trim();
-            delete d[swipeIndex]._editing;
-            saveDrafts(d);
-            swipeEditing = false;
-            renderSwipeCard();
-        }
-
-        function swipeCancelEdit() {
-            swipeEditing = false;
-            renderSwipeCard();
-        }
-
-        // Keyboard shortcuts for swipe view
-        document.addEventListener("keydown", (e) => {
-            if (draftViewMode !== "swipe") return;
-            const activeTab = document.querySelector(".tab.active");
-            if (!activeTab || activeTab.dataset.tab !== "drafts") return;
-            if (swipeEditing) return;
-            if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA" || e.target.contentEditable === "true") return;
-
-            if (e.key === "ArrowLeft" || e.key === "d") { e.preventDefault(); swipeReject(); }
-            else if (e.key === "ArrowRight" || e.key === "a") { e.preventDefault(); swipeApprove(); }
-            else if (e.key === "e") { e.preventDefault(); swipeEdit(); }
-        });
-
-        // ========== DRAFT ACTIONS ==========
-        let draftFilter = "all";
-
-        function renderDrafts(filter = draftFilter) {
-            draftFilter = filter;
-            const drafts = getDrafts();
-            const filtered = filter === "all" ? drafts : drafts.filter(f => (f.category || guessCategory(f)) === filter);
-            document.getElementById("draftCount").textContent = `${filtered.length} utkast${filter !== "all" ? ` (${filter})` : ""}`;
-
-            if (filtered.length === 0) {
-                document.getElementById("draftList").innerHTML = `<div class="empty-state"><p>Inga utkast just nu. Generera nya fakta!</p></div>`;
-                return;
-            }
-
-            document.getElementById("draftList").innerHTML = filtered.map((f, i) => {
-                const realIndex = filter === "all" ? i : drafts.indexOf(f);
-                const cat = f.category || guessCategory(f);
-                const isEditing = f._editing;
-                return `
-                    <div class="review-card" data-index="${realIndex}" data-type="draft">
-                        <div class="review-text" ${isEditing ? 'contenteditable="true"' : ''}>${escapeHtml(f.text)}</div>
-                        <div class="review-meta">
-                            <span class="badge badge-draft">Utkast</span>
-                            <span class="badge badge-category">${escapeHtml(cat)}</span>
-                            ${f.sourceName ? `<span class="badge badge-source">${escapeHtml(f.sourceName)}</span>` : ""}
-                            ${f.sourceUrl ? `<a href="${escapeHtml(f.sourceUrl)}" target="_blank" style="font-size: 0.68rem; color: #5588cc;">Källa ↗</a>` : ""}
-                        </div>
-                        <div class="review-actions">
-                            <select class="category-select" onchange="changeDraftCategory(${realIndex}, this.value)">
-                                ${getAllCategories().map(c => `<option value="${c}" ${c === cat ? 'selected' : ''}>${c}</option>`).join("")}
-                            </select>
-                            <button class="btn btn-sm btn-approve" onclick="approveDraft(${realIndex})">Godkänn</button>
-                            ${isEditing
-                                ? `<button class="btn btn-sm btn-primary" onclick="saveEdit(${realIndex})">Spara</button>`
-                                : `<button class="btn btn-sm btn-edit" onclick="editDraft(${realIndex})">Redigera</button>`}
-                            <button class="btn btn-sm btn-delete" onclick="deleteDraft(${realIndex})">Släng</button>
-                        </div>
-                    </div>`;
-            }).join("");
-        }
-
-        function renderApproved(filter = "all") {
-            const approved = getApproved();
-            const filtered = filter === "all" ? approved : approved.filter(f => (f.category || guessCategory(f)) === filter);
-            document.getElementById("approvedCount").textContent = `${filtered.length} godkända`;
-
-            if (filtered.length === 0) {
-                document.getElementById("approvedList").innerHTML = `<div class="empty-state"><p>Inga godkända fakta ännu.</p></div>`;
-                return;
-            }
-
-            document.getElementById("approvedList").innerHTML = filtered.map((f, i) => {
-                const realIndex = filter === "all" ? i : approved.indexOf(f);
-                const cat = f.category || guessCategory(f);
-                const v = f._verification || {};
-                let verifyHtml = "";
-
-                if (v.status === "checking") {
-                    verifyHtml = `<div class="verify-status verify-checking">Faktagranskas... söker källor</div>`;
-                } else if (v.status === "error") {
-                    verifyHtml = `<div class="verify-status verify-fail">Kunde inte verifiera: ${escapeHtml(v.error || "okänt fel")}</div>`;
-                } else if (v.sourceCount !== undefined) {
-                    if (v.sourceCount >= 3) {
-                        verifyHtml = `<div class="verify-status verify-pass">Verifierad — ${v.sourceCount} källor hittade${v.aiExplanation ? ". " + escapeHtml(v.aiExplanation) : ""}</div>`;
-                    } else if (v.sourceCount >= 1) {
-                        verifyHtml = `<div class="verify-status verify-warn">Bara ${v.sourceCount} käll${v.sourceCount === 1 ? "a" : "or"} hittade — behöver manuell granskning${v.aiExplanation ? ". " + escapeHtml(v.aiExplanation) : ""}</div>`;
-                    } else {
-                        verifyHtml = `<div class="verify-status verify-fail">Inga källor hittade — behöver manuell granskning${v.aiExplanation ? ". " + escapeHtml(v.aiExplanation) : ""}</div>`;
-                    }
-                    if (v.sources && v.sources.length > 0) {
-                        verifyHtml += `<div class="verify-sources">${v.sources.map(s =>
-                            `<a href="${escapeHtml(s.url)}" target="_blank">📎 ${escapeHtml(s.source || s.name || s.title)} ↗</a>`
-                        ).join("")}</div>`;
-                    }
-                }
-
-                return `
-                    <div class="review-card" data-index="${realIndex}" data-type="approved">
-                        ${verifyHtml}
-                        <div class="review-text">${escapeHtml(f.text)}</div>
-                        <div class="review-meta">
-                            <span class="badge badge-approved">Godkänd</span>
-                            <span class="badge badge-category">${escapeHtml(cat)}</span>
-                            ${f.sourceName ? `<span class="badge badge-source">${escapeHtml(f.sourceName)}</span>` : ""}
-                        </div>
-                        <div class="review-actions">
-                            <select class="category-select" onchange="changeApprovedCategory(${realIndex}, this.value)">
-                                ${getAllCategories().map(c => `<option value="${c}" ${c === cat ? 'selected' : ''}>${c}</option>`).join("")}
-                            </select>
-                            <button class="btn btn-sm btn-approve" onclick="forcePublish(${realIndex})">Publicera ändå</button>
-                            <button class="btn btn-sm btn-edit" onclick="reverifyApproved(${realIndex})">Verifiera igen</button>
-                            <button class="btn btn-sm btn-delete" onclick="unapprove(${realIndex})">Flytta till utkast</button>
-                        </div>
-                    </div>`;
-            }).join("");
-        }
-
-        function renderFilters() {
-            const draftCats = new Set(getDrafts().map(f => f.category || guessCategory(f)));
-            const approvedCats = new Set(getApproved().map(f => f.category || guessCategory(f)));
-
-            document.getElementById("draftFilters").innerHTML =
-                `<label>Filtrera:</label><button class="filter-pill ${draftFilter === 'all' ? 'active' : ''}" onclick="filterDrafts('all', this)">Alla</button>` +
-                [...draftCats].sort().map(c => `<button class="filter-pill ${draftFilter === c ? 'active' : ''}" onclick="filterDrafts('${c}', this)">${c}</button>`).join("");
-
-            document.getElementById("approvedFilters").innerHTML =
-                `<label>Filtrera:</label><button class="filter-pill active" onclick="filterApproved('all', this)">Alla</button>` +
-                [...approvedCats].sort().map(c => `<button class="filter-pill" onclick="filterApproved('${c}', this)">${c}</button>`).join("");
-        }
-
-        function filterDrafts(f, btn) { document.querySelectorAll("#draftFilters .filter-pill").forEach(p => p.classList.remove("active")); btn.classList.add("active"); renderDrafts(f); }
-        function filterApproved(f, btn) { document.querySelectorAll("#approvedFilters .filter-pill").forEach(p => p.classList.remove("active")); btn.classList.add("active"); renderApproved(f); }
-
-        function approveDraft(i) { approveWithVerification(i, false); }
-        function deleteDraft(i) { const d = getDrafts(); const removed = d.splice(i, 1)[0]; if (removed) moveToTrash(removed); saveDrafts(d); refreshAll(); }
-        function editDraft(i) { const d = getDrafts(); d[i]._editing = true; saveDrafts(d); renderDrafts(); }
-        function saveEdit(i) { const d = getDrafts(); const card = document.querySelector(`.review-card[data-index="${i}"][data-type="draft"]`); if (card) d[i].text = card.querySelector('.review-text').textContent.trim(); delete d[i]._editing; saveDrafts(d); renderDrafts(); }
-        function changeDraftCategory(i, c) { const d = getDrafts(); d[i].category = c; saveDrafts(d); }
-        function changeApprovedCategory(i, c) { const a = getApproved(); a[i].category = c; saveApproved(a); }
-        function unapprove(i) { const a = getApproved(); const f = a.splice(i, 1)[0]; if (!f) return; delete f._verification; const d = getDrafts(); d.unshift(f); saveDrafts(d); saveApproved(a); refreshAll(); }
-
-        function forcePublish(i) {
-            const a = getApproved();
-            const f = a.splice(i, 1)[0];
-            if (!f) return;
-            const published = getPublished();
-            published.push(f);
-            savePublished(published);
-            saveApproved(a);
-            refreshAll();
-        }
-
-        async function reverifyApproved(i) {
-            const a = getApproved();
-            if (!a[i]) return;
-            a[i]._verification = { status: "checking" };
-            saveApproved(a);
-            renderApproved();
-
-            try {
-                const result = await verifyFact(a[i]);
-                const a2 = getApproved();
-                if (a2[i]) {
-                    a2[i]._verification = result;
-                    if (result.verified) {
-                        // Auto-publish
-                        const published = getPublished();
-                        published.push({ ...a2[i] });
-                        savePublished(published);
-                        a2.splice(i, 1);
-                    }
-                    saveApproved(a2);
-                }
-            } catch (err) {
-                const a2 = getApproved();
-                if (a2[i]) {
-                    a2[i]._verification = { status: "error", sourceCount: 0, sources: [], verified: false, error: err.message };
-                    saveApproved(a2);
-                }
-            }
-            refreshAll();
-        }
-
-        document.getElementById("approveAllBtn").addEventListener("click", async () => {
-            const d = getDrafts(); if (!d.length) return;
-            if (!confirm(`Godkänn alla ${d.length} utkast och faktagranska? Detta kan ta en stund.`)) return;
-            const a = getApproved();
-            const toVerify = d.map(f => { f.category = f.category || guessCategory(f); delete f._editing; f._verification = { status: "checking" }; return f; });
-            a.push(...toVerify);
-            saveDrafts([]); saveApproved(a); refreshAll();
-
-            // Verify each in background
-            for (let i = a.length - toVerify.length; i < a.length; i++) {
-                try {
-                    const result = await verifyFact(a[i]);
-                    const a2 = getApproved();
-                    if (a2[i]) {
-                        a2[i]._verification = result;
-                        if (result.verified) {
-                            const pub = getPublished();
-                            pub.push({ ...a2[i] });
-                            savePublished(pub);
-                            a2.splice(i, 1); i--;
-                        }
-                        saveApproved(a2);
-                        refreshAll();
-                    }
-                } catch (err) { console.warn("Verify failed for index", i, err); }
-            }
-            refreshAll();
-        });
-
-        document.getElementById("deleteAllDraftsBtn").addEventListener("click", () => {
-            const d = getDrafts(); if (!d.length) return;
-            if (!confirm(`Radera alla ${d.length} utkast?`)) return;
-            saveDrafts([]); refreshAll();
-        });
-
-
-        document.getElementById("verifyAllBtn").addEventListener("click", async () => {
-            const a = getApproved();
-            const unverified = a.filter(f => !f._verification || f._verification.status === "error" || f._verification.sourceCount === undefined);
-            if (unverified.length === 0) { alert("Alla fakta är redan verifierade."); return; }
-            if (!confirm(`Verifiera ${unverified.length} fakta? Detta kan ta en stund.`)) return;
-
-            // Mark all as checking
-            a.forEach(f => {
-                if (!f._verification || f._verification.status === "error" || f._verification.sourceCount === undefined) {
-                    f._verification = { status: "checking" };
-                }
-            });
-            saveApproved(a);
-            renderApproved();
-
-            const statusEl = document.getElementById("publishStatus");
-            let verified = 0, autoPublished = 0;
-
-            for (let i = 0; i < a.length; i++) {
-                const a2 = getApproved();
-                if (!a2[i] || (a2[i]._verification && a2[i]._verification.status !== "checking")) continue;
-
-                statusEl.textContent = `🔍 Verifierar ${++verified}/${unverified.length}...`;
-                statusEl.style.color = "";
-
-                try {
-                    const result = await verifyFact(a2[i]);
-                    const a3 = getApproved();
-                    if (a3[i]) {
-                        a3[i]._verification = result;
-                        if (result.verified) {
-                            const pub = getPublished();
-                            pub.push({ ...a3[i] });
-                            savePublished(pub);
-                            a3.splice(i, 1);
-                            saveApproved(a3);
-                            i--;
-                            autoPublished++;
-                        } else {
-                            saveApproved(a3);
-                        }
-                        renderApproved();
-                        renderStats();
-                    }
-                } catch (err) {
-                    console.warn("Verify failed:", err);
-                    const a3 = getApproved();
-                    if (a3[i]) {
-                        a3[i]._verification = { status: "error", sourceCount: 0, sources: [], verified: false, error: err.message };
-                        saveApproved(a3);
-                    }
-                }
-            }
-
-            statusEl.textContent = `✓ Klart! ${autoPublished} auto-publicerade, ${getApproved().length} kvar för granskning.`;
-            statusEl.style.color = "#38a169";
-            refreshAll();
-            setTimeout(() => { statusEl.textContent = ""; }, 6000);
-        });
-
-        // ========== TRASH ==========
-        function renderTrash() {
-            const trash = getTrash();
-            document.getElementById("trashCount").textContent = `${trash.length} slängda`;
-            if (trash.length === 0) {
-                document.getElementById("trashList").innerHTML = `<div class="empty-state"><p>Papperskorgen är tom.</p></div>`;
-                return;
-            }
-            document.getElementById("trashList").innerHTML = trash.map((f, i) => {
-                const cat = f.category || guessCategory(f);
-                const date = f._trashedAt ? new Date(f._trashedAt).toLocaleDateString("sv-SE") : "";
-                return `<div class="trash-card">
-                    <div class="trash-text">${escapeHtml(f.text)}</div>
-                    <div class="review-meta">
-                        <span class="badge badge-category">${escapeHtml(cat)}</span>
-                        ${f.sourceName ? `<span class="badge badge-source">${escapeHtml(f.sourceName)}</span>` : ""}
-                        ${date ? `<span style="font-size:0.65rem;color:var(--text-secondary)">Slängd ${date}</span>` : ""}
-                    </div>
-                    <div class="trash-actions">
-                        <button class="btn btn-sm btn-outline" onclick="restoreFromTrash(${i})">Återställ till utkast</button>
-                        <button class="btn btn-sm btn-ghost" onclick="permanentDelete(${i})">Ta bort permanent</button>
-                    </div>
-                </div>`;
-            }).join("");
-        }
-
-        function restoreFromTrash(i) {
-            const t = getTrash();
-            const f = t.splice(i, 1)[0];
-            if (!f) return;
-            delete f._trashedAt;
-            const d = getDrafts(); d.unshift(f); saveDrafts(d);
-            saveTrash(t); refreshAll();
-        }
-
-        function permanentDelete(i) {
-            const t = getTrash();
-            t.splice(i, 1);
-            saveTrash(t); renderTrash();
-        }
-
-        document.getElementById("emptyTrashBtn").addEventListener("click", () => {
-            const t = getTrash();
-            if (!t.length) return;
-            if (!confirm(`Permanent ta bort ${t.length} fakta från papperskorgen?`)) return;
-            saveTrash([]); renderTrash();
-        });
-
-        // ========== DUPLICATE DETECTION ==========
-        function normalizeText(text) {
-            return (text || "").toLowerCase()
-                .replace(/[^\wåäöé ]/g, "")
-                .replace(/\s+/g, " ")
-                .trim();
-        }
-
-        function wordSet(text) {
-            const words = normalizeText(text).split(" ").filter(w => w.length > 3);
-            return new Set(words);
-        }
-
-        function similarity(textA, textB) {
-            const a = wordSet(textA);
-            const b = wordSet(textB);
-            if (a.size === 0 || b.size === 0) return 0;
-            let overlap = 0;
-            for (const w of a) { if (b.has(w)) overlap++; }
-            return overlap / Math.min(a.size, b.size);
-        }
-
-        function findDuplicates() {
-            const approved = getApproved();
-            const published = getPublished();
-            const drafts = getDrafts();
-            const dismissed = new Set(getDismissedDups());
-            const pairs = [];
-            function isDismissed(text) { return dismissed.has(normalizeText(text)); }
-
-            // Approved vs published
-            for (let i = 0; i < approved.length; i++) {
-                if (isDismissed(approved[i].text)) continue;
-                for (let j = 0; j < published.length; j++) {
-                    const sim = similarity(approved[i].text, published[j].text);
-                    if (sim >= 0.5) {
-                        pairs.push({
-                            approvedIdx: i, approvedFact: approved[i],
-                            existingFact: published[j], existingSource: "publicerad",
-                            similarity: sim
-                        });
-                    }
-                }
-            }
-
-            // Approved vs approved
-            for (let i = 0; i < approved.length; i++) {
-                if (isDismissed(approved[i].text)) continue;
-                for (let j = i + 1; j < approved.length; j++) {
-                    const sim = similarity(approved[i].text, approved[j].text);
-                    if (sim >= 0.5) {
-                        pairs.push({
-                            approvedIdx: i, approvedFact: approved[i],
-                            existingFact: approved[j], existingIdx: j,
-                            existingSource: "godkänd", similarity: sim
-                        });
-                    }
-                }
-            }
-
-            // Drafts vs published + approved
-            const liveAndApproved = [...published, ...approved];
-            for (let i = 0; i < drafts.length; i++) {
-                if (isDismissed(drafts[i].text)) continue;
-                for (let j = 0; j < liveAndApproved.length; j++) {
-                    const sim = similarity(drafts[i].text, liveAndApproved[j].text);
-                    if (sim >= 0.5) {
-                        pairs.push({
-                            draftIdx: i, approvedFact: drafts[i],
-                            existingFact: liveAndApproved[j],
-                            existingSource: j < published.length ? "publicerad" : "godkänd",
-                            similarity: sim, isDraft: true
-                        });
-                    }
-                }
-            }
-
-            return pairs.sort((a, b) => b.similarity - a.similarity);
-        }
-
-        function renderDuplicates() {
-            const pairs = findDuplicates();
-            const badge = document.getElementById("dupBadge");
-
-            if (pairs.length > 0) {
-                badge.textContent = pairs.length;
-                badge.style.display = "inline";
-            } else {
-                badge.style.display = "none";
-            }
-
-            document.getElementById("dupCount").textContent = `${pairs.length} möjliga dubletter`;
-
-            if (pairs.length === 0) {
-                document.getElementById("dupList").innerHTML = `<div class="empty-state"><p>Inga dubletter hittade! 🎉</p></div>`;
-                return;
-            }
-
-            document.getElementById("dupList").innerHTML = pairs.map((p, i) => {
-                const pct = Math.round(p.similarity * 100);
-                const srcLabel = p.isDraft ? "Utkast" : "Godkänd";
-                return `<div class="dup-pair">
-                    <div class="dup-similarity">⚠️ ${pct}% likhet</div>
-                    <div class="dup-item">
-                        <div><strong>${srcLabel}:</strong> ${escapeHtml(p.approvedFact.text)}</div>
-                        <div class="dup-item-meta">
-                            <span class="badge badge-category">${escapeHtml(p.approvedFact.category || guessCategory(p.approvedFact))}</span>
-                            ${p.isDraft
-                                ? `<button class="btn btn-sm btn-approve" onclick="dismissDuplicate(${p.draftIdx}, 'draft')">Inte en dublett</button>
-                                   <button class="btn btn-sm btn-delete" onclick="deleteDraft(${p.draftIdx})">Släng</button>`
-                                : `<button class="btn btn-sm btn-approve" onclick="dismissDuplicate(${p.approvedIdx}, 'approved')">Inte en dublett</button>
-                                   <button class="btn btn-sm btn-delete" onclick="removeApproved(${p.approvedIdx})">Ta bort</button>`
-                            }
-                        </div>
-                    </div>
-                    <div class="dup-item">
-                        <div><strong>${escapeHtml(p.existingSource)}:</strong> ${escapeHtml(p.existingFact.text)}</div>
-                        <div class="dup-item-meta">
-                            <span class="badge badge-category">${escapeHtml(p.existingFact.category || guessCategory(p.existingFact))}</span>
-                        </div>
-                    </div>
-                </div>`;
-            }).join("");
-        }
-
-        function removeApproved(i) {
-            const a = getApproved();
-            const removed = a.splice(i, 1)[0];
-            if (removed) moveToTrash(removed);
-            saveApproved(a);
-            refreshAll();
-        }
-
-        // Mark a fact as "not a duplicate" so it's excluded from future checks
-        const DISMISSED_DUPS_KEY = "smartass_dismissed_dups";
-        function getDismissedDups() { try { return JSON.parse(localStorage.getItem(DISMISSED_DUPS_KEY) || "[]"); } catch { return []; } }
-        function saveDismissedDups(d) { localStorage.setItem(DISMISSED_DUPS_KEY, JSON.stringify(d)); }
-
-        function dismissDuplicate(idx, type) {
-            const list = type === "draft" ? getDrafts() : getApproved();
-            if (!list[idx]) return;
-            const textHash = normalizeText(list[idx].text);
-            const dismissed = getDismissedDups();
-            if (!dismissed.includes(textHash)) dismissed.push(textHash);
-            saveDismissedDups(dismissed);
-            refreshAll();
-        }
-
-        // ========== IMPORT CURATED TO DRAFTS ==========
-        function updateImportSection() {
-            const alreadyImported = localStorage.getItem(IMPORTED_KEY) === "true";
-            const section = document.getElementById("importSection");
-            const count = FACTS_DB ? FACTS_DB.length : 0;
-            document.getElementById("importableCount").textContent = count;
-            if (alreadyImported || count === 0) {
-                section.style.display = "none";
-            }
-        }
-
-        document.getElementById("importCuratedBtn").addEventListener("click", () => {
-            const count = FACTS_DB ? FACTS_DB.length : 0;
-            if (!confirm(`Importera alla ${count} befintliga fakta som utkast? Du kan sedan granska dem en och en.`)) return;
-            const d = getDrafts();
-            FACTS_DB.forEach(f => {
-                d.push({
-                    text: f.text,
-                    keywords: f.keywords || [],
-                    sourceName: f.sourceName || "",
-                    sourceUrl: f.sourceUrl || "",
-                    related: f.related || [],
-                    category: guessCategory(f),
-                    _importedFrom: "curated",
-                    _createdAt: Date.now()
-                });
-            });
-            saveDrafts(d);
-            localStorage.setItem(IMPORTED_KEY, "true");
-            document.getElementById("importStatus").textContent = `✓ ${count} fakta importerade som utkast!`;
-            document.getElementById("importStatus").style.color = "#38a169";
-            updateImportSection();
-            refreshAll();
-            setTimeout(() => { openTab("drafts"); }, 800);
-        });
-
-        // ========== PUBLISH ==========
-        function getPublished() { try { return JSON.parse(localStorage.getItem(PUBLISHED_KEY) || "[]"); } catch { return []; } }
-        function savePublished(p) { localStorage.setItem(PUBLISHED_KEY, JSON.stringify(p)); }
-
-        // Load data from GitHub — only if local is empty (first visit on this device)
-        // If local data exists, local is the source of truth
-        async function loadAllFromGitHub() {
-            let changed = false;
-            for (const [file, { get, save, label }] of Object.entries(SYNC_FILES)) {
-                try {
-                    const local = get();
-                    const hasLocal = Array.isArray(local) ? local.length > 0 : Object.keys(local).length > 0;
-
-                    // Skip if we already have local data — local wins
-                    if (hasLocal) continue;
-
-                    const res = await fetch(file + "?" + Date.now());
-                    if (!res.ok) continue;
-                    const remote = await res.json();
-                    if (!remote || (Array.isArray(remote) && remote.length === 0)) continue;
-
-                    let merged = remote;
-
-                    save(merged);
-                    changed = true;
-                } catch {}
-            }
-            if (changed) refreshAll();
-        }
-
-        document.getElementById("publishBtn").addEventListener("click", () => {
-            const approved = getApproved();
-            if (approved.length === 0) { alert("Inga godkända fakta att publicera."); return; }
-
-            const verified = approved.filter(f => f._verification?.verified);
-            const unverified = approved.filter(f => !f._verification?.verified);
-
-            let msg = "";
-            if (unverified.length > 0 && verified.length > 0) {
-                msg = `${verified.length} verifierade fakta publiceras.\n${unverified.length} overifierade blir kvar.\n\nFortsätt?`;
-            } else if (unverified.length > 0) {
-                msg = `Alla ${unverified.length} fakta saknar tillräcklig verifiering.\nVill du publicera dem ändå?`;
-            } else {
-                msg = `Publicera ${verified.length} verifierade fakta?`;
-            }
-            if (!confirm(msg)) return;
-
-            const published = getPublished();
-            const toPublish = unverified.length > 0 && verified.length > 0 ? verified : approved;
-            toPublish.forEach(f => {
-                published.push({
-                    text: f.text, keywords: f.keywords || [],
-                    sourceName: f.sourceName || "", sourceUrl: f.sourceUrl || "",
-                    related: f.related || [], category: f.category || guessCategory(f)
-                });
-            });
-            savePublished(published);
-
-            // Keep unverified in approved (unless we're force-publishing all)
-            if (unverified.length > 0 && verified.length > 0) {
-                saveApproved(unverified);
-            } else {
-                saveApproved([]);
-            }
-
-            const statusEl = document.getElementById("publishStatus");
-            statusEl.textContent = `🚀 ${toPublish.length} fakta publicerade!`;
-            statusEl.style.color = "#38a169";
-            refreshAll();
-            setTimeout(() => { statusEl.textContent = ""; }, 5000);
-        });
-
-        // ========== SYNC TO GITHUB ==========
-        const GITHUB_REPO = "FloraBernh/smartass";
-        const SYNC_FILES = {
-            "published-data.json": { get: getPublished, save: savePublished, label: "publicerade" },
-            "drafts-data.json": { get: getDrafts, save: saveDrafts, label: "utkast" },
-            "approved-data.json": { get: getApproved, save: saveApproved, label: "godkända" },
-            "trash-data.json": { get: getTrash, save: saveTrash, label: "papperskorg" },
-            "searches-data.json": {
-                get: () => { try { return JSON.parse(localStorage.getItem("smartass_searches") || "[]"); } catch { return []; } },
-                save: (d) => localStorage.setItem("smartass_searches", JSON.stringify(d)),
-                label: "sökningar"
-            },
-            "categories-data.json": { get: getCustomCategories, save: saveCustomCategories, label: "kategorier" },
-            "dismissed-data.json": {
-                get: () => { try { return JSON.parse(localStorage.getItem(DISMISSED_DUPS_KEY) || "[]"); } catch { return []; } },
-                save: (d) => localStorage.setItem(DISMISSED_DUPS_KEY, JSON.stringify(d)),
-                label: "avfärdade dubletter"
-            }
+        const GITHUB_REPO = "FloraBernh/funfacnthensome";
+        const FILE = "published-data.json";
+        const TOKEN_KEY = "smartass_gh_token";
+
+        let facts = [];
+        let fileSha = "";
+        let loaded = false;
+
+        const els = {
+            input: document.getElementById("factInput"),
+            publishBtn: document.getElementById("publishBtn"),
+            status: document.getElementById("status"),
+            list: document.getElementById("factList"),
+            count: document.getElementById("count"),
         };
 
-        function getGitHubToken() {
-            let token = localStorage.getItem("smartass_gh_token");
-            if (!token) {
-                token = prompt("Ange din GitHub Personal Access Token (sparas lokalt):");
-                if (token) localStorage.setItem("smartass_gh_token", token);
-            }
+        function setStatus(msg, kind = "") {
+            els.status.textContent = msg;
+            els.status.className = "status" + (kind ? " " + kind : "");
+        }
+
+        function askForToken() {
+            return new Promise((resolve) => {
+                const modal = document.getElementById("tokenModal");
+                const input = document.getElementById("tokenInput");
+                const saveBtn = document.getElementById("tokenSaveBtn");
+                const cancelBtn = document.getElementById("tokenCancelBtn");
+
+                input.value = "";
+                modal.classList.add("open");
+                setTimeout(() => input.focus(), 50);
+
+                const cleanup = () => {
+                    modal.classList.remove("open");
+                    saveBtn.removeEventListener("click", onSave);
+                    cancelBtn.removeEventListener("click", onCancel);
+                    input.removeEventListener("keydown", onKey);
+                };
+                const onSave = () => {
+                    const value = input.value.trim();
+                    cleanup();
+                    if (value) {
+                        localStorage.setItem(TOKEN_KEY, value);
+                        resolve(value);
+                    } else {
+                        resolve(null);
+                    }
+                };
+                const onCancel = () => { cleanup(); resolve(null); };
+                const onKey = (e) => {
+                    if (e.key === "Enter") { e.preventDefault(); onSave(); }
+                    else if (e.key === "Escape") { e.preventDefault(); onCancel(); }
+                };
+                saveBtn.addEventListener("click", onSave);
+                cancelBtn.addEventListener("click", onCancel);
+                input.addEventListener("keydown", onKey);
+            });
+        }
+
+        async function getToken() {
+            let token = localStorage.getItem(TOKEN_KEY);
+            if (!token) token = await askForToken();
             return token;
         }
 
-        async function ghGetSha(file, token) {
-            try {
-                const res = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/contents/${file}`, {
-                    headers: { "Authorization": `token ${token}` }
-                });
-                if (res.ok) return (await res.json()).sha;
-            } catch {}
-            return "";
+        function escapeHtml(str) {
+            const div = document.createElement("div");
+            div.textContent = str ?? "";
+            return div.innerHTML;
         }
 
-        async function ghPutFile(file, data, token) {
-            const content = btoa(unescape(encodeURIComponent(JSON.stringify(data, null, 2))));
-            const sha = await ghGetSha(file, token);
-            const body = { message: `Synka ${file}`, content, branch: "main" };
-            if (sha) body.sha = sha;
+        async function ghFetch() {
+            const token = await getToken();
+            if (!token) throw new Error("Ingen GitHub-token angiven.");
+            const res = await fetch(
+                `https://api.github.com/repos/${GITHUB_REPO}/contents/${FILE}?ref=main&_=${Date.now()}`,
+                { headers: { "Authorization": `token ${token}` } }
+            );
+            if (res.status === 401) {
+                localStorage.removeItem(TOKEN_KEY);
+                throw new Error("Ogiltig GitHub-token. Försök igen.");
+            }
+            if (!res.ok) throw new Error(`GitHub API: ${res.status}`);
+            const data = await res.json();
+            fileSha = data.sha;
+            const decoded = decodeURIComponent(escape(atob(data.content.replace(/\n/g, ""))));
+            return JSON.parse(decoded || "[]");
+        }
 
-            const res = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/contents/${file}`, {
-                method: "PUT",
-                headers: { "Authorization": `token ${token}`, "Content-Type": "application/json" },
-                body: JSON.stringify(body)
-            });
+        async function ghPut(newFacts) {
+            const token = await getToken();
+            if (!token) throw new Error("Ingen GitHub-token angiven.");
+            const content = btoa(unescape(encodeURIComponent(JSON.stringify(newFacts, null, 2) + "\n")));
+            const body = {
+                message: `Uppdatera ${FILE} via admin`,
+                content,
+                branch: "main",
+            };
+            if (fileSha) body.sha = fileSha;
+
+            const res = await fetch(
+                `https://api.github.com/repos/${GITHUB_REPO}/contents/${FILE}`,
+                {
+                    method: "PUT",
+                    headers: {
+                        "Authorization": `token ${token}`,
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(body),
+                }
+            );
+            if (res.status === 401) {
+                localStorage.removeItem(TOKEN_KEY);
+                throw new Error("Ogiltig GitHub-token.");
+            }
             if (!res.ok) {
-                const err = await res.json();
-                if (res.status === 401) { localStorage.removeItem("smartass_gh_token"); throw new Error("Ogiltig token"); }
-                throw new Error(err.message || "Okänt fel");
+                const err = await res.json().catch(() => ({}));
+                throw new Error(err.message || `GitHub API: ${res.status}`);
             }
+            const data = await res.json();
+            fileSha = data.content?.sha || "";
         }
 
-        // Smart merge: add new facts from remote, but skip anything in local trash
-        function smartMergeFacts(local, remote, trashTexts) {
-            const merged = [...local];
-            const existingTexts = new Set(local.map(f => (f.text || "").trim().toLowerCase()));
-            for (const fact of remote) {
-                const key = (fact.text || "").trim().toLowerCase();
-                if (key && !existingTexts.has(key) && !trashTexts.has(key)) {
-                    merged.push(fact);
-                    existingTexts.add(key);
-                }
-            }
-            return merged;
-        }
+        function renderList() {
+            els.count.textContent = facts.length === 0
+                ? ""
+                : `${facts.length} ${facts.length === 1 ? "fakta" : "fakta"} totalt`;
 
-        function smartMergeSearches(local, remote) {
-            const map = {};
-            for (const s of local) map[s.query.toLowerCase()] = { ...s };
-            for (const s of remote) {
-                const key = s.query.toLowerCase();
-                if (map[key]) {
-                    map[key].count = Math.max(map[key].count, s.count);
-                    if (s.lastSearched > map[key].lastSearched) map[key].lastSearched = s.lastSearched;
-                    if (!map[key].firstSearched || s.firstSearched < map[key].firstSearched) map[key].firstSearched = s.firstSearched;
-                    map[key].hadResult = map[key].hadResult || s.hadResult;
-                } else {
-                    map[key] = { ...s };
-                }
-            }
-            return Object.values(map);
-        }
-
-        // Two-way sync: pull new items from GitHub, then push everything back
-        async function syncToGitHub() {
-            const btn = document.getElementById("syncBtn");
-            const originalText = btn.innerHTML;
-            btn.innerHTML = "⏳ Synkar...";
-            btn.disabled = true;
-
-            const token = getGitHubToken();
-            if (!token) { btn.innerHTML = originalText; btn.disabled = false; return; }
-
-            try {
-                // Build set of trashed fact texts — these should NEVER come back
-                const trashTexts = new Set(getTrash().map(f => (f.text || "").trim().toLowerCase()));
-
-                // Step 1: Pull from GitHub and smart-merge into local
-                for (const [file, { get, save }] of Object.entries(SYNC_FILES)) {
-                    try {
-                        const res = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/contents/${file}`, {
-                            headers: { "Authorization": `token ${token}` }
-                        });
-                        if (!res.ok) continue;
-                        const ghData = await res.json();
-                        const remote = JSON.parse(decodeURIComponent(escape(atob(ghData.content))));
-                        const local = get();
-
-                        let merged;
-                        if (file === "searches-data.json") {
-                            merged = smartMergeSearches(local, remote);
-                        } else if (file === "categories-data.json" || file === "dismissed-data.json") {
-                            merged = [...new Set([...local, ...remote])];
-                        } else if (file === "trash-data.json") {
-                            // Trash: union — keep all trashed items from both sides
-                            merged = smartMergeFacts(local, remote, new Set());
-                        } else {
-                            // Drafts, approved, published: merge but skip trashed facts
-                            merged = smartMergeFacts(local, remote, trashTexts);
-                        }
-                        save(merged);
-                    } catch {}
-                }
-
-                // Step 2: Push merged local data to GitHub
-                for (const [file, { get }] of Object.entries(SYNC_FILES)) {
-                    await ghPutFile(file, get(), token);
-                }
-
-                refreshAll();
-                btn.innerHTML = "✅ Synkat!";
-                btn.style.background = "var(--green)";
-                setTimeout(() => { btn.innerHTML = originalText; btn.disabled = false; }, 3000);
-            } catch (e) {
-                alert("Synk misslyckades: " + e.message);
-                btn.innerHTML = originalText;
-                btn.disabled = false;
-            }
-        }
-
-        // ========== TOUCH SWIPE ==========
-        function initSwipeTouch() {
-            const container = document.getElementById("swipeContainer");
-            let startX = 0, startY = 0, currentX = 0, isDragging = false;
-
-            container.addEventListener("touchstart", (e) => {
-                if (swipeEditing) return;
-                const card = document.getElementById("swipeCard");
-                if (!card) return;
-                startX = e.touches[0].clientX;
-                startY = e.touches[0].clientY;
-                currentX = 0;
-                isDragging = true;
-                card.classList.add("dragging");
-            }, { passive: true });
-
-            container.addEventListener("touchmove", (e) => {
-                if (!isDragging || swipeEditing) return;
-                const card = document.getElementById("swipeCard");
-                if (!card) return;
-                const dx = e.touches[0].clientX - startX;
-                const dy = e.touches[0].clientY - startY;
-                // Only horizontal swipe
-                if (Math.abs(dx) < Math.abs(dy) && Math.abs(dx) < 10) return;
-                e.preventDefault();
-                currentX = dx;
-                const rotate = dx * 0.08;
-                card.style.transform = `translateX(${dx}px) rotate(${rotate}deg)`;
-
-                // Show overlay
-                let overlayYes = card.querySelector(".swipe-overlay-yes");
-                let overlayNo = card.querySelector(".swipe-overlay-no");
-                if (!overlayYes) {
-                    overlayYes = document.createElement("div");
-                    overlayYes.className = "swipe-overlay swipe-overlay-yes";
-                    overlayYes.textContent = "GODKÄNN ✓";
-                    card.appendChild(overlayYes);
-                }
-                if (!overlayNo) {
-                    overlayNo = document.createElement("div");
-                    overlayNo.className = "swipe-overlay swipe-overlay-no";
-                    overlayNo.textContent = "SLÄNG ✗";
-                    card.appendChild(overlayNo);
-                }
-                overlayYes.style.opacity = dx > 40 ? Math.min((dx - 40) / 60, 1) : 0;
-                overlayNo.style.opacity = dx < -40 ? Math.min((-dx - 40) / 60, 1) : 0;
-            }, { passive: false });
-
-            container.addEventListener("touchend", () => {
-                if (!isDragging || swipeEditing) return;
-                isDragging = false;
-                const card = document.getElementById("swipeCard");
-                if (!card) return;
-                card.classList.remove("dragging");
-
-                if (currentX > 100) {
-                    swipeApprove();
-                } else if (currentX < -100) {
-                    swipeReject();
-                } else {
-                    card.style.transform = "";
-                    const overlays = card.querySelectorAll(".swipe-overlay");
-                    overlays.forEach(o => o.style.opacity = 0);
-                }
-            }, { passive: true });
-        }
-
-        // ========== TAB NAVIGATION ==========
-        function openTab(tabName) {
-            document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
-            document.querySelectorAll(".tab-panel").forEach(p => p.classList.remove("active"));
-            document.querySelector(`[data-tab="${tabName}"]`).classList.add("active");
-            document.getElementById(`panel-${tabName}`).classList.add("active");
-        }
-
-        function openPublishedWithFilter(category) {
-            publishedFilter = category;
-            publishedPage = 0;
-            openTab("published");
-            renderPublishedFilters();
-            renderPublished();
-        }
-
-        document.querySelectorAll(".tab").forEach(tab => {
-            tab.addEventListener("click", () => {
-                openTab(tab.dataset.tab);
-                if (tab.dataset.tab === "published") { renderPublishedFilters(); renderPublished(); }
-                if (tab.dataset.tab === "searches") { renderSearches(); }
-                if (tab.dataset.tab === "known") { loadKnownStats(); }
-            });
-        });
-
-        // ========== SEARCH STATISTICS ==========
-        function getSearches() {
-            try { return JSON.parse(localStorage.getItem("smartass_searches") || "[]"); } catch { return []; }
-        }
-
-        function renderSearches() {
-            const searches = getSearches();
-            const container = document.getElementById("searchesList");
-            document.getElementById("searchCount").textContent = `${searches.length} unika sökningar`;
-
-            if (searches.length === 0) {
-                container.innerHTML = `<p style="color:var(--text-secondary); text-align:center; padding:2rem;">Inga sökningar ännu.</p>`;
+            if (facts.length === 0) {
+                els.list.innerHTML = `<div class="list-empty">Inga publicerade fakta ännu. Skriv en ovan och tryck Publicera.</div>`;
                 return;
             }
 
-            // Sort: most searched first
-            const sorted = [...searches].sort((a, b) => b.count - a.count);
-
-            container.innerHTML = `
-                <div style="display:flex; gap:0.5rem; margin-bottom:1rem; flex-wrap:wrap;">
-                    <button class="btn btn-sm search-filter-btn active" data-filter="all" style="font-size:0.75rem;">Alla (${searches.length})</button>
-                    <button class="btn btn-sm search-filter-btn" data-filter="miss" style="font-size:0.75rem; background:var(--red); color:#fff;">Utan resultat (${searches.filter(s => !s.hadResult).length})</button>
-                    <button class="btn btn-sm search-filter-btn" data-filter="hit" style="font-size:0.75rem; background:var(--green); color:#222;">Med resultat (${searches.filter(s => s.hadResult).length})</button>
-                </div>
-                <table style="width:100%; border-collapse:collapse; font-size:0.82rem;">
-                    <thead>
-                        <tr style="text-align:left; border-bottom:2px solid var(--border);">
-                            <th style="padding:0.5rem;">Sökterm</th>
-                            <th style="padding:0.5rem; text-align:center;">Antal</th>
-                            <th style="padding:0.5rem;">Senast</th>
-                            <th style="padding:0.5rem; text-align:center;">Resultat</th>
-                            <th style="padding:0.5rem;"></th>
-                        </tr>
-                    </thead>
-                    <tbody id="searchTableBody">
-                        ${sorted.map((s, i) => renderSearchRow(s, i)).join("")}
-                    </tbody>
-                </table>
-            `;
-
-            // Filter buttons
-            container.querySelectorAll(".search-filter-btn").forEach(btn => {
-                btn.addEventListener("click", () => {
-                    container.querySelectorAll(".search-filter-btn").forEach(b => b.classList.remove("active"));
-                    btn.classList.add("active");
-                    const filter = btn.dataset.filter;
-                    const rows = container.querySelectorAll("tbody tr");
-                    rows.forEach(row => {
-                        if (filter === "all") row.style.display = "";
-                        else if (filter === "miss") row.style.display = row.dataset.had === "false" ? "" : "none";
-                        else row.style.display = row.dataset.had === "true" ? "" : "none";
-                    });
-                });
-            });
+            els.list.innerHTML = facts
+                .map((f, i) => `
+                    <div class="fact-item">
+                        <div class="fact-item-text">${escapeHtml(f.text)}</div>
+                        <button class="fact-item-delete" data-index="${i}" title="Ta bort">✕</button>
+                    </div>`)
+                .join("");
         }
 
-        function renderSearchRow(s, idx) {
-            const date = new Date(s.lastSearched);
-            const dateStr = date.toLocaleDateString("sv-SE", { day: "numeric", month: "short" });
-            const statusDot = s.hadResult
-                ? `<span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--green);"></span>`
-                : `<span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--red);"></span>`;
-
-            return `<tr data-had="${s.hadResult}" style="border-bottom:1px solid var(--border);">
-                <td style="padding:0.5rem; font-weight:500;">${escapeHtml(s.query)}</td>
-                <td style="padding:0.5rem; text-align:center;">${s.count}</td>
-                <td style="padding:0.5rem; color:var(--text-secondary);">${dateStr}</td>
-                <td style="padding:0.5rem; text-align:center;">${statusDot}</td>
-                <td style="padding:0.5rem;"><button class="btn btn-sm" onclick="deleteSearch(${idx})" style="font-size:0.7rem; padding:0.2rem 0.5rem;">✕</button></td>
-            </tr>`;
+        async function loadFacts() {
+            try {
+                facts = await ghFetch();
+                if (!Array.isArray(facts)) facts = [];
+                loaded = true;
+                renderList();
+            } catch (e) {
+                els.list.innerHTML = `<div class="list-empty">Kunde inte ladda: ${escapeHtml(e.message)}<br><button class="btn btn-ghost" style="margin-top:0.8rem;" id="retryBtn">Försök igen</button></div>`;
+                document.getElementById("retryBtn")?.addEventListener("click", loadFacts);
+            }
         }
 
-        function deleteSearch(idx) {
-            const searches = getSearches();
-            searches.splice(idx, 1);
-            localStorage.setItem("smartass_searches", JSON.stringify(searches));
-            renderSearches();
+        async function publishFact() {
+            if (!loaded) {
+                setStatus("Vänta tills publicerade fakta har laddats först.", "error");
+                return;
+            }
+            const text = els.input.value.trim();
+            if (!text) {
+                setStatus("Skriv en fakta först.", "error");
+                els.input.focus();
+                return;
+            }
+
+            els.publishBtn.disabled = true;
+            setStatus("Publicerar...");
+
+            const newFact = { text };
+            const updated = [...facts, newFact];
+
+            try {
+                await ghPut(updated);
+                facts = updated;
+                els.input.value = "";
+                renderList();
+                setStatus("✓ Publicerad!", "success");
+                setTimeout(() => { if (els.status.textContent === "✓ Publicerad!") setStatus(""); }, 3000);
+            } catch (e) {
+                setStatus("Kunde inte publicera: " + e.message, "error");
+            } finally {
+                els.publishBtn.disabled = false;
+            }
         }
 
-        document.getElementById("clearSearchesBtn").addEventListener("click", () => {
-            if (confirm("Rensa all sökstatistik?")) {
-                localStorage.removeItem("smartass_searches");
-                renderSearches();
+        async function deleteFact(index) {
+            const fact = facts[index];
+            if (!fact) return;
+            const preview = (fact.text || "").slice(0, 60) + (fact.text.length > 60 ? "..." : "");
+            if (!confirm(`Radera den här faktan?\n\n"${preview}"`)) return;
+
+            const updated = facts.slice(0, index).concat(facts.slice(index + 1));
+            setStatus("Raderar...");
+
+            try {
+                await ghPut(updated);
+                facts = updated;
+                renderList();
+                setStatus("✓ Raderad!", "success");
+                setTimeout(() => { if (els.status.textContent === "✓ Raderad!") setStatus(""); }, 3000);
+            } catch (e) {
+                setStatus("Kunde inte radera: " + e.message, "error");
+            }
+        }
+
+        els.publishBtn.addEventListener("click", publishFact);
+
+        els.input.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) {
+                e.preventDefault();
+                publishFact();
             }
         });
 
-        // ========== KNOWN FACTS STATS ==========
-        async function loadKnownStats() {
-            const container = document.getElementById("knownList");
-            const countEl = document.getElementById("knownCount");
-            container.innerHTML = `<p style="color:var(--text-secondary);text-align:center;padding:2rem;">Laddar...</p>`;
+        els.list.addEventListener("click", (e) => {
+            const btn = e.target.closest(".fact-item-delete");
+            if (!btn) return;
+            const i = Number(btn.dataset.index);
+            if (Number.isInteger(i)) deleteFact(i);
+        });
 
-            try {
-                const snap = await _db.collection("factStats").orderBy("knownCount", "desc").get();
-
-                if (snap.empty) {
-                    countEl.textContent = "Inga kända fakta ännu";
-                    container.innerHTML = `<p style="color:var(--text-secondary);text-align:center;padding:2rem;">Ingen har klickat "Jag vet redan det här" ännu.</p>`;
-                    return;
-                }
-
-                countEl.textContent = `${snap.size} fakta med "kända"-klick`;
-
-                container.innerHTML = snap.docs.map(doc => {
-                    const d = doc.data();
-                    const count = d.knownCount || 0;
-                    const hue = count >= 10 ? "var(--red)" : count >= 4 ? "var(--yellow)" : "var(--green)";
-                    const pubFacts = getPublished();
-                    const isPublished = pubFacts.some(f => (f.text || "").slice(0, 80) === doc.id);
-
-                    return `
-                        <div style="display:flex;gap:0.8rem;align-items:flex-start;padding:0.9rem;background:white;border:1px solid var(--border);border-radius:10px;margin-bottom:0.5rem;">
-                            <div style="flex-shrink:0;min-width:44px;text-align:center;background:${hue};border-radius:8px;padding:0.3rem 0.5rem;">
-                                <div style="font-size:1.1rem;font-weight:700;">${count}</div>
-                                <div style="font-size:0.6rem;font-weight:500;">kända</div>
-                            </div>
-                            <div style="flex:1;min-width:0;">
-                                <div style="font-size:0.85rem;line-height:1.5;margin-bottom:0.4rem;">${escapeHtml(d.text || "")}</div>
-                                <div style="display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
-                                    ${d.category ? `<span class="badge badge-category">${escapeHtml(d.category)}</span>` : ""}
-                                    ${isPublished ? `<span class="badge badge-approved">Publicerad</span>` : `<span class="badge" style="background:#eee;color:#888;">Ej publicerad</span>`}
-                                    ${isPublished ? `<button class="btn btn-sm btn-delete" onclick="removeKnownFact('${doc.id}')">Ta bort från publicerade</button>` : ""}
-                                </div>
-                            </div>
-                        </div>`;
-                }).join("");
-
-            } catch (e) {
-                container.innerHTML = `<p style="color:var(--red);padding:1rem;">Fel: ${e.message}</p>`;
-            }
-        }
-
-        function removeKnownFact(factKey) {
-            const pub = getPublished();
-            const idx = pub.findIndex(f => (f.text || "").slice(0, 80) === factKey);
-            if (idx === -1) return;
-            if (!confirm(`Ta bort faktan från publicerade?\n\n"${pub[idx].text.slice(0, 80)}..."`)) return;
-            pub.splice(idx, 1);
-            localStorage.setItem("smartass_published", JSON.stringify(pub));
-            alert("Borttagen från publicerade. Glöm inte att synka till GitHub!");
-            loadKnownStats(); // re-render
-        }
-
-        // ========== AI GENERATION ==========
-        function withTimeout(promise, ms, label) {
-            return Promise.race([
-                promise,
-                new Promise((_, reject) => setTimeout(() => reject(new Error(`Timeout efter ${ms/1000}s: ${label}`)), ms))
-            ]);
-        }
-
-        async function generateFacts(count, category, statusEl) {
-            const catInstruction = category === "mix"
-                ? "Blanda olika kategorier: rymden, djur, mat, historia, vetenskap, natur, kroppen, musik, sport, konst, film, mode, gaming, geografi, teknologi, litteratur, matematik, språk, sverige, psykologi, ekonomi."
-                : `Fokusera på kategorin: ${category}.`;
-
-            const allCats = getAllCategories().join(", ");
-            const prompt = `Du är en faktaredaktör för appen SmartAss. Generera exakt ${count} roliga och korta fakta på svenska.
-
-REGLER:
-- Varje fakta ska vara MAX 2 meningar
-- Ska vara intressant, överraskande, kul att berätta vidare
-- Citera ALLTID en trovärdig institutionell källa (NASA, Smithsonian, WHO, universitet, museum, etc.) i sourceName-fältet
-- Ange en passande kategori för varje fakta. VIKTIGT: välj den kategori som BÄST matchar faktans innehåll. Tillgängliga kategorier: ${allCats}
-- Om ingen kategori passar, skriv "Övrigt"
-- VARIERA kategorierna — inte alla ska ha samma kategori
-- ${catInstruction}
-
-STILREGLER FÖR TEXTEN (MYCKET VIKTIGT):
-- Börja ALDRIG med "Visste du att" eller liknande inledningar
-- Nämn ALDRIG källan i själva texten (INTE "Enligt NASA...", "Forskare har visat...")
-- Skriv faktan rakt på sak som ett påstående. T.ex. "Pluto är en dvärgplanet." — INTE "Enligt NASA är Pluto en dvärgplanet." och INTE "Visste du att Pluto är en dvärgplanet?"
-- Källan anges SEPARAT i sourceName och sourceUrl
-
-Svara i JSON-format (inget annat, bara JSON-arrayen):
-[{"text":"...","category":"...","sourceName":"...","sourceUrl":"https://...","keywords":["..."],"related":["..."]}]`;
-
-            // Try multiple models — gpt-4o-mini is most reliable on Puter free tier
-            const models = ["gpt-4o-mini", "gpt-4o", "claude-3-5-sonnet"];
-            let lastError = null;
-
-            for (const model of models) {
-                try {
-                    if (statusEl) statusEl.textContent = `Anropar ${model}...`;
-                    console.log(`Trying model: ${model}`);
-
-                    const response = await withTimeout(
-                        puter.ai.chat(prompt, { model }),
-                        30000,
-                        model
-                    );
-
-                    console.log(`Response from ${model}:`, response);
-
-                    let text = "";
-                    if (response?.message?.content) {
-                        text = typeof response.message.content === "string"
-                            ? response.message.content
-                            : JSON.stringify(response.message.content);
-                    } else if (typeof response === "string") {
-                        text = response;
-                    } else if (response) {
-                        text = JSON.stringify(response);
-                    }
-
-                    if (!text || text.length < 10) {
-                        lastError = new Error(`Tom respons från ${model}`);
-                        console.warn(`Empty response from ${model}:`, text);
-                        continue;
-                    }
-
-                    const jsonMatch = text.match(/\[[\s\S]*\]/);
-                    if (!jsonMatch) {
-                        lastError = new Error(`Kunde inte hitta JSON i svaret från ${model}`);
-                        console.warn(`No JSON in response from ${model}:`, text.substring(0, 200));
-                        continue;
-                    }
-
-                    const parsed = JSON.parse(jsonMatch[0]).filter(f => f.text && f.sourceName).map(f => {
-                        // Clean up AI text quirks
-                        let t = f.text;
-                        t = t.replace(/^Visste du att\s*/i, "");
-                        t = t.replace(/^Vet du att\s*/i, "");
-                        t = t.replace(/^Faktum:\s*/i, "");
-                        t = t.replace(/^Fun fact:\s*/i, "");
-                        // Remove source references in text
-                        t = t.replace(/,?\s*enligt [^.]+\./i, ".");
-                        t = t.replace(/\s*\(enligt [^)]+\)/gi, "");
-                        // Capitalize first letter after cleanup
-                        t = t.charAt(0).toUpperCase() + t.slice(1);
-                        return { ...f, text: t };
-                    });
-                    if (parsed.length === 0) {
-                        lastError = new Error(`Inga giltiga fakta från ${model}`);
-                        continue;
-                    }
-
-                    if (statusEl) statusEl.textContent = `✓ ${parsed.length} fakta från ${model}`;
-                    return parsed;
-                } catch (err) {
-                    lastError = err;
-                    console.warn(`Model ${model} failed:`, err.message);
-                    continue;
-                }
-            }
-
-            throw lastError || new Error("Alla AI-modeller misslyckades.");
-        }
-
-        async function runGeneration(countInputId, progressBarId, progressFillId, statusId) {
-            const count = parseInt(document.getElementById(countInputId).value) || 10;
-            const category = document.getElementById("genCategory")?.value || "mix";
-            const pBar = document.getElementById(progressBarId);
-            const pFill = document.getElementById(progressFillId);
-            const status = document.getElementById(statusId);
-            pBar.classList.add("active"); pFill.style.width = "10%";
-            status.style.color = "";
-            status.textContent = `Genererar ${count} fakta med AI...`;
-
-            try {
-                const batchSize = 20; const batches = Math.ceil(count / batchSize); let all = [];
-                for (let i = 0; i < batches; i++) {
-                    const bc = Math.min(batchSize, count - all.length);
-                    status.textContent = `Genererar batch ${i+1}/${batches} (${bc} fakta)...`;
-                    pFill.style.width = `${10 + (80 * i / batches)}%`;
-                    all.push(...await generateFacts(bc, category, status));
-                }
-                const d = getDrafts(); all.forEach(f => { f._createdAt = Date.now(); d.unshift(f); }); saveDrafts(d);
-                pFill.style.width = "100%"; status.textContent = `✓ Klart! ${all.length} nya fakta som utkast.`;
-                status.style.color = "#38a169";
-                refreshAll();
-                setTimeout(() => { pBar.classList.remove("active"); status.textContent = ""; status.style.color = ""; }, 4000);
-            } catch (err) {
-                console.error("Generation error:", err);
-                pFill.style.width = "0%"; pBar.classList.remove("active");
-                status.textContent = `✗ Fel: ${err.message}`;
-                status.style.color = "#e53e3e";
-            }
-        }
-
-        document.getElementById("generateBtn").addEventListener("click", () => runGeneration("genCount", "genProgress", "genProgressFill", "genStatus"));
-
-        // ========== INIT ==========
-        function refreshAll() {
-            renderStats();
-            renderPublishedFilters();
-            renderPublished();
-            renderDrafts();
-            renderApproved();
-            renderFilters();
-            renderTrash();
-            renderDuplicates();
-            updateImportSection();
-            if (draftViewMode === "swipe") renderSwipeCard();
-        }
-
-        const genCatSelect = document.getElementById("genCategory");
-        getAllCategories().forEach(c => { const o = document.createElement("option"); o.value = c; o.textContent = c; genCatSelect.appendChild(o); });
-
-        refreshAll();
-        initSwipeTouch();
-        loadAllFromGitHub();
+        loadFacts();
     </script>
 </body>
 </html>
