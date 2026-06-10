@@ -99,5 +99,11 @@
     "credibility": "high",
     "title": "Coca-Colas flaskform designades för att kännas igen i mörker",
     "sourceUrl": "https://www.coca-colacompany.com/about-us/history/the-history-of-the-coca-cola-contour-bottle"
+  },
+  {
+    "text": "När Larry Page och Sergey Brin startade sökmotorn 1998 lät de sidan vara helt vit med bara en sökruta eftersom de helt enkelt inte behärskade HTML tillräckligt väl för att bygga en mer avancerad webbdesign.",
+    "credibility": "high",
+    "title": "Googles minimalistiska startsida berodde på bristande kodkunskap",
+    "sourceUrl": "https://about.google/our-story/"
   }
 ]
