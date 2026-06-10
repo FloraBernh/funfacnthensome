@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SmartAss — Admin</title>
+    <link rel="preconnect" href="https://fonts.cdnfonts.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/coolvetica">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg: #f5f5f5;
@@ -22,7 +24,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Inter', -apple-system, sans-serif;
+            font-family: 'Coolvetica', 'Inter', -apple-system, sans-serif;
             background: var(--bg);
             color: var(--text);
             -webkit-font-smoothing: antialiased;
@@ -79,7 +81,7 @@
             border: 1.5px solid var(--border);
             border-radius: 8px;
             font-size: 0.92rem;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Coolvetica', 'Inter', sans-serif;
             line-height: 1.55;
             color: var(--text);
             outline: none;
@@ -105,7 +107,7 @@
             border-radius: 8px;
             font-size: 0.85rem;
             font-weight: 600;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Coolvetica', 'Inter', sans-serif;
             cursor: pointer;
             transition: all 0.15s;
         }
@@ -153,6 +155,14 @@
             border-bottom: 1px solid var(--border);
         }
         .fact-item:last-child { border-bottom: none; }
+
+        .fact-item-title {
+            font-size: 1rem;
+            font-weight: 600;
+            line-height: 1.3;
+            color: var(--text);
+            margin-bottom: 0.2rem;
+        }
 
         .fact-item-text {
             flex: 1;
@@ -231,7 +241,7 @@
             border: 1.5px solid var(--border);
             border-radius: 8px;
             font-size: 0.85rem;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Coolvetica', 'Inter', sans-serif;
             outline: none;
             margin-bottom: 0.9rem;
         }
@@ -263,7 +273,7 @@
             border: 1.5px solid var(--border);
             border-radius: 8px;
             font-size: 0.88rem;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Coolvetica', 'Inter', sans-serif;
             color: var(--text);
             outline: none;
             transition: border-color 0.15s;
@@ -340,6 +350,14 @@
     <div class="main">
         <div class="card">
             <h2>Lägg till ny fakta</h2>
+            <input
+                type="text"
+                id="titleInput"
+                class="field-input"
+                placeholder="Rubrik"
+                maxlength="120"
+                style="margin-bottom:0.7rem;"
+            >
             <textarea
                 id="factInput"
                 class="fact-textarea"
@@ -471,6 +489,7 @@
         let loaded = false;
 
         const els = {
+            title: document.getElementById("titleInput"),
             input: document.getElementById("factInput"),
             sourceName: document.getElementById("sourceNameInput"),
             sourceUrl: document.getElementById("sourceUrlInput"),
@@ -701,10 +720,14 @@
                     const thumbHtml = f.imageUrl
                         ? `<img src="${escapeHtml(f.imageUrl)}" alt="" class="fact-item-thumb" loading="lazy" onerror="this.style.display='none'">`
                         : "";
+                    const titleHtml = f.title
+                        ? `<div class="fact-item-title">${escapeHtml(f.title)}</div>`
+                        : "";
                     return `
                         <div class="fact-item">
                             ${thumbHtml}
                             <div style="flex:1; min-width:0;">
+                                ${titleHtml}
                                 <div class="fact-item-text">${escapeHtml(f.text)}</div>
                                 <div class="fact-item-meta">${metaParts.join("&nbsp;·&nbsp;")}</div>
                             </div>
@@ -739,6 +762,7 @@
                 return;
             }
 
+            const title = els.title.value.trim();
             const sourceName = els.sourceName.value.trim();
             const sourceUrl = els.sourceUrl.value.trim();
             const credibility = els.credibility.value || "high";
@@ -754,6 +778,7 @@
             setStatus(imageFile ? "Laddar upp bild..." : "Publicerar...");
 
             const newFact = { text, credibility };
+            if (title) newFact.title = title;
             if (sourceName) newFact.sourceName = sourceName;
             if (sourceUrl) newFact.sourceUrl = sourceUrl;
 
@@ -769,6 +794,7 @@
                 const updated = [...facts, newFact];
                 await ghPut(updated);
                 facts = updated;
+                els.title.value = "";
                 els.input.value = "";
                 els.sourceName.value = "";
                 els.sourceUrl.value = "";

@@ -7,9 +7,11 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
     <title>SmartAss</title>
+    <link rel="preconnect" href="https://fonts.cdnfonts.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/coolvetica">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg: #ffffff;
@@ -24,7 +26,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Inter', -apple-system, sans-serif;
+            font-family: 'Coolvetica', 'Inter', -apple-system, sans-serif;
             background: var(--bg);
             color: var(--text);
             min-height: 100vh;
@@ -56,7 +58,7 @@
             border-radius: 100px;
             font-size: 1.1rem;
             font-weight: 600;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Coolvetica', 'Inter', sans-serif;
             cursor: pointer;
             transition: all 0.15s;
         }
@@ -146,6 +148,15 @@
         .fact-card.anim-out-left  { animation: slideOutToLeft   0.22s ease forwards; pointer-events: none; }
         .fact-card.anim-out-right { animation: slideOutToRight  0.22s ease forwards; pointer-events: none; }
 
+        .fact-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            line-height: 1.25;
+            margin-bottom: 0.7rem;
+            color: var(--text);
+            letter-spacing: -0.01em;
+        }
+
         .fact-text {
             font-size: 0.92rem;
             line-height: 1.65;
@@ -214,7 +225,7 @@
             background: white;
             font-size: 0.72rem;
             font-weight: 500;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Coolvetica', 'Inter', sans-serif;
             cursor: pointer;
             transition: all 0.15s;
             color: var(--text-secondary);
@@ -433,9 +444,14 @@
                 ? `<img src="${escapeHtml(fact.imageUrl)}" alt="" class="fact-image" loading="lazy" onerror="this.remove()">`
                 : "";
 
+            const titleHtml = fact.title
+                ? `<div class="fact-title">${escapeHtml(fact.title)}</div>`
+                : "";
+
             factArea.innerHTML = `
                 <div class="fact-card ${animClass}">
                     ${imageHtml}
+                    ${titleHtml}
                     <div class="fact-text">${escapeHtml(fact.text)}</div>
                     <div class="fact-footer">
                         <div class="credibility cred-${cred}">
