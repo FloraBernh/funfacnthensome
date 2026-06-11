@@ -974,10 +974,50 @@
                     if (els.status.textContent.startsWith("✓")) setStatus("");
                 }, 3000);
             } catch (e) {
-                setStatus("Kunde inte spara: " + e.message, "error");
+                if (isShaConflict(e)) {
+                    await handleShaConflict("publicera");
+                } else {
+                    setStatus("Kunde inte spara: " + e.message, "error");
+                }
             } finally {
                 els.publishBtn.disabled = false;
             }
+        }
+
+        function isShaConflict(e) {
+            const msg = (e?.message || "").toLowerCase();
+            return msg.includes("does not match") || msg.includes("409");
+        }
+
+        async function handleShaConflict(action) {
+            // Spara aktuell edit-state innan vi laddar om
+            const editingTitle = editingIndex !== null ? facts[editingIndex]?.title : null;
+            const editingText  = editingIndex !== null ? facts[editingIndex]?.text  : null;
+            try {
+                facts = await ghFetch();
+                if (!Array.isArray(facts)) facts = [];
+            } catch (err) {
+                setStatus("Innehållet har uppdaterats utifrån, men kunde inte hämta senaste data: " + err.message, "error");
+                return;
+            }
+            // Försök hitta den editerade faktan i den nya datan via title/text
+            if (editingIndex !== null) {
+                const newIdx = facts.findIndex(f =>
+                    (editingTitle && f.title === editingTitle) ||
+                    (!editingTitle && editingText && f.text === editingText)
+                );
+                if (newIdx >= 0) {
+                    editingIndex = newIdx;
+                } else {
+                    // Faktan finns inte längre på GitHub — avbryt redigeringen
+                    resetForm();
+                    renderList();
+                    setStatus("⚠️ Faktan du redigerade har försvunnit från GitHub (raderad utanför admin?). Listan är omladdad.", "error");
+                    return;
+                }
+            }
+            renderList();
+            setStatus(`⚠️ Innehållet ändrades utanför admin (t.ex. ny commit). Listan är omladdad — tryck ${action === "publicera" ? "Publicera/Spara" : "ta bort"} igen.`, "error");
         }
 
         async function deleteFact(index) {
@@ -1001,7 +1041,11 @@
                 setStatus("✓ Raderad!", "success");
                 setTimeout(() => { if (els.status.textContent === "✓ Raderad!") setStatus(""); }, 3000);
             } catch (e) {
-                setStatus("Kunde inte radera: " + e.message, "error");
+                if (isShaConflict(e)) {
+                    await handleShaConflict("radera");
+                } else {
+                    setStatus("Kunde inte radera: " + e.message, "error");
+                }
             }
         }
 
