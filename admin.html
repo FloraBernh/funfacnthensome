@@ -759,17 +759,19 @@
                 .map((f, i) => {
                     const cred = f.credibility || "high";
                     const credLabel = CRED_LABEL[cred] || CRED_LABEL.high;
-                    const sourceHtml = f.sourceName
-                        ? (f.sourceUrl
-                            ? `<a href="${escapeHtml(f.sourceUrl)}" target="_blank" rel="noopener">${escapeHtml(f.sourceName)}</a>`
-                            : `<span>${escapeHtml(f.sourceName)}</span>`)
-                        : "";
+                    let sourceMeta = "";
+                    if (f.sourceUrl) {
+                        const label = f.sourceName ? `Källa: ${escapeHtml(f.sourceName)}` : "Källa";
+                        sourceMeta = `<a href="${escapeHtml(f.sourceUrl)}" target="_blank" rel="noopener noreferrer">${label}</a>`;
+                    } else if (f.sourceName) {
+                        sourceMeta = `Källa: ${escapeHtml(f.sourceName)}`;
+                    }
                     const stats = factStats[factHash(f.text)] || {};
                     const knew = stats.knewCount || 0;
                     const learned = stats.learnedCount || 0;
                     const metaParts = [
                         `<span class="cred-pill ${cred}">${credLabel}</span>`,
-                        sourceHtml ? `Källa: ${sourceHtml}` : "",
+                        sourceMeta,
                         `<span class="stat-chip" title="Visste redan">🧠 <strong>${knew}</strong></span>`,
                         `<span class="stat-chip" title="Lärde sig nytt">💡 <strong>${learned}</strong></span>`,
                     ].filter(Boolean);

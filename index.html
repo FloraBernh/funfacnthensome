@@ -375,10 +375,11 @@
             const credLabel = CRED_LABEL[cred] || CRED_LABEL.high;
 
             let sourceHtml = "";
-            if (fact.sourceName) {
-                sourceHtml = fact.sourceUrl
-                    ? `<a href="${escapeHtml(fact.sourceUrl)}" target="_blank" rel="noopener" class="source-link">Källa: ${escapeHtml(fact.sourceName)}</a>`
-                    : `<span class="source-text">Källa: ${escapeHtml(fact.sourceName)}</span>`;
+            if (fact.sourceUrl) {
+                const label = fact.sourceName ? `Källa: ${escapeHtml(fact.sourceName)}` : "Källa";
+                sourceHtml = `<a href="${escapeHtml(fact.sourceUrl)}" target="_blank" rel="noopener noreferrer" class="source-link">${label}</a>`;
+            } else if (fact.sourceName) {
+                sourceHtml = `<span class="source-text">Källa: ${escapeHtml(fact.sourceName)}</span>`;
             }
 
             const imageHtml = fact.imageUrl
