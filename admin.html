@@ -457,7 +457,10 @@
         </div>
 
         <div class="card">
-            <h2>Publicerade fakta</h2>
+            <div style="display:flex; justify-content:space-between; align-items:center; gap:0.8rem; flex-wrap:wrap; margin-bottom:0.4rem;">
+                <h2 style="margin:0;">Publicerade fakta</h2>
+                <button type="button" class="btn btn-ghost" id="resetStatsBtn" style="padding:0.4rem 0.9rem; font-size:0.78rem;">Nollställ alla räknare</button>
+            </div>
             <div class="count" id="count"></div>
             <div id="factList">
                 <div class="loading">Laddar...</div>
@@ -520,6 +523,50 @@
                 factStats = m;
             } catch (e) {
                 console.warn("loadStats failed:", e);
+            }
+        }
+
+        async function resetAllStats() {
+            if (!db) {
+                setStatus("Firestore är inte tillgängligt.", "error");
+                return;
+            }
+            const total = Object.keys(factStats).length;
+            const msg = total === 0
+                ? "Inga räknare att nollställa. Kör nollställningen ändå (rensar eventuella docs som inte laddats lokalt)?"
+                : `Detta nollställer ALLA klick-räknare (🧠 och 💡) för ${total} fakta. Är du säker?`;
+            if (!confirm(msg)) return;
+
+            const btn = document.getElementById("resetStatsBtn");
+            btn.disabled = true;
+            const originalText = btn.textContent;
+            btn.textContent = "Nollställer...";
+            setStatus("Nollställer räknare...");
+
+            try {
+                const snap = await db.collection("factStats").get();
+                if (snap.empty) {
+                    factStats = {};
+                    renderList();
+                    setStatus("✓ Inget att nollställa, allt var redan tomt.", "success");
+                    return;
+                }
+                // Firestore batches max 500 writes — räcker gott för en personlig sida
+                const batch = db.batch();
+                snap.forEach(doc => batch.delete(doc.ref));
+                await batch.commit();
+                factStats = {};
+                renderList();
+                setStatus(`✓ ${snap.size} räknare nollställda!`, "success");
+                setTimeout(() => {
+                    if (els.status.textContent.startsWith("✓")) setStatus("");
+                }, 4000);
+            } catch (e) {
+                console.error("resetAllStats failed:", e);
+                setStatus("Kunde inte nollställa: " + e.message, "error");
+            } finally {
+                btn.disabled = false;
+                btn.textContent = originalText;
             }
         }
 
@@ -956,6 +1003,7 @@
         }
 
         els.publishBtn.addEventListener("click", publishFact);
+        document.getElementById("resetStatsBtn").addEventListener("click", resetAllStats);
 
         els.input.addEventListener("keydown", (e) => {
             if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) {
