@@ -1,4 +1,4 @@
-// Firestore Security Rules for SmartAss
+// Firestore Security Rules for Fun Facts N Then Some
 // Klistra in dessa i Firebase Console → Firestore Database → Rules
 
 rules_version = '2';
