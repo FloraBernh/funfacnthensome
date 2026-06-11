@@ -39,6 +39,21 @@
             overflow-x: hidden;
         }
 
+        .site-logo {
+            position: fixed;
+            top: 4rem;
+            left: 50%;
+            transform: translateX(-50%);
+            height: 56px;
+            width: auto;
+            z-index: 5;
+            pointer-events: none;
+            user-select: none;
+        }
+        @media (max-width: 500px) {
+            .site-logo { height: 44px; top: 2.5rem; }
+        }
+
         /* Färgade ljusklotar i bakgrunden — rör sig långsamt så glaset känns levande */
         body::before,
         body::after {
@@ -324,6 +339,8 @@
     </style>
 </head>
 <body>
+    <img src="images/logo.svg" alt="Fun Facts N Then Some" class="site-logo">
+
     <div class="container">
         <div class="fact-area" id="factArea"></div>
         <div id="randomSection" style="width:100%;">
