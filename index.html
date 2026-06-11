@@ -49,6 +49,11 @@
             z-index: 5;
             pointer-events: none;
             user-select: none;
+            opacity: 1;
+            transition: opacity 0.3s ease;
+        }
+        body.card-mode .site-logo {
+            opacity: 0;
         }
         @media (max-width: 500px) {
             .site-logo { height: 88px; top: 2.5rem; }
@@ -550,12 +555,14 @@
         // ========== NAV ==========
         function enterCardMode() {
             document.getElementById("randomSection").style.display = "none";
+            document.body.classList.add("card-mode");
         }
 
         function returnToStart() {
             _currentFact = null;
             document.getElementById("factArea").innerHTML = "";
             document.getElementById("randomSection").style.display = "";
+            document.body.classList.remove("card-mode");
         }
 
         // ========== EVENT LISTENERS ==========
