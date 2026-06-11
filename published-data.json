@@ -3,8 +3,9 @@
     "text": "Logotypen designades 1971 av den grafiska designstudenten Carolyn Davidson. Företagets grundare Phil Knight var till en början inte särskilt imponerad och sa: \"I don't love it, but it will grow on me\". Som tack fick Davidson dock flera år senare både en diamantring med loggan och en stor post aktier i företaget.",
     "credibility": "high",
     "title": "Nikes logga kostade 35 dollar",
-    "sourceUrl": "https://www.oregonlive.com/business/2011/06/the_creator_of_nikes_famed_swo.html",
-    "imageUrl": "images/1781092793517-r1l4j6.svg"
+    "sourceUrl": "https://about.nike.com/en/magazine/nike-swoosh-logo-history",
+    "imageUrl": "images/1781092793517-r1l4j6.svg",
+    "sourceName": "Nike"
   },
   {
     "text": "Den berömda surrealistiske konstnären skapade klubbans blommiga logotyp över en kopp kaffe 1969. Det var också Dalí som insisterade på att logotypen skulle placeras uppe på toppen av papperet, inte på sidan, så att den alltid syntes perfekt utan att skrynklas.",
@@ -61,7 +62,8 @@
     "text": "När bröderna Michelin lanserade den idag prestigefyllda restaurangguiden år 1900 var det ett rent affärsknep för att få bilister att köra längre sträckor, slita ut däcken snabbare och därmed tvingas köpa nya.",
     "credibility": "high",
     "title": "Guide Michelin var en strategi för att sälja fler bildäck",
-    "sourceUrl": "https://guide.michelin.com/en/article/features/about-the-michelin-guide"
+    "sourceUrl": "https://www.smithsonianmag.com/arts-culture/the-michelin-guide-why-we-look-to-automotive-experts-for-dining-advice-74210894/",
+    "sourceName": "Smithsonian Magazine"
   },
   {
     "text": "När skylten restes 1923 stod det \"HOLLYWOODLAND\", och syftet var enbart att fungera som en temporär utomhusreklam för ett nytt bostadsområde i bergen.",
@@ -91,7 +93,8 @@
     "text": "Den berömda nyansen \"Tiffany Blue\" skapades exklusivt för företaget 1845 och är ett skyddat färgvarumärke med det officiella Pantone-numret 1837, vilket innebär att ingen annan aktör får använda den i sin marknadsföring.",
     "credibility": "high",
     "title": "Tiffany & Co. äger varumärkesskyddet på sin specifika blå färg",
-    "sourceUrl": "https://www.tiffany.com/stories/tiffany-blue/"
+    "sourceUrl": "https://press.tiffany.com/our-story/tiffany-blue/",
+    "sourceName": "Tiffany & Co. (officiell press)"
   },
   {
     "text": "Designbriefen från 1915 krävde en flaska som var så unik att man omedelbart skulle kunna identifiera den enbart genom att hålla i den, eller om den låg krossad på marken.",
@@ -109,31 +112,36 @@
     "text": "När apotekaren Caleb Bradham skapade drycken 1893 döpte han den efter sig själv, innan den fem år senare bytte namn till Pepsi-Cola baserat på det medicinska ordet för matsmältning, dyspepsi.",
     "credibility": "high",
     "title": "Pepsi hette från början \"Brad's Drink\"",
-    "sourceUrl": "https://www.pepsico.com/who-we-are/our-history"
+    "sourceUrl": "https://www.dncr.nc.gov/blog/2016/08/28/brads-drink-becomes-pepsi-cola-1898",
+    "sourceName": "NC Dept of Natural and Cultural Resources"
   },
   {
     "text": "När de första följetongerna sändes i amerikansk radio på 1930-talet sponsrades och producerades de helt av företag ville sälja tvättmedel till hemmafruar.",
     "credibility": "high",
     "title": "Begreppet \"såpoperor\" kommer direkt från marknadsföring",
-    "sourceUrl": "https://us.pg.com/blogs/pg-history/"
+    "sourceUrl": "https://www.britannica.com/art/soap-opera",
+    "sourceName": "Encyclopædia Britannica"
   },
   {
     "text": "Innan apelsinen (orange) introducerades till Europa under medeltiden fanns inget eget ord för färgen i det engelska eller svenska språket, utan nyansen kallades helt enkelt för \"gul-röd\".",
     "credibility": "high",
     "title": "Färgen orange döptes efter frukten, inte tvärtom",
-    "sourceUrl": "https://www.oxfordlearnersdictionaries.com/definition/english/orange_2"
+    "sourceUrl": "https://www.merriam-webster.com/wordplay/did-orange-the-fruit-or-the-color-come-first",
+    "sourceName": "Merriam-Webster"
   },
   {
     "text": "Marknadsföringskonceptet \"smälter i munnen, inte i handen\" utvecklades under andra världskriget så att militärer kunde bära med sig choklad utan att den smälte i fält.",
     "credibility": "high",
     "title": "M&M's skapades för att soldater skulle kunna äta choklad utan att kladda",
-    "sourceUrl": "https://www.mars.com/our-brands/mms"
+    "sourceUrl": "https://missionrollcall.org/veteran-voices/articles/mms-and-the-military/",
+    "sourceName": "Mission Roll Call"
   },
   {
     "text": "Jeff Bezos registrerade företaget under namnet Cadabra (från abrakadabra) 1994, men ändrade det snabbt efter att hans advokat hört fel och trott att han sa \"cadaver\" (lik).",
     "credibility": "high",
     "title": "Amazon skulle ursprungligen heta \"Cadabra\"",
-    "sourceUrl": "https://www.aboutamazon.com/about-us/amazon-history"
+    "sourceUrl": "https://finance.yahoo.com/news/jeff-bezos-wanted-amazon-named-184721277.html",
+    "sourceName": "Yahoo Finance"
   },
   {
     "text": "De ikoniska gyllene bågarna ritades 1952 som faktiska neonbelysta strukturdetaljer på byggnadernas sidor för att locka till sig bilister från vägen, långt innan de slogs ihop till bokstaven \"M\" i logotypen.",
@@ -145,25 +153,29 @@
     "text": "Diamantmonopolet De Beers lanserade en extremt framgångsrik reklamkampanj i mitten av 1900-talet som etablerade den sociala normen att en man borde spendera exakt två månadslöner på en diamantring.",
     "credibility": "high",
     "title": "Förlovningsringens koppling till två månadslöner uppfanns av De Beers",
-    "sourceUrl": "https://www.bbc.com/worklife/article/20200512-how-diamonds-became-the-ultimate-marriage-status-symbol"
+    "sourceUrl": "https://www.aljazeera.com/features/2025/9/14/how-the-diamond-engagement-ring-was-invented-and-sold-around-the-world",
+    "sourceName": "Al Jazeera"
   },
   {
     "text": "De rörliga animationerna introducerades på 1980-talet eftersom tidiga datorskärmar riskerade att drabbas av \"burn-in\", där en statisk bild permanent brändes fast i fosforskiktet om skärmen lämnades igång orörd.",
     "credibility": "high",
     "title": "Skärmsläckaren skapades för att inte skärmen skulle förstöras",
-    "sourceUrl": "https://www.britannica.com/technology/screensaver"
+    "sourceUrl": "https://www.howtogeek.com/screensavers-were-actually-ahead-of-their-time/",
+    "sourceName": "How-To Geek"
   },
   {
     "text": "Eftersom det krävdes tusentals havssniglar för att utvinna ett enda gram av färgämnet tyrisk lila, var färgen så extremt dyr att romerska kejsare stiftade lagar som förbjöd vanliga medborgare att bära lila kläder.",
     "credibility": "high",
     "title": "Färgen lila var historiskt reserverad för kungligheter på grund av produktionskostnaden",
-    "sourceUrl": "https://www.getty.edu/news/the-ancient-history-of-the-color-purple/"
+    "sourceUrl": "https://www.smithsonianmag.com/smart-news/in-ancient-rome-purple-dye-was-made-from-snails-1239931/",
+    "sourceName": "Smithsonian Magazine"
   },
   {
     "text": "När UPC-systemet (Universal Product Code) testades för allra första gången i en livsmedelsbutik i Ohio 1974, var den allra första skannade varan ett tiopack Wrigley's Juicy Fruit.",
     "credibility": "high",
     "title": "Den första streckkoden som skannades satt på ett paket tuggummi",
-    "sourceUrl": "https://www.si.edu/object/wrigleys-juicy-fruit-chewing-gum:nmah_1194218"
+    "sourceUrl": "https://www.history.com/this-day-in-history/june-26/barcode-scanner-invention-first-use",
+    "sourceName": "History.com"
   },
   {
     "text": "Genom att introducera ett tredje, medvetet mindre prisvärt alternativ (som en mellanpopcorn för 65 kr, när en liten kostar 30 kr och en stor 70 kr) luras vår hjärna att tro att det dyraste alternativet är ett fantastiskt kap.",
@@ -199,14 +211,15 @@
     "text": "Glassnamnet hittades på av grundaren i New York för att det skulle låta genuint \"danskt\" och exklusivt. Danskan använder ju dock inte ens bokstaven \"ä\" eller kombinationen \"zs\".",
     "credibility": "high",
     "title": "Häagen-Dazs betyder absolut ingenting",
-    "sourceName": "Time",
-    "sourceUrl": "https://time.com/3081079/the-inventor-of-haagen-dazs-didnt-speak-danish/"
+    "sourceName": "Food Bible",
+    "sourceUrl": "https://www.foodbible.com/news/us-food/haagen-dazs-name-meaning-founder-224684-20251027"
   },
   {
     "text": "I Japan kallas McDonalds berömda maskot inte för Ronald, utan Donald McDonald. Anledningen är helt enkelt en geografisk varumärkesanpassning eftersom \"R\"-ljudet är väldigt svårt att uttala tydligt på japanska.",
     "credibility": "high",
     "title": "I Japan heter clownen Donald McDonald",
-    "sourceUrl": "https://www.businessinsider.com/why-ronald-mcdonald-is-called-donald-in-japan-2017-7"
+    "sourceUrl": "https://kotaku.com/why-ronald-mcdonalds-name-is-slightly-different-in-japa-1825232733",
+    "sourceName": "Kotaku"
   },
   {
     "text": "Bokstävernas märkliga placering på våra tangentbord uppfanns 1873 för de första skrivmaskinerna. Marknadsföringslögnen var att det var \"ergonomiskt\", men i själva verket särade man på vanliga bokstavskombinationer för att sakta ner maskinskriverskorna så att metallarmarna inte skulle haka fast i varandra.",
@@ -218,7 +231,8 @@
     "text": "När amerikanska handelsblockader under andra världskriget gjorde att den tyska fabriken inte längre kunde importera sirapen som krävdes för att göra Coca-Cola, var de tvungna att innovera. De slängde ihop en ny dryck gjord på tyska matrester (som vassle och äppelrester) och marknadsförde den under namnet Fanta.",
     "credibility": "high",
     "title": "Fanta uppfanns som en nödlösning i Nazityskland",
-    "sourceUrl": "https://www.businessinsider.com/how-fanta-was-created-for-nazi-germany-2019-11"
+    "sourceUrl": "https://www.thelocal.de/20170523/fanta-how-the-nazi-era-drink-became-the-world-famous-brand",
+    "sourceName": "The Local Germany"
   },
   {
     "text": "Genom en reklamkampanj 1974 kallad \"Kurisumasu ni wa kentakkii\" (Kentucky for Christmas) lyckades KFC övertyga Japan om att friterad kyckling är amerikansk julmat. Idag är det en enorm tradition och miljoner japaner bokar sin julkyckling månader i förväg.",
