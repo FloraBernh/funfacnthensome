@@ -12,51 +12,59 @@
     "credibility": "high",
     "title": "Chupa Chups logga designades av Salvador Dalí",
     "sourceUrl": "https://www.fastcompany.com/1669224/salvador-dal-s-real-masterpiece-the-logo-for-chupa-chups-lollipops",
-    "imageUrl": "images/1781092889450-lfiy57.svg"
+    "imageUrl": "images/1781092889450-lfiy57.svg",
+    "sourceName": "Fast Company"
   },
   {
     "text": "Innan den extremt machokodade \"Marlboro Man\" introducerades på 1950-talet, marknadsfördes märket från 1920-talet till kvinnor under parollen \"Mild as May\". De hade till och med rött papper runt filtret för att dölja fläckar från läppstift.",
     "credibility": "high",
     "title": "Marlboro var från början en cigarett för kvinnor",
-    "sourceUrl": "https://tobacco.stanford.edu/cigarettes/women/mild-as-may/"
+    "sourceUrl": "https://tobacco.stanford.edu/cigarettes/women/mild-as-may/",
+    "sourceName": "Stanford University (Tobacco Marketing)"
   },
   {
     "text": "Om du tittar på det tomma utrymmet mellan det stora \"E\":et och lilla \"x\":et i deras logotyp ser du en vit pil som pekar framåt. Designern Lindon Leader skapade den 1994 för att undermedvetet förmedla fart, precision och framåtrörelse.",
     "credibility": "high",
     "title": "FedEx har en inbyggd optisk illusion",
     "sourceUrl": "https://www.cnbc.com/2021/04/09/how-the-fedex-logo-became-one-of-the-most-successful-ever-made.html",
-    "imageUrl": "images/1781094038811-luqf6d.jpg"
+    "imageUrl": "images/1781094038811-luqf6d.jpg",
+    "sourceName": "CNBC"
   },
   {
     "text": "När AT&T köpte den första klickbara annonsen på nätet 1994 klickade nästan hälften av alla besökare på den, vilket är astronomiskt jämfört med dagens snitt på cirka 0,1 procent.",
     "credibility": "high",
     "title": "Världens första bannerannons hade en klickfrekvens på 44 procent",
-    "sourceUrl": "https://www.thedrum.com/news/1994-first-banner-ad-appears-hotwiredcom"
+    "sourceUrl": "https://www.thedrum.com/news/1994-first-banner-ad-appears-hotwiredcom",
+    "sourceName": "The Drum"
   },
   {
     "text": "Den skapades av Tim Berners-Lee 1991 för att förklara hur World Wide Web fungerar, och den ligger fortfarande kvar på sin ursprungliga adress hos det europeiska forskningscentret CERN.",
     "credibility": "high",
     "title": "Världens första webbplats är fortfarande live",
-    "sourceUrl": "https://info.cern.ch/"
+    "sourceUrl": "https://info.cern.ch/",
+    "sourceName": "CERN"
   },
   {
     "text": "Grundaren Ingvar Kamprad kategoriserade sortimentet enligt fasta geografiska och språkliga mönster eftersom han hade svårt att memorera sifferkombinationer. Till exempel döps mattor efter danska platser och sängar efter norska.",
     "credibility": "high",
     "title": "Ikeas produktnamn är ett system utvecklat för att hantera dyslexi",
-    "sourceUrl": "https://ikeamuseum.com/"
+    "sourceUrl": "https://ikeamuseum.com/",
+    "sourceName": "IKEA Museum"
   },
   {
     "text": "Reklambyrågrundaren Dan Wieden inspirerades 1988 av Gary Gilmores sista uttalande \"Let's do it\" inför sin avrättning, vilket justerades minimalt för att bli Nikes globala varumärkeskoncept.",
     "credibility": "high",
     "title": "Nikes slogan \"Just Do It\" är baserad på en dödsdömd mördares sista ord",
-    "sourceUrl": "https://www.businessinsider.com/nike-just-do-it-inspired-utah-killer-gary-gilmore-2019-7"
+    "sourceUrl": "https://www.businessinsider.com/nike-just-do-it-inspired-utah-killer-gary-gilmore-2019-7",
+    "sourceName": "Business Insider"
   },
   {
     "text": "Symbolen är en sammanslagning av de nordiska runorna för H och B (Hagall och Bjarkan), vilket står för vikingakungen Harald Blåtand som enade Skandinavien på samma sätt som tekniken enar enheter.",
     "credibility": "high",
     "title": "Bluetooth-loggan är en kombination av vikingaruner",
     "sourceUrl": "https://www.bluetooth.com/about-us/bluetooth-origin/",
-    "imageUrl": "images/1781094816127-05fan5.png"
+    "imageUrl": "images/1781094816127-05fan5.png",
+    "sourceName": "Bluetooth SIG"
   },
   {
     "text": "När bröderna Michelin lanserade den idag prestigefyllda restaurangguiden år 1900 var det ett rent affärsknep för att få bilister att köra längre sträckor, slita ut däcken snabbare och därmed tvingas köpa nya.",
@@ -69,25 +77,29 @@
     "text": "När skylten restes 1923 stod det \"HOLLYWOODLAND\", och syftet var enbart att fungera som en temporär utomhusreklam för ett nytt bostadsområde i bergen.",
     "credibility": "high",
     "title": "Hollywood-skylten var från början en mäklarannons",
-    "sourceUrl": "https://www.hollywoodsign.org/history/a-sign-is-born"
+    "sourceUrl": "https://www.hollywoodsign.org/history/a-sign-is-born",
+    "sourceName": "Hollywood Sign Trust"
   },
   {
     "text": "VD:n för Guinness bryggeri, Sir Hugh Beaver, skapade boken på 1950-talet som ett marknadsföringsverktyg för att ge bargäster en officiell källa som kunde avgöra deras ständiga diskussioner.",
     "credibility": "high",
     "title": "Guinness Rekordbok togs fram för att lösa pubbråk",
-    "sourceUrl": "https://www.guinnessworldrecords.com/about-us/our-story"
+    "sourceUrl": "https://www.guinnessworldrecords.com/about-us/our-story",
+    "sourceName": "Guinness World Records"
   },
   {
     "text": "Den grafiska designern Milton Glaser skissade logotypen på ett kuvert i en taxi 1976 för att hjälpa New York under en djup ekonomisk kris, och han tog aldrig betalt för sitt arbete.",
     "credibility": "high",
     "title": "\"I ♥ NY\"-logotypen designades gratis på ett papperskuvert",
-    "sourceUrl": "https://www.moma.org/collection/works/128649"
+    "sourceUrl": "https://www.moma.org/collection/works/128649",
+    "sourceName": "MoMA"
   },
   {
     "text": "Den ikoniska färgen \"Rosso Corsa\" valdes inte av estetiska skäl, utan för att International Automobile Federation (FIA) under tidigt 1900-tal krävde att alla italienska tävlingsbilar måste vara röda för att skilja nationerna åt.",
     "credibility": "high",
     "title": "Ferraris röda färg var ursprungligen ett påtvingat regelverk",
-    "sourceUrl": "https://www.ferrari.com/en-EN/history"
+    "sourceUrl": "https://www.ferrari.com/en-EN/history",
+    "sourceName": "Ferrari"
   },
   {
     "text": "Den berömda nyansen \"Tiffany Blue\" skapades exklusivt för företaget 1845 och är ett skyddat färgvarumärke med det officiella Pantone-numret 1837, vilket innebär att ingen annan aktör får använda den i sin marknadsföring.",
@@ -100,13 +112,15 @@
     "text": "Designbriefen från 1915 krävde en flaska som var så unik att man omedelbart skulle kunna identifiera den enbart genom att hålla i den, eller om den låg krossad på marken.",
     "credibility": "high",
     "title": "Coca-Colas flaskform designades för att kännas igen i mörker",
-    "sourceUrl": "https://www.coca-colacompany.com/about-us/history/the-history-of-the-coca-cola-contour-bottle"
+    "sourceUrl": "https://www.coca-colacompany.com/about-us/history/the-history-of-the-coca-cola-contour-bottle",
+    "sourceName": "The Coca-Cola Company"
   },
   {
     "text": "När Larry Page och Sergey Brin startade sökmotorn 1998 lät de sidan vara helt vit med bara en sökruta eftersom de helt enkelt inte behärskade HTML tillräckligt väl för att bygga en mer avancerad webbdesign.",
     "credibility": "high",
     "title": "Googles minimalistiska startsida berodde på bristande kodkunskap",
-    "sourceUrl": "https://about.google/our-story/"
+    "sourceUrl": "https://about.google/our-story/",
+    "sourceName": "Google"
   },
   {
     "text": "När apotekaren Caleb Bradham skapade drycken 1893 döpte han den efter sig själv, innan den fem år senare bytte namn till Pepsi-Cola baserat på det medicinska ordet för matsmältning, dyspepsi.",
@@ -147,7 +161,8 @@
     "text": "De ikoniska gyllene bågarna ritades 1952 som faktiska neonbelysta strukturdetaljer på byggnadernas sidor för att locka till sig bilister från vägen, långt innan de slogs ihop till bokstaven \"M\" i logotypen.",
     "credibility": "high",
     "title": "McDonald's gula bågar var ursprungligen en del av arkitekturen",
-    "sourceUrl": "https://www.mcdonalds.com/us/en-us/about-us/our-history.html"
+    "sourceUrl": "https://www.mcdonalds.com/us/en-us/about-us/our-history.html",
+    "sourceName": "McDonald's"
   },
   {
     "text": "Diamantmonopolet De Beers lanserade en extremt framgångsrik reklamkampanj i mitten av 1900-talet som etablerade den sociala normen att en man borde spendera exakt två månadslöner på en diamantring.",
@@ -181,31 +196,36 @@
     "text": "Genom att introducera ett tredje, medvetet mindre prisvärt alternativ (som en mellanpopcorn för 65 kr, när en liten kostar 30 kr och en stor 70 kr) luras vår hjärna att tro att det dyraste alternativet är ett fantastiskt kap.",
     "credibility": "high",
     "title": "Betes-effekten (Decoy Effect) får oss att spendera mer pengar",
-    "sourceUrl": "https://thedecisionlab.com/biases/decoy-effect"
+    "sourceUrl": "https://thedecisionlab.com/biases/decoy-effect",
+    "sourceName": "The Decision Lab"
   },
   {
     "text": "När Volvos ingenjör Nils Bohlin fulländade bältet 1959 valde bilkoncernen att göra patentet fritt tillgängligt för alla konkurrenter, vilket cementerade Volvos varumärkesidentitet som marknadsledande inom säkerhet.",
     "credibility": "high",
     "title": "Volvo gav bort patentet på trepunktsbältet för att rädda liv",
-    "sourceUrl": "https://www.volvogroup.com/en/about-us/heritage/three-point-safety-belt.html"
+    "sourceUrl": "https://www.volvogroup.com/en/about-us/heritage/three-point-safety-belt.html",
+    "sourceName": "Volvo Group"
   },
   {
     "text": "Sedan 1985 har biltillverkarens \"Nose Team\" kemiskt analyserat och dofttestat över 500 komponenter i interiören för att säkerställa att materialen tillsammans skapar en harmonisk och neutral \"nybilskänsla\".",
     "credibility": "high",
     "title": "Audi har ett forskarteam som enbart arbetar med att lukt",
-    "sourceUrl": "https://www.thedrive.com/news/33439/audi-has-an-entire-team-of-people-who-just-smell-things"
+    "sourceUrl": "https://www.thedrive.com/news/33439/audi-has-an-entire-team-of-people-who-just-smell-things",
+    "sourceName": "The Drive"
   },
   {
     "text": "Färgen röd har den längsta våglängden av alla färger och uppfattas blixtsnabbt av den mänskliga amygdalan, vilket evolutionärt signalerar fara eller akut hot och därmed blockerar logiskt tänkande till förmån för snabba impulser.",
     "credibility": "high",
     "title": "Röda reafärgade skyltar triggar en fysisk nödsituation i hjärnan",
-    "sourceUrl": "https://thedecisionlab.com/reference-guide/psychology/pricing-psychology"
+    "sourceUrl": "https://thedecisionlab.com/reference-guide/psychology/pricing-psychology",
+    "sourceName": "The Decision Lab"
   },
   {
     "text": "Två personer kan få olika omslagsbilder för exakt samma serie eftersom Netflix testar vilka bilder som lockar just dig att klicka.",
     "credibility": "high",
     "title": "Netflix miniatyrbilder är personliga",
-    "sourceUrl": "https://netflixtechblog.com/artwork-personalization-c589f074ad76"
+    "sourceUrl": "https://netflixtechblog.com/artwork-personalization-c589f074ad76",
+    "sourceName": "Netflix Tech Blog"
   },
   {
     "text": "Glassnamnet hittades på av grundaren i New York för att det skulle låta genuint \"danskt\" och exklusivt. Danskan använder ju dock inte ens bokstaven \"ä\" eller kombinationen \"zs\".",
@@ -225,7 +245,8 @@
     "text": "Bokstävernas märkliga placering på våra tangentbord uppfanns 1873 för de första skrivmaskinerna. Marknadsföringslögnen var att det var \"ergonomiskt\", men i själva verket särade man på vanliga bokstavskombinationer för att sakta ner maskinskriverskorna så att metallarmarna inte skulle haka fast i varandra.",
     "credibility": "high",
     "title": "QWERTY-tangentbordet designades för att göra oss långsamma",
-    "sourceUrl": "https://www.smithsonianmag.com/arts-culture/fact-of-fiction-the-legend-of-the-qwerty-keyboard-49863249/"
+    "sourceUrl": "https://www.smithsonianmag.com/arts-culture/fact-of-fiction-the-legend-of-the-qwerty-keyboard-49863249/",
+    "sourceName": "Smithsonian Magazine"
   },
   {
     "text": "När amerikanska handelsblockader under andra världskriget gjorde att den tyska fabriken inte längre kunde importera sirapen som krävdes för att göra Coca-Cola, var de tvungna att innovera. De slängde ihop en ny dryck gjord på tyska matrester (som vassle och äppelrester) och marknadsförde den under namnet Fanta.",
@@ -238,55 +259,64 @@
     "text": "Genom en reklamkampanj 1974 kallad \"Kurisumasu ni wa kentakkii\" (Kentucky for Christmas) lyckades KFC övertyga Japan om att friterad kyckling är amerikansk julmat. Idag är det en enorm tradition och miljoner japaner bokar sin julkyckling månader i förväg.",
     "credibility": "high",
     "title": "KFC skapade den japanska jultraditionen",
-    "sourceUrl": "https://www.bbc.com/worklife/article/20161216-why-japan-celebrates-christmas-with-kfc"
+    "sourceUrl": "https://www.bbc.com/worklife/article/20161216-why-japan-celebrates-christmas-with-kfc",
+    "sourceName": "BBC"
   },
   {
     "text": "På 1920-talet uppfann reklammakare för Listerine den medicinska termen \"halitosis\" (dålig andedräkt) för att skrämma konsumenter. Innan dess marknadsfördes vätskan främst som golvrengöring och botemedel mot gonorré.",
     "credibility": "high",
     "title": "Listerine hittade på en sjukdom för att sälja munskölj",
-    "sourceUrl": "https://www.smithsonianmag.com/smart-news/marketing-campaign-invented-halitosis-180954082/"
+    "sourceUrl": "https://www.smithsonianmag.com/smart-news/marketing-campaign-invented-halitosis-180954082/",
+    "sourceName": "Smithsonian Magazine"
   },
   {
     "text": "Världens första lagliga och kommersiella TV-reklam sändes i USA 1941 precis innan en basebollmatch. Det var klocktillverkaren Bulova som köpte den korta reklamslotten för 9 dollar.",
     "credibility": "high",
     "title": "Världens första TV-reklam kostade 9 dollar",
-    "sourceUrl": "https://fortune.com/2016/07/01/bulova-tv-commercial/"
+    "sourceUrl": "https://fortune.com/2016/07/01/bulova-tv-commercial/",
+    "sourceName": "Fortune"
   },
   {
     "text": "Coca-Cola uppfann inte jultomten, men deras ikoniska reklamkampanjer på 1930-talet (illustrerade av svenskättlingen Haddon Sundblom) cementerade bilden av den tjocka, jovialiska tomten i röd-vita kläder som hela världen nu känner till.",
     "credibility": "high",
     "title": "Coca-Cola formade vår bild av Jultomten",
-    "sourceUrl": "https://www.coca-colacompany.com/about-us/history/haddon-sundblom-and-the-coca-cola-santas"
+    "sourceUrl": "https://www.coca-colacompany.com/about-us/history/haddon-sundblom-and-the-coca-cola-santas",
+    "sourceName": "The Coca-Cola Company"
   },
   {
     "text": "Kaffejätten skulle egentligen döpas till \"Pequod\", efter valfångstfartyget i den klassiska boken Moby Dick. En medgrundare tyckte dock att \"en kopp Pequod\" lät oaptitligt, så de valde istället att döpa företaget efter skeppets styrman, Starbuck.",
     "credibility": "high",
     "title": "Starbucks var nära att få namnet Pequod",
-    "sourceUrl": "https://www.starbucks.com/about-us/"
+    "sourceUrl": "https://www.starbucks.com/about-us/",
+    "sourceName": "Starbucks"
   },
   {
     "text": "Bubbelplasten uppfanns 1957 av två ingenjörer som egentligen försökte skapa en modern, tredimensionell plasttapet. Tapeten floppade totalt, men IBM insåg senare att materialet var perfekt för att skydda deras nya, känsliga datorer vid frakt.",
     "credibility": "high",
     "title": "Bubbelplast var från början en misslyckad tapet",
-    "sourceUrl": "https://www.smithsonianmag.com/innovation/accidental-invention-bubble-wrap-180971325/"
+    "sourceUrl": "https://www.smithsonianmag.com/innovation/accidental-invention-bubble-wrap-180971325/",
+    "sourceName": "Smithsonian Magazine"
   },
   {
     "text": "Sveriges mest köpta bil skapades av ett misstag 1953. Fabriken i Gävle försökte egentligen tillverka marshmallows, men smeten betedde sig fel i maskinerna och massan kom ut i formen av små, sega bilar istället.",
     "credibility": "high",
     "title": "Ahlgrens bilar kom till av ett maskinfel",
-    "sourceUrl": "https://www.cloetta.com/en/about-cloetta/history/the-history-of-ahlgrens-bilar/"
+    "sourceUrl": "https://www.cloetta.com/en/about-cloetta/history/the-history-of-ahlgrens-bilar/",
+    "sourceName": "Cloetta"
   },
   {
     "text": "När IKEA-katalogen var som allra störst i början av 2010-talet, strax innan de fasade ut den, distribuerades den årligen i över 200 miljoner exemplar på över 30 språk – vilket översteg upplagan för Bibeln och gjorde den till världens mest tryckta kommersiella publikation.",
     "credibility": "high",
     "title": "IKEA-katalogen trycktes i fler exemplar än Bibeln",
-    "sourceUrl": "https://www.adweek.com/brand-marketing/ad-day-ikea-hilariously-pitches-its-2015-catalog-cutting-edge-technology-159846/"
+    "sourceUrl": "https://www.adweek.com/brand-marketing/ad-day-ikea-hilariously-pitches-its-2015-catalog-cutting-edge-technology-159846/",
+    "sourceName": "Adweek"
   },
   {
     "text": "Coca-Colas kampanj där de ersatte sin klassiska logotyp med vanliga förnamn på flaskorna var ett genidrag. När kampanjen lanserades i USA lyckades den på egen hand vända företagets tio år långa och djupa negativa försäljningstrend.",
     "credibility": "high",
     "title": "\"Share a Coke\" vände Coca Colas massiva säljkris",
-    "sourceUrl": "https://www.adweek.com/brand-marketing/coca-colas-share-coke-campaign-grows-sales-first-time-10-years-160433/"
+    "sourceUrl": "https://www.adweek.com/brand-marketing/coca-colas-share-coke-campaign-grows-sales-first-time-10-years-160433/",
+    "sourceName": "Adweek"
   },
   {
     "text": "Att vi idag kallar irriterande massmejl för \"spam\" har sitt ursprung i en sketch av humorgruppen Monty Python. I sketchen överröstas allt normalt prat av en grupp vikingar som konstant och oönskat sjunger om köttkonserven SPAM.",
@@ -299,6 +329,7 @@
     "text": "Sportdrycken uppfanns 1965 vid University of Florida. Forskarna tog fram den av en enda anledning: att hjälpa deras eget amerikanska fotbollslag, \"the Florida Gators\", att inte kollapsa av vätskebrist under den extrema hettan på matcherna.",
     "credibility": "high",
     "title": "Gatorade uppfanns för ett specifikt lag",
-    "sourceUrl": "https://www.marathon.se/nyheter/gatorade-nylanseras-i-sverige"
+    "sourceUrl": "https://www.marathon.se/nyheter/gatorade-nylanseras-i-sverige",
+    "sourceName": "Marathon.se"
   }
 ]
