@@ -459,7 +459,10 @@
         <div class="card">
             <div style="display:flex; justify-content:space-between; align-items:center; gap:0.8rem; flex-wrap:wrap; margin-bottom:0.4rem;">
                 <h2 style="margin:0;">Publicerade fakta</h2>
-                <button type="button" class="btn btn-ghost" id="resetStatsBtn" style="padding:0.4rem 0.9rem; font-size:0.78rem;">Nollställ alla räknare</button>
+                <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+                    <button type="button" class="btn btn-ghost" id="resetSeenBtn" style="padding:0.4rem 0.9rem; font-size:0.78rem;">Börja om visningen</button>
+                    <button type="button" class="btn btn-ghost" id="resetStatsBtn" style="padding:0.4rem 0.9rem; font-size:0.78rem;">Nollställ alla räknare</button>
+                </div>
             </div>
             <div class="count" id="count"></div>
             <div id="factList">
@@ -1004,6 +1007,21 @@
 
         els.publishBtn.addEventListener("click", publishFact);
         document.getElementById("resetStatsBtn").addEventListener("click", resetAllStats);
+
+        document.getElementById("resetSeenBtn").addEventListener("click", () => {
+            const msg = "Detta börjar om visningen på den HÄR enheten.\n\nAlla fakta börjar visas slumpmässigt på nytt utan repris tills alla har visats. Klick-räknarna i Firestore påverkas inte.\n\nObs: detta gäller bara den webbläsare/enhet som visningen sker på. Om eventet visas från ett annat ställe måste du köra om där.\n\nFortsätt?";
+            if (!confirm(msg)) return;
+            try {
+                localStorage.removeItem("smartass_seen");
+                localStorage.removeItem("smartass_known");
+                setStatus("✓ Visningen är nollställd på denna enhet!", "success");
+                setTimeout(() => {
+                    if (els.status.textContent.startsWith("✓")) setStatus("");
+                }, 4000);
+            } catch (e) {
+                setStatus("Kunde inte nollställa: " + e.message, "error");
+            }
+        });
 
         els.input.addEventListener("keydown", (e) => {
             if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) {
