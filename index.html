@@ -330,6 +330,21 @@
         }
         .fact-action-btn:active { transform: scale(0.97); }
 
+        /* Mörk variant — matchar 'Berätta'-knappen */
+        .fact-action-btn.is-dark {
+            background: rgba(34, 34, 34, 0.85);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+        }
+        .fact-action-btn.is-dark::before {
+            background: linear-gradient(to bottom, rgba(255,255,255,0.18), rgba(255,255,255,0));
+        }
+        .fact-action-btn.is-dark:hover {
+            background: rgba(40, 40, 40, 0.92);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.22);
+        }
+
         .error-msg {
             color: var(--text-secondary);
             font-size: 0.88rem;
@@ -537,7 +552,7 @@
                 </div>
                 <div class="fact-actions ${animClass}">
                     <button class="fact-action-btn" id="knewBtn">🧠 Ja det här har jag koll på</button>
-                    <button class="fact-action-btn" id="learnedBtn">💡 Wow, där ser man!</button>
+                    <button class="fact-action-btn is-dark" id="learnedBtn">💡 Wow, där ser man!</button>
                 </div>`;
 
             document.getElementById("knewBtn")?.addEventListener("click", () => {
