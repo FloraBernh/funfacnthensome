@@ -283,23 +283,33 @@
             font-weight: 500;
         }
 
+        .fact-question {
+            margin-top: 1.4rem;
+            text-align: center;
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+
         .fact-actions {
             display: flex;
             gap: 1.2rem;
             justify-content: center;
-            margin-top: 1.5rem;
+            margin-top: 0.9rem;
             flex-wrap: wrap;
         }
         .fact-action-btn {
             position: relative;
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 0.35rem;
-            padding: 0.6rem 1.2rem;
+            padding: 0.65rem 2.2rem;
+            min-width: 110px;
             border-radius: 100px;
             border: 1px solid rgba(255, 255, 255, 0.35);
             background: rgba(255, 255, 255, 0.45);
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             font-weight: 600;
             font-family: 'Inter', sans-serif;
             cursor: pointer;
@@ -548,15 +558,16 @@
                         ${sourceHtml}
                     </div>
                 </div>
+                <div class="fact-question ${animClass}">Visste du om detta?</div>
                 <div class="fact-actions ${animClass}">
-                    <button class="fact-action-btn" id="knewBtn">🧠 Ja det här har jag koll på</button>
-                    <button class="fact-action-btn is-dark" id="learnedBtn">💡 Wow, där ser man!</button>
+                    <button class="fact-action-btn" id="learnedBtn">Nej</button>
+                    <button class="fact-action-btn is-dark" id="knewBtn">Ja</button>
                 </div>`;
 
             document.getElementById("knewBtn")?.addEventListener("click", () => {
                 trackClick(fact, "knewCount");
                 markFactKnown(fact);
-                returnToStart();
+                showNewFact();
             });
 
             document.getElementById("learnedBtn")?.addEventListener("click", () => {
@@ -576,6 +587,18 @@
             document.getElementById("factArea").innerHTML = "";
             document.getElementById("randomSection").style.display = "";
             document.body.classList.remove("card-mode");
+        }
+
+        function showNewFact() {
+            const fact = pickRandomFact();
+            if (!fact) {
+                document.getElementById("factArea").innerHTML =
+                    `<div class="fact-card anim-in-fade"><div class="error-msg">Inga fler nya fakta just nu.</div></div>`;
+                return;
+            }
+            markFactSeen(fact);
+            _currentFact = fact;
+            renderSingleFact();
         }
 
         // ========== EVENT LISTENERS ==========
