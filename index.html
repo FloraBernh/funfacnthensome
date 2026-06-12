@@ -319,18 +319,18 @@
             backdrop-filter: blur(18px) saturate(200%);
             -webkit-backdrop-filter: blur(18px) saturate(200%);
             box-shadow: 0 2px 8px rgba(40, 40, 70, 0.04);
-            overflow: hidden;
+            isolation: isolate;
         }
-        /* Mjuk gradient-ljusreflex i stället för 1px hård inset-linje */
+        /* Mjuk gradient-ljusreflex */
         .fact-action-btn::before {
             content: "";
             position: absolute;
-            top: 0; left: 0; right: 0; height: 60%;
-            background: linear-gradient(to bottom, rgba(255,255,255,0.4), rgba(255,255,255,0));
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.4), rgba(255,255,255,0) 60%);
             pointer-events: none;
-            border-radius: 100px 100px 0 0;
+            border-radius: inherit;
+            z-index: -1;
         }
-        .fact-action-btn > * { position: relative; z-index: 1; }
         .fact-action-btn:hover {
             background: rgba(255, 255, 255, 0.7);
             transform: translateY(-1px);
