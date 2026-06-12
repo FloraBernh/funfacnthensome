@@ -70,33 +70,35 @@
             will-change: transform;
         }
         body::before {
-            width: 540px;
-            height: 540px;
+            width: 820px;
+            height: 820px;
             background: radial-gradient(circle, #C2FF66 0%, transparent 70%);
-            top: -160px;
-            left: -120px;
-            animation: floatBlobA 22s ease-in-out infinite alternate;
+            top: -240px;
+            left: -200px;
+            animation: floatBlobA 20s ease-in-out infinite alternate;
         }
         body::after {
-            width: 640px;
-            height: 640px;
+            width: 960px;
+            height: 960px;
             background: radial-gradient(circle, #FFDB77 0%, #FF8383 55%, transparent 80%);
-            bottom: -200px;
-            right: -180px;
-            animation: floatBlobB 28s ease-in-out infinite alternate;
+            bottom: -300px;
+            right: -260px;
+            animation: floatBlobB 24s ease-in-out infinite alternate;
         }
 
         @keyframes floatBlobA {
-            0%   { transform: translate(0, 0)        scale(1); }
-            33%  { transform: translate(120px, 80px) scale(1.12); }
-            66%  { transform: translate(60px, 200px) scale(0.95); }
-            100% { transform: translate(180px, 40px) scale(1.05); }
+            0%   { transform: translate(0, 0)         scale(1); }
+            25%  { transform: translate(260px, 140px) scale(1.18); }
+            50%  { transform: translate(140px, 380px) scale(0.85); }
+            75%  { transform: translate(340px, 220px) scale(1.25); }
+            100% { transform: translate(80px, 60px)   scale(0.95); }
         }
         @keyframes floatBlobB {
-            0%   { transform: translate(0, 0)            scale(1); }
-            33%  { transform: translate(-90px, -120px)   scale(1.08); }
-            66%  { transform: translate(-180px, -40px)   scale(0.92); }
-            100% { transform: translate(-60px, -160px)   scale(1.1); }
+            0%   { transform: translate(0, 0)             scale(1); }
+            25%  { transform: translate(-200px, -260px)   scale(1.15); }
+            50%  { transform: translate(-380px, -100px)   scale(0.82); }
+            75%  { transform: translate(-120px, -340px)   scale(1.22); }
+            100% { transform: translate(-260px, -60px)    scale(0.9); }
         }
 
         @media (prefers-reduced-motion: reduce) {
