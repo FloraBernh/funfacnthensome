@@ -39,6 +39,46 @@
             overflow-x: hidden;
         }
 
+        .lang-switcher {
+            position: fixed;
+            top: 1.5rem;
+            right: 1.5rem;
+            display: flex;
+            gap: 0.3rem;
+            padding: 0.25rem;
+            border-radius: 100px;
+            background: rgba(255, 255, 255, 0.45);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(18px) saturate(200%);
+            -webkit-backdrop-filter: blur(18px) saturate(200%);
+            box-shadow: 0 2px 8px rgba(40, 40, 70, 0.04);
+            z-index: 6;
+        }
+        .lang-switcher button {
+            border: none;
+            background: transparent;
+            color: var(--text-secondary);
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 0.78rem;
+            letter-spacing: 0.04em;
+            padding: 0.35rem 0.75rem;
+            border-radius: 100px;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+            min-width: 36px;
+        }
+        .lang-switcher button:hover {
+            color: var(--text);
+        }
+        .lang-switcher button.is-active {
+            background: rgba(34, 34, 34, 0.88);
+            color: #fff;
+        }
+        @media (max-width: 500px) {
+            .lang-switcher { top: 1rem; right: 1rem; }
+        }
+
         .site-logo {
             position: fixed;
             top: 4rem;
@@ -357,6 +397,11 @@
 <body>
     <img src="images/logo.svg" alt="Fun Facts N Then Some" class="site-logo">
 
+    <div class="lang-switcher" id="langSwitcher">
+        <button type="button" data-lang="sv">SV</button>
+        <button type="button" data-lang="en">EN</button>
+    </div>
+
     <div class="container">
         <div class="fact-area" id="factArea"></div>
         <div id="randomSection" style="width:100%;">
@@ -429,7 +474,78 @@
             return div.innerHTML;
         }
 
-        const CRED_LABEL = { high: "Hög", medium: "Medel", low: "Låg" };
+        // ========== i18n ==========
+        const LANG_KEY = "smartass_lang";
+        const I18N = {
+            sv: {
+                randomBtn: "Berätta något jag inte vet",
+                question: "Visste du om detta?",
+                yes: "Ja",
+                no: "Nej",
+                credLabel: "Trovärdighet:",
+                credHigh: "Hög",
+                credMedium: "Medel",
+                credLow: "Låg",
+                sourcePrefix: "Källa",
+                noFacts: "Inga publicerade fakta ännu!",
+                noMoreFacts: "Inga fler nya fakta just nu.",
+            },
+            en: {
+                randomBtn: "Tell me something I don't know",
+                question: "Did you know this?",
+                yes: "Yes",
+                no: "No",
+                credLabel: "Credibility:",
+                credHigh: "High",
+                credMedium: "Medium",
+                credLow: "Low",
+                sourcePrefix: "Source",
+                noFacts: "No published facts yet!",
+                noMoreFacts: "No more new facts right now.",
+            },
+        };
+
+        let currentLang = (() => {
+            try {
+                const stored = localStorage.getItem(LANG_KEY);
+                if (stored === "sv" || stored === "en") return stored;
+            } catch {}
+            // Auto-detect — om browsern är engelsk, börja på en, annars sv
+            const navLang = (navigator.language || "sv").toLowerCase();
+            return navLang.startsWith("en") ? "en" : "sv";
+        })();
+
+        function t(key) {
+            return I18N[currentLang]?.[key] ?? I18N.sv[key] ?? key;
+        }
+
+        function credLabelText(level) {
+            const map = { high: t("credHigh"), medium: t("credMedium"), low: t("credLow") };
+            return map[level] || map.high;
+        }
+
+        function applyLangUI() {
+            document.documentElement.lang = currentLang;
+            document.getElementById("randomBtn").textContent = t("randomBtn");
+            // Markera aktiv knapp
+            document.querySelectorAll("#langSwitcher button").forEach(btn => {
+                btn.classList.toggle("is-active", btn.dataset.lang === currentLang);
+            });
+            // Re-render aktuell fakta om en visas
+            if (_currentFact) renderSingleFact();
+        }
+
+        function setLang(lang) {
+            if (lang !== "sv" && lang !== "en") return;
+            currentLang = lang;
+            try { localStorage.setItem(LANG_KEY, lang); } catch {}
+            applyLangUI();
+        }
+
+        document.getElementById("langSwitcher").addEventListener("click", (e) => {
+            const btn = e.target.closest("button[data-lang]");
+            if (btn) setLang(btn.dataset.lang);
+        });
 
         // ========== FIREBASE (Firestore för klick-statistik) ==========
         const firebaseConfig = {
@@ -514,42 +630,47 @@
             _slideDir = null;
 
             const cred = fact.credibility || "high";
-            const credLabel = CRED_LABEL[cred] || CRED_LABEL.high;
+            const credLabel = credLabelText(cred);
+
+            // Välj språk-specifik titel/text med fallback till svenska
+            const factTitle = (currentLang === "en" && fact.title_en) ? fact.title_en : fact.title;
+            const factText  = (currentLang === "en" && fact.text_en)  ? fact.text_en  : fact.text;
 
             let sourceHtml = "";
+            const sourcePrefix = t("sourcePrefix");
             if (fact.sourceUrl) {
-                const label = fact.sourceName ? `Källa: ${escapeHtml(fact.sourceName)}` : "Källa";
+                const label = fact.sourceName ? `${sourcePrefix}: ${escapeHtml(fact.sourceName)}` : sourcePrefix;
                 sourceHtml = `<a href="${escapeHtml(fact.sourceUrl)}" target="_blank" rel="noopener noreferrer" class="source-link">${label}</a>`;
             } else if (fact.sourceName) {
-                sourceHtml = `<span class="source-text">Källa: ${escapeHtml(fact.sourceName)}</span>`;
+                sourceHtml = `<span class="source-text">${sourcePrefix}: ${escapeHtml(fact.sourceName)}</span>`;
             }
 
             const imageHtml = fact.imageUrl
                 ? `<div class="fact-image-frame"><img src="${escapeHtml(fact.imageUrl)}" alt="" class="fact-image" loading="lazy" onerror="this.parentElement.remove()"></div>`
                 : "";
 
-            const titleHtml = fact.title
-                ? `<div class="fact-title">${escapeHtml(fact.title)}</div>`
+            const titleHtml = factTitle
+                ? `<div class="fact-title">${escapeHtml(factTitle)}</div>`
                 : "";
 
             factArea.innerHTML = `
                 <div class="fact-card ${animClass}">
                     ${imageHtml}
                     ${titleHtml}
-                    <div class="fact-text">${escapeHtml(fact.text)}</div>
+                    <div class="fact-text">${escapeHtml(factText)}</div>
                     <div class="fact-footer">
                         <div class="credibility cred-${cred}">
                             <span class="cred-dot"></span>
-                            <span>Trovärdighet:</span>
+                            <span>${t("credLabel")}</span>
                             <span class="cred-label">${credLabel}</span>
                         </div>
                         ${sourceHtml}
                     </div>
                 </div>
-                <div class="fact-question ${animClass}">Visste du om detta?</div>
+                <div class="fact-question ${animClass}">${t("question")}</div>
                 <div class="fact-actions ${animClass}">
-                    <button class="fact-action-btn" id="learnedBtn">Nej</button>
-                    <button class="fact-action-btn is-dark" id="knewBtn">Ja</button>
+                    <button class="fact-action-btn" id="learnedBtn">${t("no")}</button>
+                    <button class="fact-action-btn is-dark" id="knewBtn">${t("yes")}</button>
                 </div>`;
 
             document.getElementById("knewBtn")?.addEventListener("click", () => {
@@ -581,7 +702,7 @@
             const fact = pickRandomFact();
             if (!fact) {
                 document.getElementById("factArea").innerHTML =
-                    `<div class="fact-card anim-in-fade"><div class="error-msg">Inga fler nya fakta just nu.</div></div>`;
+                    `<div class="fact-card anim-in-fade"><div class="error-msg">${t("noMoreFacts")}</div></div>`;
                 return;
             }
             markFactSeen(fact);
@@ -593,13 +714,13 @@
         document.getElementById("randomBtn").addEventListener("click", async () => {
             if (_publishedFacts.length === 0) {
                 document.getElementById("factArea").innerHTML =
-                    `<div class="fact-card anim-in-fade"><div class="error-msg">Inga publicerade fakta ännu!</div></div>`;
+                    `<div class="fact-card anim-in-fade"><div class="error-msg">${t("noFacts")}</div></div>`;
                 return;
             }
             const fact = pickRandomFact();
             if (!fact) {
                 document.getElementById("factArea").innerHTML =
-                    `<div class="fact-card anim-in-fade"><div class="error-msg">Inga fler nya fakta just nu.</div></div>`;
+                    `<div class="fact-card anim-in-fade"><div class="error-msg">${t("noMoreFacts")}</div></div>`;
                 return;
             }
             markFactSeen(fact);
@@ -609,6 +730,7 @@
         });
 
         // ========== INIT ==========
+        applyLangUI();
         loadPublishedFacts();
     </script>
 </body>
