@@ -389,18 +389,35 @@
                 <span>✏️ Redigerar fakta — ändra och tryck Spara, eller avbryt.</span>
                 <button type="button" id="cancelEditBtn">Avbryt</button>
             </div>
+            <div class="field-label" style="margin-bottom:0.3rem;">🇸🇪 Svenska</div>
             <input
                 type="text"
                 id="titleInput"
                 class="field-input"
-                placeholder="Rubrik"
+                placeholder="Rubrik (sv)"
                 maxlength="120"
-                style="margin-bottom:0.7rem;"
+                style="margin-bottom:0.5rem;"
             >
             <textarea
                 id="factInput"
                 class="fact-textarea"
                 placeholder="Skriv din fakta här..."
+                maxlength="600"
+            ></textarea>
+
+            <div class="field-label" style="margin-top:1rem; margin-bottom:0.3rem;">🇬🇧 English</div>
+            <input
+                type="text"
+                id="titleEnInput"
+                class="field-input"
+                placeholder="Title (en)"
+                maxlength="120"
+                style="margin-bottom:0.5rem;"
+            >
+            <textarea
+                id="factEnInput"
+                class="fact-textarea"
+                placeholder="Write your fact in English here..."
                 maxlength="600"
             ></textarea>
 
@@ -580,6 +597,8 @@
         const els = {
             title: document.getElementById("titleInput"),
             input: document.getElementById("factInput"),
+            titleEn: document.getElementById("titleEnInput"),
+            inputEn: document.getElementById("factEnInput"),
             sourceName: document.getElementById("sourceNameInput"),
             sourceUrl: document.getElementById("sourceUrlInput"),
             credibility: document.getElementById("credibilityInput"),
@@ -867,6 +886,8 @@
             imageState = "unchanged";
             els.title.value = "";
             els.input.value = "";
+            els.titleEn.value = "";
+            els.inputEn.value = "";
             els.sourceName.value = "";
             els.sourceUrl.value = "";
             els.credibility.value = "high";
@@ -884,6 +905,8 @@
             editingIndex = index;
             els.title.value = f.title || "";
             els.input.value = f.text || "";
+            els.titleEn.value = f.title_en || "";
+            els.inputEn.value = f.text_en || "";
             els.sourceName.value = f.sourceName || "";
             els.sourceUrl.value = f.sourceUrl || "";
             els.credibility.value = f.credibility || "high";
@@ -921,6 +944,8 @@
             }
 
             const title = els.title.value.trim();
+            const titleEn = els.titleEn.value.trim();
+            const textEn = els.inputEn.value.trim();
             const sourceName = els.sourceName.value.trim();
             const sourceUrl = els.sourceUrl.value.trim();
             const credibility = els.credibility.value || "high";
@@ -940,6 +965,8 @@
 
             const newFact = { text, credibility };
             if (title) newFact.title = title;
+            if (titleEn) newFact.title_en = titleEn;
+            if (textEn) newFact.text_en = textEn;
             if (sourceName) newFact.sourceName = sourceName;
             if (sourceUrl) newFact.sourceUrl = sourceUrl;
 
