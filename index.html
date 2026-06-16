@@ -605,14 +605,26 @@
             return _currentFact;
         }
 
-        function pickRandomFact() {
+        function pickRandomFact(excludeFact = null) {
             if (_publishedFacts.length === 0) return null;
             const knownIds = getKnownFacts();
-            const candidates = _publishedFacts.filter(f => !knownIds[factId(f)]);
+            const excludeId = excludeFact ? factId(excludeFact) : null;
+            const candidates = _publishedFacts.filter(f => {
+                const id = factId(f);
+                return !knownIds[id] && id !== excludeId;
+            });
             if (candidates.length === 0) return null;
-            const unseen = candidates.filter(f => !isFactSeen(f));
-            const pool = unseen.length > 0 ? unseen : candidates;
-            return pool[Math.floor(Math.random() * pool.length)];
+            let unseen = candidates.filter(f => !isFactSeen(f));
+            if (unseen.length === 0) {
+                // Alla kandidater redan sedda — rensa seen för dem så cykeln börjar om
+                try {
+                    const seenData = JSON.parse(localStorage.getItem(SEEN_KEY) || "{}");
+                    candidates.forEach(c => { delete seenData[factId(c)]; });
+                    localStorage.setItem(SEEN_KEY, JSON.stringify(seenData));
+                } catch {}
+                unseen = candidates;
+            }
+            return unseen[Math.floor(Math.random() * unseen.length)];
         }
 
         // ========== RENDER ==========
@@ -699,7 +711,7 @@
         }
 
         function showNewFact() {
-            const fact = pickRandomFact();
+            const fact = pickRandomFact(_currentFact);
             if (!fact) {
                 document.getElementById("factArea").innerHTML =
                     `<div class="fact-card anim-in-fade"><div class="error-msg">${t("noMoreFacts")}</div></div>`;
