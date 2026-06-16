@@ -539,7 +539,7 @@
                 const snap = await db.collection("factStats").get();
                 const m = {};
                 snap.forEach(doc => {
-                    if (doc.id === "__reset__") return; // metadata, inte en fakta-räknare
+                    if (doc.id === "reset_signal") return; // metadata, inte en fakta-räknare
                     m[doc.id] = doc.data();
                 });
                 factStats = m;
@@ -1097,7 +1097,7 @@
 
                 // 2. Skriv global reset-timestamp till Firestore (alla enheter får signalen)
                 if (db) {
-                    await db.collection("factStats").doc("__reset__").set({
+                    await db.collection("factStats").doc("reset_signal").set({
                         resetAt: firebase.firestore.FieldValue.serverTimestamp(),
                     });
                 }
@@ -1107,7 +1107,7 @@
                     const snap = await db.collection("factStats").get();
                     const batch = db.batch();
                     snap.forEach(doc => {
-                        if (doc.id !== "__reset__") batch.delete(doc.ref);
+                        if (doc.id !== "reset_signal") batch.delete(doc.ref);
                     });
                     if (!snap.empty) await batch.commit();
                 }

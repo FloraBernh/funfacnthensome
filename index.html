@@ -586,11 +586,11 @@
         }
 
         // Global reset-lyssnare: när admin trycker "Nollställ inför event"
-        // skrivs en timestamp till factStats/__reset__. Vi lyssnar realtid och
+        // skrivs en timestamp till factStats/reset_signal. Vi lyssnar realtid och
         // rensar lokal seen/known så alla 50 fakta dyker upp igen.
         const LOCAL_RESET_KEY = "smartass_local_reset";
         if (db) {
-            db.collection("factStats").doc("__reset__").onSnapshot(doc => {
+            db.collection("factStats").doc("reset_signal").onSnapshot(doc => {
                 if (!doc.exists) return;
                 const globalReset = doc.data().resetAt?.toMillis?.() || 0;
                 if (!globalReset) return;
@@ -624,26 +624,23 @@
             return _currentFact;
         }
 
-        function pickRandomFact(excludeFact = null) {
+        // Sekventiell räknare: visa fakta 1→2→…→N→1→2→… i ordning
+        const NEXT_IDX_KEY = "smartass_next_idx";
+        function getNextIdx() {
+            try { return parseInt(localStorage.getItem(NEXT_IDX_KEY) || "0", 10) || 0; }
+            catch { return 0; }
+        }
+        function setNextIdx(i) {
+            try { localStorage.setItem(NEXT_IDX_KEY, String(i)); } catch {}
+        }
+        function pickNextFact() {
             if (_publishedFacts.length === 0) return null;
-            const knownIds = getKnownFacts();
-            const excludeId = excludeFact ? factId(excludeFact) : null;
-            const candidates = _publishedFacts.filter(f => {
-                const id = factId(f);
-                return !knownIds[id] && id !== excludeId;
-            });
-            if (candidates.length === 0) return null;
-            let unseen = candidates.filter(f => !isFactSeen(f));
-            if (unseen.length === 0) {
-                // Alla kandidater redan sedda — rensa seen för dem så cykeln börjar om
-                try {
-                    const seenData = JSON.parse(localStorage.getItem(SEEN_KEY) || "{}");
-                    candidates.forEach(c => { delete seenData[factId(c)]; });
-                    localStorage.setItem(SEEN_KEY, JSON.stringify(seenData));
-                } catch {}
-                unseen = candidates;
-            }
-            return unseen[Math.floor(Math.random() * unseen.length)];
+            const n = _publishedFacts.length;
+            let idx = getNextIdx() % n;
+            if (idx < 0) idx = 0;
+            const fact = _publishedFacts[idx];
+            setNextIdx((idx + 1) % n);
+            return fact;
         }
 
         // ========== RENDER ==========
@@ -706,7 +703,6 @@
 
             document.getElementById("knewBtn")?.addEventListener("click", () => {
                 trackClick(fact, "knewCount");
-                markFactKnown(fact);
                 showNewFact();
             });
 
@@ -730,13 +726,12 @@
         }
 
         function showNewFact() {
-            const fact = pickRandomFact(_currentFact);
+            const fact = pickNextFact();
             if (!fact) {
                 document.getElementById("factArea").innerHTML =
-                    `<div class="fact-card anim-in-fade"><div class="error-msg">${t("noMoreFacts")}</div></div>`;
+                    `<div class="fact-card anim-in-fade"><div class="error-msg">${t("noFacts")}</div></div>`;
                 return;
             }
-            markFactSeen(fact);
             _currentFact = fact;
             renderSingleFact();
         }
@@ -748,13 +743,7 @@
                     `<div class="fact-card anim-in-fade"><div class="error-msg">${t("noFacts")}</div></div>`;
                 return;
             }
-            const fact = pickRandomFact();
-            if (!fact) {
-                document.getElementById("factArea").innerHTML =
-                    `<div class="fact-card anim-in-fade"><div class="error-msg">${t("noMoreFacts")}</div></div>`;
-                return;
-            }
-            markFactSeen(fact);
+            const fact = pickNextFact();
             _currentFact = fact;
             enterCardMode();
             renderSingleFact();
