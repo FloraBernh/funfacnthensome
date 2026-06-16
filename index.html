@@ -585,6 +585,25 @@
             }, { merge: true }).catch(e => console.warn("trackClick failed:", e));
         }
 
+        // Global reset-lyssnare: när admin trycker "Nollställ inför event"
+        // skrivs en timestamp till factStats/__reset__. Vi lyssnar realtid och
+        // rensar lokal seen/known så alla 50 fakta dyker upp igen.
+        const LOCAL_RESET_KEY = "smartass_local_reset";
+        if (db) {
+            db.collection("factStats").doc("__reset__").onSnapshot(doc => {
+                if (!doc.exists) return;
+                const globalReset = doc.data().resetAt?.toMillis?.() || 0;
+                if (!globalReset) return;
+                const localReset = parseInt(localStorage.getItem(LOCAL_RESET_KEY) || "0", 10);
+                if (globalReset > localReset) {
+                    localStorage.removeItem(SEEN_KEY);
+                    localStorage.removeItem(KNOWN_KEY);
+                    localStorage.setItem(LOCAL_RESET_KEY, String(globalReset));
+                    console.log("Global reset detekterad — lokal seen/known rensad.");
+                }
+            }, err => console.warn("Reset listener failed:", err));
+        }
+
         // ========== PUBLISHED FACTS ==========
         let _publishedFacts = [];
         async function loadPublishedFacts() {

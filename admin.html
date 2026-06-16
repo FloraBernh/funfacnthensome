@@ -477,8 +477,7 @@
             <div style="display:flex; justify-content:space-between; align-items:center; gap:0.8rem; flex-wrap:wrap; margin-bottom:0.4rem;">
                 <h2 style="margin:0;">Publicerade fakta</h2>
                 <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
-                    <button type="button" class="btn btn-ghost" id="resetSeenBtn" style="padding:0.4rem 0.9rem; font-size:0.78rem;">Börja om visningen</button>
-                    <button type="button" class="btn btn-ghost" id="resetStatsBtn" style="padding:0.4rem 0.9rem; font-size:0.78rem;">Nollställ alla räknare</button>
+                    <button type="button" class="btn btn-primary" id="resetSeenBtn" style="padding:0.4rem 0.9rem; font-size:0.78rem;">🔄 Nollställ inför event</button>
                 </div>
             </div>
             <div class="count" id="count"></div>
@@ -539,7 +538,10 @@
             try {
                 const snap = await db.collection("factStats").get();
                 const m = {};
-                snap.forEach(doc => { m[doc.id] = doc.data(); });
+                snap.forEach(doc => {
+                    if (doc.id === "__reset__") return; // metadata, inte en fakta-räknare
+                    m[doc.id] = doc.data();
+                });
                 factStats = m;
             } catch (e) {
                 console.warn("loadStats failed:", e);
@@ -1077,20 +1079,51 @@
         }
 
         els.publishBtn.addEventListener("click", publishFact);
-        document.getElementById("resetStatsBtn").addEventListener("click", resetAllStats);
 
-        document.getElementById("resetSeenBtn").addEventListener("click", () => {
-            const msg = "Detta börjar om visningen på den HÄR enheten.\n\nAlla fakta börjar visas slumpmässigt på nytt utan repris tills alla har visats. Klick-räknarna i Firestore påverkas inte.\n\nObs: detta gäller bara den webbläsare/enhet som visningen sker på. Om eventet visas från ett annat ställe måste du köra om där.\n\nFortsätt?";
+        document.getElementById("resetSeenBtn").addEventListener("click", async () => {
+            const msg = "🔄 Nollställ allt inför event?\n\nDetta gör tre saker:\n• Rensar alla 🧠/💡-räknare i Firestore\n• Rensar 'kända fakta' och 'sedda fakta' lokalt\n• Skickar en global reset-signal — alla öppna besökare får automatiskt alla 50 fakta tillbaka i sin slumpkö (även de som markerats som 'kända')\n\nFortsätt?";
             if (!confirm(msg)) return;
+
+            const btn = document.getElementById("resetSeenBtn");
+            btn.disabled = true;
+            const originalText = btn.textContent;
+            btn.textContent = "Nollställer...";
+            setStatus("Nollställer allt...");
+
             try {
+                // 1. Rensa lokal seen/known
                 localStorage.removeItem("smartass_seen");
                 localStorage.removeItem("smartass_known");
-                setStatus("✓ Visningen är nollställd på denna enhet!", "success");
+
+                // 2. Skriv global reset-timestamp till Firestore (alla enheter får signalen)
+                if (db) {
+                    await db.collection("factStats").doc("__reset__").set({
+                        resetAt: firebase.firestore.FieldValue.serverTimestamp(),
+                    });
+                }
+
+                // 3. Rensa alla räknare i factStats
+                if (db) {
+                    const snap = await db.collection("factStats").get();
+                    const batch = db.batch();
+                    snap.forEach(doc => {
+                        if (doc.id !== "__reset__") batch.delete(doc.ref);
+                    });
+                    if (!snap.empty) await batch.commit();
+                }
+
+                factStats = {};
+                renderList();
+                setStatus("✓ Allt nollställt — alla 50 fakta är tillbaka!", "success");
                 setTimeout(() => {
                     if (els.status.textContent.startsWith("✓")) setStatus("");
                 }, 4000);
             } catch (e) {
+                console.error("Reset failed:", e);
                 setStatus("Kunde inte nollställa: " + e.message, "error");
+            } finally {
+                btn.disabled = false;
+                btn.textContent = originalText;
             }
         });
 
